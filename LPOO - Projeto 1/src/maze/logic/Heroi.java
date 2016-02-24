@@ -6,19 +6,19 @@ public class Heroi {
 	
 	/****ATRIBUTOS****/
 	
-	boolean armado = false;
-	char letra;
-	Posicao pos = new Posicao();
-	Posicao posAnt = new Posicao();
+	public boolean armado = false;
+	public char letra;
+	public Posicao pos = new Posicao();
+	public Posicao posAnt = new Posicao();
 	
 	/****M�TODOS****/
 	
 	public void updateLetra()
 	{
-		if(armado == false)
-			letra = 'H';
+		if(this.armado == false)
+			this.letra = 'H';
 		else
-			letra = 'A';
+			this.letra = 'A';
 	}
 	
 	public static void main(String[] args) 

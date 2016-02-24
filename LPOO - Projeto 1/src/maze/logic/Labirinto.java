@@ -1,10 +1,7 @@
 package maze.logic;
 
 public class Labirinto {
-
-	/****ATRIBUTOS****/
-	
-	// array bidimensional para guardar os s�mbolos do labirinto
+	// array bidimensional com o labirinto da iteração 1
 	char[][] symbols = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
@@ -19,30 +16,15 @@ public class Labirinto {
 				{'X','X','X','X','X','X','X','X','X','X'}
 		};
 
+	/****ATRIBUTOS****/
+	
+	//maze é o array de símbolos do labirinto
 	char[][] maze = symbols;
 	
-	Heroi heroi = new Heroi();
+
+	/****MÉTODOS****/
 	
-	/****CLASSES AMIGAS****/
-	
-	class Pos
-	{
-	    int x;
-	    int y;
-	 };
-	 
-	/****M�TODOS****/
-	
-	public static void main(String[] args) {
-		Labirinto lab = new Labirinto();
-		lab.printLab();
-		lab.heroi.pos = lab.findPos(lab.heroi.letra);
-		//lab.heroi.moveHeroi(pos);
-		lab.updateMaze();
-		lab.printLab();
-	}
-	
-	// Imprime o labirinto com os s�mbolos
+	// Imprime o labirinto com os símbolos
 	public void printLab()
 	{
 		for (int i = 0; i < this.maze.length; i++)
@@ -60,34 +42,23 @@ public class Labirinto {
 		}
 	}
 	
-	 public Posicao findPos(char letra)
-	 {
+	// Procura e retorna a posição de uma determinada letra
+	public Posicao findPos(char letra)
+	{
 		Posicao pos = new Posicao();
-		 
-		 for (int i = 0; i < this.maze.length; i++)
+
+		for (int i = 0; i < this.maze.length; i++)
+		{
+			for (int j = 0; j < this.maze[i].length; j++)
 			{
-				for (int j = 0; j < this.maze[i].length; j++)
+				if(maze[i][j] == letra)
 				{
-					if(maze[i][j] == letra)
-					{
-						pos.x = i;
-						pos.y = j;
-					}
+					pos.y = i;
+					pos.x = j;
 				}
 			}
-		 
-		 return pos;
-	 }
-	 
-	 public void updateMaze()
-	 {
-		 Posicao pos = new Posicao();
-		 pos.x = 1;
-		 pos.y = 2;
-		 //pos = findPos('H');
-		 heroi.getPos();
-		 heroi.moveHeroi(pos);
-		 this.maze[heroi.posAnt.x + 1][heroi.posAnt.y + 1] = '0';
-		 this.maze[heroi.pos.x][heroi.pos.y] = 'H';
-	 }
+		}
+
+		return pos;
+	}
 }
