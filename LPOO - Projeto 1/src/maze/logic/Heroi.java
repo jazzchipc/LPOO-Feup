@@ -1,3 +1,4 @@
+package maze.logic;
 import java.util.Scanner;
 
 
@@ -10,7 +11,7 @@ public class Heroi {
 	Posicao pos = new Posicao();
 	Posicao posAnt = new Posicao();
 	
-	/****MÉTODOS****/
+	/****Mï¿½TODOS****/
 	
 	public void updateLetra()
 	{

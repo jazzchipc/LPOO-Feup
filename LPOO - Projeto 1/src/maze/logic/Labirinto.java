@@ -1,9 +1,10 @@
+package maze.logic;
 
 public class Labirinto {
 
 	/****ATRIBUTOS****/
 	
-	// array bidimensional para guardar os símbolos do labirinto
+	// array bidimensional para guardar os sï¿½mbolos do labirinto
 	char[][] symbols = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
@@ -30,7 +31,7 @@ public class Labirinto {
 	    int y;
 	 };
 	 
-	/****MÉTODOS****/
+	/****Mï¿½TODOS****/
 	
 	public static void main(String[] args) {
 		Labirinto lab = new Labirinto();
@@ -41,7 +42,7 @@ public class Labirinto {
 		lab.printLab();
 	}
 	
-	// Imprime o labirinto com os símbolos
+	// Imprime o labirinto com os sï¿½mbolos
 	public void printLab()
 	{
 		for (int i = 0; i < this.maze.length; i++)
