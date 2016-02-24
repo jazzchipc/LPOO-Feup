@@ -4,36 +4,54 @@ public class Labirinto {
 	/****ATRIBUTOS****/
 	
 	// array bidimensional para guardar os símbolos do labirinto
-	private char[][] symbols = 	
+	char[][] symbols = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
 				{'X','H','0','0','0','0','0','0','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','D','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','0','0','0','0','0','X','0','X'},
+				{'X','0','0','0','0','0','0','X','0','S'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','E','X','X','0','0','0','0','0','X'},
 				{'X','X','X','X','X','X','X','X','X','X'}
 		};
 
+	char[][] maze = symbols;
 	
+	Heroi heroi = new Heroi();
+	
+	/****CLASSES AMIGAS****/
+	
+	class Pos
+	{
+	    int x;
+	    int y;
+	 };
+	 
 	/****MÉTODOS****/
 	
 	public static void main(String[] args) {
 		Labirinto lab = new Labirinto();
 		lab.printLab();
+		lab.heroi.pos = lab.findPos(lab.heroi.letra);
+		//lab.heroi.moveHeroi(pos);
+		lab.updateMaze();
+		lab.printLab();
 	}
 	
 	// Imprime o labirinto com os símbolos
-	private void printLab()
+	public void printLab()
 	{
-		for (int i = 0; i < this.symbols.length; i++)
+		for (int i = 0; i < this.maze.length; i++)
 		{
-			for (int j = 0; j < this.symbols[i].length; j++)
+			for (int j = 0; j < this.maze[i].length; j++)
 			{
-				System.out.print(symbols[i][j]); // imprime a letra do array
+				if(maze[i][j] == '0')
+					System.out.print(' ');
+				else
+					System.out.print(maze[i][j]); // imprime a letra do array
 				System.out.print("|");
 				
 			}
@@ -41,6 +59,34 @@ public class Labirinto {
 		}
 	}
 	
+	 public Posicao findPos(char letra)
+	 {
+		Posicao pos = new Posicao();
+		 
+		 for (int i = 0; i < this.maze.length; i++)
+			{
+				for (int j = 0; j < this.maze[i].length; j++)
+				{
+					if(maze[i][j] == letra)
+					{
+						pos.x = i;
+						pos.y = j;
+					}
+				}
+			}
+		 
+		 return pos;
+	 }
 	 
-
+	 public void updateMaze()
+	 {
+		 Posicao pos = new Posicao();
+		 pos.x = 1;
+		 pos.y = 2;
+		 //pos = findPos('H');
+		 heroi.getPos();
+		 heroi.moveHeroi(pos);
+		 this.maze[heroi.posAnt.x + 1][heroi.posAnt.y + 1] = '0';
+		 this.maze[heroi.pos.x][heroi.pos.y] = 'H';
+	 }
 }
