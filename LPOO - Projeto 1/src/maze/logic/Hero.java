@@ -2,14 +2,14 @@ package maze.logic;
 import java.util.Scanner;
 
 
-public class Heroi {
+public class Hero {
 	
 	/****ATRIBUTOS****/
 	
 	public boolean armado = false;
 	public char letra;
-	public Posicao pos = new Posicao();
-	public Posicao posAnt = new Posicao();
+	public Position pos = new Position();
+	public Position posAnt = new Position();
 	
 	/****M�TODOS****/
 	
@@ -23,7 +23,7 @@ public class Heroi {
 	
 	public static void main(String[] args) 
 	{
-		Labirinto lab = new Labirinto();
+		Maze lab = new Maze();
 		lab.printLab();
 	}
 	
@@ -66,7 +66,7 @@ public class Heroi {
 		
 	}
 	
-	public void moveHeroi(Posicao pos)
+	public void moveHeroi(Position pos)
 	{
 		this.posAnt = this.pos;
 		this.pos = pos;

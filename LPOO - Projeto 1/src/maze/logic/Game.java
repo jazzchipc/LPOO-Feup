@@ -1,15 +1,15 @@
 package maze.logic;
 
-public class Jogo {
+public class Game {
 	
 	/****ATRIBUTOS****/
 	
-	Labirinto lab = new Labirinto();
-	Heroi heroi = new Heroi();
+	Maze lab = new Maze();
+	Hero heroi = new Hero();
 
 	public static void main(String[] args) 
 	{
-		Jogo jogo = new Jogo();
+		Game jogo = new Game();
 		
 		jogo.initJogo();
 		

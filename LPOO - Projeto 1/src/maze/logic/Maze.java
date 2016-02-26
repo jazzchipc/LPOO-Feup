@@ -1,6 +1,6 @@
 package maze.logic;
 
-public class Labirinto {
+public class Maze {
 	// array bidimensional com o labirinto da iteração 1
 	char[][] symbols = 	
 		{
@@ -43,9 +43,9 @@ public class Labirinto {
 	}
 	
 	// Procura e retorna a posição de uma determinada letra
-	public Posicao findPos(char letra)
+	public Position findPos(char letra)
 	{
-		Posicao pos = new Posicao();
+		Position pos = new Position();
 
 		for (int i = 0; i < this.maze.length; i++)
 		{

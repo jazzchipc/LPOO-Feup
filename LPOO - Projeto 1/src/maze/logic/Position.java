@@ -1,6 +1,6 @@
 package maze.logic;
 
-public class Posicao 
+public class Position 
 {
 	public int x,y;
 }
