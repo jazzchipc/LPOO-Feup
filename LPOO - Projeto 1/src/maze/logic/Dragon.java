@@ -13,11 +13,20 @@ public class Dragon {
 
 	}
 	
-	public Dragon(Position pos)
+	public Dragon()
 	{
-		this.pos = pos;
 		this.letter = 'D';
 		this.visible = true;
+	}
+	
+	public void updatePosition(Position pos)
+	{
+		this.pos = pos ;
+	}
+	
+	public char getLetter()
+	{
+		return this.letter;
 	}
 	
 	public Position getPosition()

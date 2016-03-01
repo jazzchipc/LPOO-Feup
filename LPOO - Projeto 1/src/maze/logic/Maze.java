@@ -19,7 +19,8 @@ public class Maze {
 	/****ATRIBUTOS****/
 	
 	//maze é o array de símbolos do labirinto
-	char[][] maze = symbols;
+	private char[][] maze = symbols;
+	private Position exit = this.findPos('S');
 	
 
 	/****MÉTODOS****/

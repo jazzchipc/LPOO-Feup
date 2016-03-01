@@ -6,30 +6,58 @@ public class Hero {
 	
 	/****ATRIBUTOS****/
 	
-	public boolean armado = false;
-	public char letra;
-	public Position pos = new Position();
-	public Position posAnt = new Position();
+	private boolean armed = false;
+	private char letter;
+	private Position pos = new Position();
+	private Position prePos = new Position();
 	
-	/****M�TODOS****/
+	/****METHODS****/
+	
+	/**----Those which obtain attributes**/
+	
+	public boolean getArmed()
+	{
+		return this.armed;
+	}
+	
+	public char getLetter()
+	{
+		return this.letter;
+	}
+	
+	public Position getPos()
+	{
+		return this.pos;
+	}
+	
+	public Position getPrePos()
+	{
+		return this.prePos;
+	}
+	
+	/**----Those which change attribute values**/
+	
+	public void updatePosition (Position pos)
+	{
+		this.pos = pos;
+	}
+	
+	public void updateArmed(boolean bool)
+	{
+		armed = bool;
+	}
 	
 	public void updateLetra()
 	{
-		if(this.armado == false)
-			this.letra = 'H';
+		if(this.armed == false)
+			this.letter = 'H';
 		else
-			this.letra = 'A';
+			this.letter = 'A';
 	}
 	
-	public static void main(String[] args) 
+	public void getPosition()
 	{
-		Maze lab = new Maze();
-		lab.printLab();
-	}
-	
-	public void getPos()
-	{
-		this.posAnt = this.pos;
+		this.prePos = this.pos;
 		Scanner in = new Scanner(System.in);
 		char move;
 		
@@ -58,7 +86,7 @@ public class Hero {
 	{
 		switch(letra)
 		{
-		case 'X': this.pos = this.posAnt;
+		case 'X': this.pos = this.prePos;
 		break;
 		case ' ':break;
 		case 'D':
@@ -68,7 +96,7 @@ public class Hero {
 	
 	public void moveHeroi(Position pos)
 	{
-		this.posAnt = this.pos;
+		this.prePos = this.pos;
 		this.pos = pos;
 	}
 	

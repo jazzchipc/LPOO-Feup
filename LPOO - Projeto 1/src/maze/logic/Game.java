@@ -4,30 +4,36 @@ public class Game {
 	
 	/****ATRIBUTOS****/
 	
-	Maze lab = new Maze();
-	Hero heroi = new Hero();
+	private Maze maze = new Maze();
+	private Hero hero = new Hero();
+	private Dragon dragon = new Dragon();
+	private Sword sword = new Sword();
+	
 
 	public static void main(String[] args) 
 	{
-		Game jogo = new Game();
+		Game game = new Game();
 		
-		jogo.initJogo();
+		game.initGame();
 		
 		int i = 0;
 		while (i < 5)
 		{
 		
-		jogo.lab.printLab();
+		game.maze.printLab();
 		
-		jogo.heroi.getPos();
+		game.hero.getPos();
 		
 		}
 	}
 	
-	public void initJogo()
+	public void initGame()
 	{
 		
-	heroi.pos = lab.findPos(heroi.letra); // primeira posição do "H"
+	hero.updatePosition(maze.findPos(hero.getLetter())); // initial Position of the "H" letter
+	dragon.updatePosition(maze.findPos(dragon.getLetter()));
+	sword.updatePosition(maze.findPos(sword.getLetter()));
+	
 
 	}
 }
