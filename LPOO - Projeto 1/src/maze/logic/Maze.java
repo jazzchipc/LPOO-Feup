@@ -26,7 +26,7 @@ public class Maze {
 	/****MÉTODOS****/
 	
 	// Imprime o labirinto com os símbolos
-	public void printLab()
+	public void printMaze()
 	{
 		for (int i = 0; i < this.maze.length; i++)
 		{
@@ -61,5 +61,10 @@ public class Maze {
 		}
 
 		return pos;
+	}
+	
+	public void updateMaze(Position pos, char letter)
+	{
+		this.maze[pos.y][pos.x] = letter;
 	}
 }

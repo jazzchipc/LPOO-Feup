@@ -17,13 +17,14 @@ public class Game {
 		game.initGame();
 		
 
-		game.maze.printLab();
-		
-		
-		game.hero.getPos();
+		game.maze.printMaze();
+		game.hero.getPosition();
+		System.out.println(game.hero.getPosition().y );
 		game.hero.getNewPosition();
-		game.hero.moveHeroi(game.hero.getPos());
-		game.maze.printLab();
+		game.hero.moveHeroi(game.hero.getPosition());
+		game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
+		game.maze.printMaze();
+		System.out.println(game.hero.getPosition().y );
 	}
 	
 	public void initGame()

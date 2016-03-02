@@ -2,18 +2,25 @@ package maze.logic;
 import java.util.Scanner;
 
 
-public class Hero {
+public class Hero extends Creature{
 	
 	/****ATRIBUTOS****/
 	
+	
 	private boolean armed = false;
-	private boolean dead = false;
-	private char letter;
-	private Position pos = new Position();
-	private Position prePos = new Position();
 	private Dragon dragon = new Dragon();
+	private Position pos = new Position();
+	//pos.y = 1;
+	//pos.x = 1;
 	
 	/****METHODS****/
+	
+	public Hero()
+	{
+		this.letter = 'H';
+		//this.visible = true;
+		this.dead = false;
+	}
 	
 	/**----Those which obtain attributes**/
 	
@@ -22,41 +29,19 @@ public class Hero {
 		return this.armed;
 	}
 	
-	public char getLetter()
-	{
-		return this.letter;
-	}
-	
-	public Position getPos()
-	{
-		return this.pos;
-	}
-	
-	public Position getPrePos()
-	{
-		return this.prePos;
-	}
+
+
 	
 	/**----Those which change attribute values**/
 	
-	public void updatePosition (Position pos)
-	{
-		this.pos = pos;
-	}
+
 	
 	public void updateArmed(boolean bool)
 	{
 		armed = bool;
 	}
 	
-	public void updateLetra()
-	{
-		if(this.armed == false)
-			this.letter = 'H';
-		else
-			this.letter = 'A';
-	}
-	
+
 	public void getNewPosition()
 	{
 		this.prePos = this.pos;
@@ -71,13 +56,14 @@ public class Hero {
 		
 		switch (move)
 		{
-		case 'w': this.pos.x = this.pos.x - 1;
+		case 'q': break;
+		case 'w': this.pos.y = this.pos.y - 1;
 		break;
-		case 'a': this.pos.y = this.pos.y - 1;
+		case 'a': this.pos.x = this.pos.x - 1;
 		break;
-		case 's': this.pos.x = this.pos.x + 1;
+		case 's': this.pos.y = this.pos.y + 1;
 		break;
-		case 'd': this.pos.y = this.pos.y + 1;
+		case 'd': this.pos.x = this.pos.x + 1;
 		break;
 		
 		}
