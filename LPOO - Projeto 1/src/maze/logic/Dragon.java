@@ -1,5 +1,7 @@
 package maze.logic;
 
+import java.util.Scanner;
+
 public class Dragon extends Creature{
 
 
@@ -16,6 +18,5 @@ public class Dragon extends Creature{
 	}
 	
 
-	
 
 }
