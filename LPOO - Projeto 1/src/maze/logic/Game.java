@@ -154,9 +154,9 @@ public class Game {
 		game.maze.updateMaze(game.hero.getPosition(), '0');
 		game.maze.updateMaze(game.dragon.getPosition(), '0');
 		game.getNewHeroPosition();
-		game.analiseNewHeroPosition(game.maze.symbols[game.hero.getPosition().y][game.hero.getPosition().x]);
+		game.analiseNewHeroPosition(game.hero.getLetter());
 		game.getNewDragonPosition();
-		game.analiseNewHeroPosition(game.maze.symbols[game.dragon.getPosition().y][game.dragon.getPosition().x]);
+		game.analiseNewHeroPosition(game.dragon.getLetter());
 		game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
 		game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
 		game.maze.printMaze();
