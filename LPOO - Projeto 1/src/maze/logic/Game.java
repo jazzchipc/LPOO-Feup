@@ -16,15 +16,14 @@ public class Game {
 		
 		game.initGame();
 		
-		int i = 0;
-		while (i < 5)
-		{
-		
+
 		game.maze.printLab();
 		
-		game.hero.getPos();
 		
-		}
+		game.hero.getPos();
+		game.hero.getNewPosition();
+		game.hero.moveHeroi(game.hero.getPos());
+		game.maze.printLab();
 	}
 	
 	public void initGame()

@@ -7,9 +7,11 @@ public class Hero {
 	/****ATRIBUTOS****/
 	
 	private boolean armed = false;
+	private boolean dead = false;
 	private char letter;
 	private Position pos = new Position();
 	private Position prePos = new Position();
+	private Dragon dragon = new Dragon();
 	
 	/****METHODS****/
 	
@@ -55,7 +57,7 @@ public class Hero {
 			this.letter = 'A';
 	}
 	
-	public void getPosition()
+	public void getNewPosition()
 	{
 		this.prePos = this.pos;
 		Scanner in = new Scanner(System.in);
@@ -82,16 +84,52 @@ public class Hero {
 		
 	}
 	
-	public void newPos(char letra)
+	public void analiseNewPos(char letra)
 	{
-		switch(letra)
+		if(!armed)
 		{
-		case 'X': this.pos = this.prePos;
-		break;
-		case ' ':break;
-		case 'D':
+			switch(letra)
+			{
+			case 'X': 
+				this.pos = this.prePos;
+				break;
+			case '0':
+				break;
+			case 'E': 
+				this.armed = true;
+				break;
+			case 'D':
+				this.dead = true;
+				break;
+			case 'S':
+				this.pos = this.prePos;
+				break;				
+			}
+		}
+		else
+		{
+			switch(letra)
+			{
+			case 'X': 
+				this.pos = this.prePos;
+				break;
+			case ' ':
+				break;			
+			case 'D':
+				dragon.updateDeathStatus(true);
+				break;
+			case 'S':
+				if(dragon.getDeathStatus())
+					break;
+				else
+					{
+					this.pos = this.prePos;
+					break;
+					}
+			}
 		}
 		
+
 	}
 	
 	public void moveHeroi(Position pos)
