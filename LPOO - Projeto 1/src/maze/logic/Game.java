@@ -18,13 +18,18 @@ public class Game {
 		
 
 		game.maze.printMaze();
-		game.hero.getPosition();
-		System.out.println(game.hero.getPosition().y );
+		//game.hero.getPosition();
+		//System.out.println(game.hero.getPosition().x);
+		//System.out.println(game.hero.getPosition().y);
+		game.maze.updateMaze(game.hero.getPosition(), '0');
 		game.hero.getNewPosition();
-		game.hero.moveHeroi(game.hero.getPosition());
+		//game.hero.moveHeroi(game.hero.getPosition());
+		
 		game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
+		
 		game.maze.printMaze();
-		System.out.println(game.hero.getPosition().y );
+		//System.out.println(game.hero.getPosition().x );
+		//System.out.println(game.hero.getPosition().y );
 	}
 	
 	public void initGame()

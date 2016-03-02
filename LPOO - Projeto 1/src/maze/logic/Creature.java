@@ -26,7 +26,7 @@ public class Creature {
 		return this.pos;
 	}
 	
-	public Position getPrePos()
+	public Position getPrePosition()
 	{
 		return this.prePos;
 	}

@@ -9,16 +9,12 @@ public class Hero extends Creature{
 	
 	private boolean armed = false;
 	private Dragon dragon = new Dragon();
-	private Position pos = new Position();
-	//pos.y = 1;
-	//pos.x = 1;
-	
+
 	/****METHODS****/
 	
 	public Hero()
 	{
 		this.letter = 'H';
-		//this.visible = true;
 		this.dead = false;
 	}
 	
