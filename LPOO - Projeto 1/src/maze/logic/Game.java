@@ -53,6 +53,7 @@ public class Game {
 				break;
 			case 'E': 
 				hero.updateArmed(true);
+				hero.updateLetter('A');
 				break;
 			case 'D':
 				hero.dead = true;
@@ -76,14 +77,13 @@ public class Game {
 				break;
 			case 'S':
 				if(dragon.getDeathStatus())
-					{
-					
-					break;
+					{				
+						break;
 					}
 				else
 					{
-					hero.pos = hero.prePos;
-					break;
+						hero.pos = hero.prePos;
+						break;
 					}
 			}
 		}
@@ -115,57 +115,32 @@ public class Game {
 		
 	}
 	
-//	public void analiseNewDragonPosition(char letra)
-//	{
-//		if(!armed)
-//		{
-//			switch(letra)
-//			{
-//			case 'X': 
-//				this.pos = this.prePos;
-//				break;
-//			case '0':
-//				break;
-//			case 'E': 
-//				this.armed = true;
-//				break;
-//			case 'D':
-//				this.dead = true;
-//				break;
-//			case 'S':
-//				this.pos = this.prePos;
-//				break;				
-//			}
-//		}
-//		else
-//		{
-//			switch(letra)
-//			{
-//			case 'X': 
-//				this.pos = this.prePos;
-//				break;
-//			case ' ':
-//				break;			
-//			case 'D':
-//				dragon.updateDeathStatus(true);
-//				break;
-//			case 'S':
-//				if(dragon.getDeathStatus())
-//					{
-//					
-//					break;
-//					}
-//				else
-//					{
-//					this.pos = this.prePos;
-//					break;
-//					}
-//			}
-//		}
-//		
-//
-//	}
-//	
+	public void analiseNewDragonPosition(char letra)
+	{
+		switch(letra)
+			{
+			case 'X': 
+				dragon.pos = dragon.prePos;
+				break;
+			case 'S':
+				dragon.pos = dragon.prePos;
+				break;
+			case '0':
+				dragon.updateLetter('D');
+				break;
+			case 'E': 
+				dragon.updateLetter('F');
+				break;
+			case 'H':
+				hero.updateDeathStatus(true);
+				break;
+			case 'A':
+				dragon.updateDeathStatus(true);
+				break;
+			}
+
+	}
+	
 	public static void main(String[] args) 
 	{
 		Game game = new Game();
@@ -181,6 +156,7 @@ public class Game {
 		game.getNewHeroPosition();
 		game.analiseNewHeroPosition(game.maze.symbols[game.hero.getPosition().y][game.hero.getPosition().x]);
 		game.getNewDragonPosition();
+		game.analiseNewHeroPosition(game.maze.symbols[game.dragon.getPosition().y][game.dragon.getPosition().x]);
 		game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
 		game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
 		game.maze.printMaze();
