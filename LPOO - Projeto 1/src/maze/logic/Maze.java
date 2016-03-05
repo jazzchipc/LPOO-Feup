@@ -25,6 +25,7 @@ public class Maze {
 
 	/****MÉTODOS****/
 	
+	
 	// Imprime o labirinto com os símbolos
 	public void printMaze()
 	{

@@ -35,7 +35,7 @@ public class Hero extends Creature{
 	}
 	
 	
-	public void moveHeroi(Position pos)
+	public void moveHero(Position pos)
 	{
 		this.prePos = this.pos;
 		this.pos = pos;
