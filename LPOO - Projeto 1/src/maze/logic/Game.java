@@ -141,51 +141,72 @@ public class Game {
 	
 	public void getNewDragonPosition()
 	{
-		dragon.prePos = dragon.pos;
+		Position temp = new Position();
+		temp.x = dragon.pos.x;
+		temp.y = dragon.pos.y;
 		
 		Random in = new Random();
+		
+	
 		int move = in.nextInt(4);
 		
 
 		switch (move)
 		{
-		case '0': dragon.pos.y = dragon.pos.y - 1;
-		break;
-		case '1': dragon.pos.x = dragon.pos.x - 1;
-		break;
-		case '2': dragon.pos.y = dragon.pos.y + 1;
-		break;
-		case '3': dragon.pos.x = dragon.pos.x + 1;
-		break;
-		
+		case '0': 
+			temp.y = temp.y - 1;
+			if(analiseNewDragonPosition(charAt(temp)))
+			dragon.pos.y = dragon.pos.y - 1;
+			break;
+		case '1': 
+			temp.x = temp.x - 1;
+			if(analiseNewDragonPosition(charAt(temp)))
+			dragon.pos.x = dragon.pos.x - 1;
+			break;
+		case '2': 
+			temp.y = temp.y + 1;
+			if(analiseNewDragonPosition(charAt(temp)))
+			dragon.pos.y = dragon.pos.y + 1;
+			break;
+		case '3': 
+			temp.x = temp.x + 1;
+			if(analiseNewDragonPosition(charAt(temp)))
+			dragon.pos.x = dragon.pos.x + 1;
+			break;
 		}
+		
 		
 	}
 	
-	public void analiseNewDragonPosition(char letra)
+	public boolean analiseNewDragonPosition(char letra)
 	{
 		switch(letra)
 			{
 			case 'X': 
-				dragon.pos = dragon.prePos;
-				break;
+				return false;
+				//break;
 			case 'S':
-				dragon.pos = dragon.prePos;
-				break;
+				return false;
+				//break;
 			case '0':
 				dragon.updateLetter('D');
-				break;
+				return true;
+				//break;
 			case 'E': 
 				dragon.updateLetter('F');
-				break;
+				return true;
+				//break;
 			case 'H':
 				hero.updateDeathStatus(true);
-				break;
+				dragon.updateLetter('0');
+				return true;
+				//break;
 			case 'A':
-				dragon.updateDeathStatus(true);
-				break;
+				dragon.updateDeathStatus(true);				
+				return true;
+				//break;
 			}
-
+		return false;
 	}
 	
 	public static void main(String[] args) 
@@ -202,11 +223,8 @@ public class Game {
 		game.maze.updateMaze(game.dragon.getPosition(), '0');
 			
 		game.getNewHeroPosition();
-		//game.analiseNewHeroPosition(game.hero.getLetter());
-
 
 		game.getNewDragonPosition();
-		//game.analiseNewHeroPosition(game.dragon.getLetter());
 		
 		game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
 		game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
