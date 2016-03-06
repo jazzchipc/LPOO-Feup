@@ -87,23 +87,18 @@ public class Game {
 			{
 			case 'X': 
 				return false;
-				//break;
 			case '0':
 				return true;
-				//break;
 			case 'E': 
 				hero.updateArmed(true);
 				hero.updateLetter('A');
 				return true;
-				//break;
 			case 'D':
 				hero.dead = true;
 				return true;
-				//break;
 			case 'S':
 				System.out.println("The Dragon is still alive!");
-				return false;
-				//break;				
+				return false;				
 			}
 		}
 		else
@@ -112,26 +107,20 @@ public class Game {
 			{
 			case 'X': 
 				return false;
-				//break;
 			case '0':
-				return true;
-				//break;			
+				return true;			
 			case 'D':
 				dragon.updateDeathStatus(true);
 				dragon.updateLetter('0');
 				return true;
-				//break;
 			case 'S':
 				if(dragon.getDeathStatus())
 					{	
-						
 						return true;
-						//break;
 					}
 				else
-					{System.out.println("The Dragon is still alive!");
+					{
 						return false;
-						//break;
 					}
 			}
 		}
@@ -146,10 +135,7 @@ public class Game {
 		temp.y = dragon.pos.y;
 		
 		Random in = new Random();
-		
-	
 		int move = in.nextInt(4);
-		
 
 		switch (move)
 		{
@@ -175,7 +161,7 @@ public class Game {
 			break;
 		}
 		
-		
+	
 	}
 	
 	public boolean analiseNewDragonPosition(char letra)
@@ -184,27 +170,21 @@ public class Game {
 			{
 			case 'X': 
 				return false;
-				//break;
 			case 'S':
 				return false;
-				//break;
 			case '0':
 				dragon.updateLetter('D');
 				return true;
-				//break;
 			case 'E': 
 				dragon.updateLetter('F');
 				return true;
-				//break;
 			case 'H':
 				hero.updateDeathStatus(true);
 				dragon.updateLetter('0');
 				return true;
-				//break;
 			case 'A':
 				dragon.updateDeathStatus(true);				
 				return true;
-				//break;
 			}
 		return false;
 	}
@@ -215,7 +195,6 @@ public class Game {
 		
 		game.initGame();
 		
-
 		game.maze.printMaze();
 		
 		while(!(game.end)){
@@ -230,6 +209,15 @@ public class Game {
 		game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
 		
 		game.maze.printMaze();
+		
+		if(!game.hero.getArmed())
+			System.out.println("Get The Sword!");
+		else
+			{if(!game.dragon.getDeathStatus())
+				System.out.println("Kill The Dragon!");
+			else
+				System.out.println("Get Out!");
+			}
 		}
 	}
 	
