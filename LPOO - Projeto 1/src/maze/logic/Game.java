@@ -33,7 +33,7 @@ public class Game {
 		
 		return aux;
 	}
-	
+
 	
 	public void getNewHeroPosition()
 	{
@@ -94,9 +94,9 @@ public class Game {
 				return true;
 			case 'D':
 				hero.dead = true;
+				hero.visible = false;
 				return true;
 			case 'S':
-				System.out.println("The Dragon is still alive!");
 				return false;				
 			}
 		}
@@ -110,7 +110,7 @@ public class Game {
 				return true;			
 			case 'D':
 				dragon.updateDeathStatus(true);
-				dragon.updateLetter('0');
+				dragon.updateVisible(false);
 				return true;
 			case 'S':
 				if(dragon.getDeathStatus())
@@ -179,10 +179,11 @@ public class Game {
 				return true;
 			case 'H':
 				hero.updateDeathStatus(true);
-				dragon.updateLetter('0');
+				hero.updateVisible(false);;
 				return true;
 			case 'A':
-				dragon.updateDeathStatus(true);				
+				dragon.updateDeathStatus(true);	
+				dragon.updateVisible(false);
 				return true;
 			}
 		return false;
@@ -204,8 +205,15 @@ public class Game {
 
 		game.getNewDragonPosition();
 		
-		game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
-		game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
+		if(game.hero.getVisible() == true)
+			game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
+		else
+			game.maze.updateMaze(game.hero.getPosition(),'0');
+			
+		if(game.dragon.getVisible() == true)
+			game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
+		else
+			game.maze.updateMaze(game.dragon.getPosition(),'0');
 		
 		game.maze.printMaze();
 		

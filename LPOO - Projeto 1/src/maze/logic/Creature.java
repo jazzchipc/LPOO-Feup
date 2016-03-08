@@ -38,6 +38,15 @@ public class Creature {
 		else
 			return false;
 	}
+	
+	public boolean getVisible()
+	{
+		if(visible)
+			return true;
+		else
+			return false;
+	}
+	
 	public void updateLetter(char letter)
 	{
 		this.letter = letter;
@@ -59,4 +68,9 @@ public class Creature {
 		this.dead = dead;
 	}
 	
+	public void updateVisible(boolean visible)
+	{
+		this.visible = visible;
+	}
+
 }

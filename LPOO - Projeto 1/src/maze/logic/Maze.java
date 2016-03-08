@@ -66,6 +66,6 @@ public class Maze {
 	
 	public void updateMaze(Position pos, char letter)
 	{
-		this.maze[pos.y][pos.x] = letter;
+				this.maze[pos.y][pos.x] = letter;
 	}
 }
