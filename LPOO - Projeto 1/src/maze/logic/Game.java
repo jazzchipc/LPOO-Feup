@@ -44,7 +44,6 @@ public class Game {
 
 		Scanner in = new Scanner(System.in);
 		char move;
-		
 		System.out.println("Move: ");
 		move = in.next().charAt(0);
 		
@@ -139,22 +138,22 @@ public class Game {
 
 		switch (move)
 		{
-		case '0': 
+		case 0: 
 			temp.y = temp.y - 1;
 			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.y = dragon.pos.y - 1;
 			break;
-		case '1': 
+		case 1: 
 			temp.x = temp.x - 1;
 			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.x = dragon.pos.x - 1;
 			break;
-		case '2': 
+		case 2: 
 			temp.y = temp.y + 1;
 			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.y = dragon.pos.y + 1;
 			break;
-		case '3': 
+		case 3: 
 			temp.x = temp.x + 1;
 			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.x = dragon.pos.x + 1;
