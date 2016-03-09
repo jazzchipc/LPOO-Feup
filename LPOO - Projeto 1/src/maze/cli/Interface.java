@@ -28,8 +28,12 @@ public class Interface {
 			char move = i.makeAPlay();
 			
 			i.game.updateGame(move);
-			
+			i.game.showGame();
 		}
+		
+		i.game.endGame();
+		
+		return;
 	}	
 
 	/**

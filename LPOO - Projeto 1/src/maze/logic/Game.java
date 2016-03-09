@@ -111,7 +111,8 @@ public class Game {
 	
 	public void getNewHeroPosition(char move)
 	{
-		this.hero.prePos = this.hero.pos;	// saving current hero position on his previous position variable	
+		this.hero.prePos.x = this.hero.pos.x;
+		this.hero.prePos.y = this.hero.pos.y;// saving current hero position on his previous position variable	
 
 		switch (move)
 		{
@@ -179,14 +180,14 @@ public class Game {
 	
 	public void moveHero(char command)
 	{
+		this.maze.updateMaze(this.hero.pos, '0');
+
 		this.getNewHeroPosition(command);
 		if(!this.analiseNewHeroPosition())
 			this.hero.pos = this.hero.prePos;	// reverse move
-		else
-		{
-			this.maze.updateMaze(this.hero.prePos, '0');
-			this.maze.updateMaze(this.hero.pos, this.hero.letter);
-		}
+
+		this.maze.updateMaze(this.hero.pos, this.hero.letter);
+
 	}
 	
 	//DRAGON METHODS
@@ -239,8 +240,7 @@ public class Game {
 				dragon.updateLetter('F');
 				return true;
 			case 'H':
-				hero.updateDeathStatus(true);
-				hero.updateVisible(false);;
+				this.dragonKillsHero();
 				return true;
 			case 'A':
 				dragon.updateDeathStatus(true);	
@@ -252,29 +252,21 @@ public class Game {
 	
 	public void moveDragon()
 	{
+		this.maze.updateMaze(this.dragon.pos, '0');
+
 		this.getNewDragonPosition();
 		if(!this.analiseNewDragonPosition())
 			this.dragon.pos = this.dragon.prePos;
-		
-		else
-		{
-			this.maze.updateMaze(this.dragon.prePos, '0');
-			
-			if(this.dragon.visible)
-				this.maze.updateMaze(this.dragon.pos, this.dragon.letter);
-		}
+
+		if(this.dragon.visible)
+			this.maze.updateMaze(this.dragon.pos, this.dragon.letter);
+
 	}
 	
 	
 	public static void main(String[] args) 
 	{
-		Game game = new Game();
 		
-		game.initGame();
-		
-		game.showGame();
-		
-		game.updateGame('s');
 		
 	}
 	

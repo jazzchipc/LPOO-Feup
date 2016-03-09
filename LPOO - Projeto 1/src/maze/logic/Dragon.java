@@ -17,8 +17,6 @@ public class Dragon extends Creature{
 		this.visible = true;
 		this.dead = false;
 		this.asleep = false;
-		
-		this.pos = pos;
 	}
 	
 	
