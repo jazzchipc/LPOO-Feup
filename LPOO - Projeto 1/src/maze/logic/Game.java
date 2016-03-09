@@ -11,7 +11,8 @@ public class Game {
 	private Hero hero = new Hero();
 	private Dragon dragon = new Dragon();
 	private Sword sword = new Sword();
-	private boolean end = false;
+	
+	private boolean end = false;		// the game has ended
 
 	//GET ATTRIBUTES FUNCTIONS
 	
@@ -20,7 +21,61 @@ public class Game {
 		return this.maze;
 	}
 	
-	//METHODS
+	public boolean getEnd()
+	{
+		return this.end;
+	}
+	
+	//GAME METHODS
+	
+	public void initGame()
+	{
+		hero.updatePosition(maze.findPos(hero.getLetter())); // initial Position of the "H" letter
+		dragon.updatePosition(maze.findPos(dragon.getLetter()));
+		sword.updatePosition(maze.findPos(sword.getLetter()));
+	}
+	
+	public void showGame()
+	{
+		this.maze.printMaze();
+
+		if(!this.hero.getArmed())
+			System.out.println("Get The Sword!");
+		else
+		{
+			if(!this.dragon.getDeathStatus())
+				System.out.println("Kill The Dragon!");
+			else
+				System.out.println("Get Out!");
+		}
+	}
+	
+	public void updateGame(char command)
+	{
+		this.moveHero(command);
+		
+		this.moveDragon();
+		
+		if(this.end)
+		{
+			this.endGame();
+			return;
+		}
+	}
+	
+	public void endGame()
+	{
+		if (this.hero.dead)
+		{
+			System.out.println("Next time, try to reach the sword first.");
+		}
+		else
+		{
+			System.out.println("Well done! You got away from the maze!");
+		}
+	}
+
+	//MAZE METHODS
 	
 	public char charAt(Position pos)
 	{
@@ -40,67 +95,58 @@ public class Game {
 		return aux;
 	}
 
+	//HERO METHODS
 	
-	public void getNewHeroPosition()
+	public void heroKillsDragon()
 	{
-		
-		Position temp = new Position();
-		temp.x = hero.pos.x;
-		temp.y = hero.pos.y;
-
-		Scanner in = new Scanner(System.in);
-		char move;
-		System.out.println("Move: ");
-		move = in.next().charAt(0);
-		
-		if (!(move == 'w' || move == 'a'|| move == 's'|| move == 'd'))
-			System.out.println("Error!");
-		
-		
+		this.dragon.dead = true;
+		this.dragon.visible = false;
+	}
 	
-			switch (move)
-			{
-			case 'w':
-				temp.y = temp.y - 1;
-				if(analiseNewHeroPosition(charAt(temp)))
-				hero.pos.y = hero.pos.y - 1;			
-				break;
-			case 'a': 
-				temp.x = temp.x - 1;
-				if(analiseNewHeroPosition(charAt(temp)))
-				hero.pos.x = hero.pos.x - 1;
-				break;
-			case 's': 
-				temp.y = temp.y + 1;
-				if(analiseNewHeroPosition(charAt(temp)))
-				hero.pos.y = hero.pos.y + 1;
-				break;
-			case 'd': 
-				temp.x = temp.x + 1;
-				if(analiseNewHeroPosition(charAt(temp)))
-				hero.pos.x = hero.pos.x + 1;
-				break;
-			}
+	public void heroPicksSword()
+	{
+		this.hero.updateArmed(true);
+		this.hero.letter = 'A';
+	}
+	
+	public void getNewHeroPosition(char move)
+	{
+		this.hero.prePos = this.hero.pos;	// saving current hero position on his previous position variable	
 
+		switch (move)
+		{
+		case 'w':
+			hero.pos.y = hero.pos.y - 1;			
+			break;
+		case 'a': 
+			hero.pos.x = hero.pos.x - 1;
+			break;
+		case 's': 
+			hero.pos.y = hero.pos.y + 1;
+			break;
+		case 'd': 
+			hero.pos.x = hero.pos.x + 1;
+			break;
+		}
 	}
 		
-	public boolean analiseNewHeroPosition(char letra)
+	public boolean analiseNewHeroPosition()
 	{
+		char letter = this.charAt(this.hero.pos);	// letter in hero's next case
+		
 		if(!(hero.getArmed()))
 		{
-			switch(letra)
+			switch(letter)
 			{
 			case 'X': 
 				return false;
 			case '0':
 				return true;
 			case 'E': 
-				hero.updateArmed(true);
-				hero.updateLetter('A');
+				this.heroPicksSword();
 				return true;
 			case 'D':
-				hero.dead = true;
-				hero.visible = false;
+				this.dragonKillsHero();
 				return true;
 			case 'S':
 				return false;				
@@ -108,15 +154,14 @@ public class Game {
 		}
 		else
 		{
-			switch(letra)
+			switch(letter)
 			{
 			case 'X': 
 				return false;
 			case '0':
 				return true;			
 			case 'D':
-				dragon.updateDeathStatus(true);
-				dragon.updateVisible(false);
+				this.heroKillsDragon();
 				return true;
 			case 'S':
 				if(dragon.getDeathStatus())
@@ -130,48 +175,58 @@ public class Game {
 			}
 		}
 		return false;
-
+	}
+	
+	public void moveHero(char command)
+	{
+		this.getNewHeroPosition(command);
+		if(!this.analiseNewHeroPosition())
+			this.hero.pos = this.hero.prePos;	// reverse move
+		else
+		{
+			this.maze.updateMaze(this.hero.prePos, '0');
+			this.maze.updateMaze(this.hero.pos, this.hero.letter);
+		}
+	}
+	
+	//DRAGON METHODS
+	
+	public void dragonKillsHero()
+	{
+		this.hero.dead = true;
+		this.hero.visible = false;
+		this.end = true;
 	}
 	
 	public void getNewDragonPosition()
 	{
-		Position temp = new Position();
-		temp.x = dragon.pos.x;
-		temp.y = dragon.pos.y;
-		
+		this.dragon.prePos = this.dragon.pos;
+
 		Random in = new Random();
 		int move = in.nextInt(4);
 
 		switch (move)
 		{
 		case 0: 
-			temp.y = temp.y - 1;
-			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.y = dragon.pos.y - 1;
 			break;
-		case 1: 
-			temp.x = temp.x - 1;
-			if(analiseNewDragonPosition(charAt(temp)))
+		case 1:
 			dragon.pos.x = dragon.pos.x - 1;
 			break;
 		case 2: 
-			temp.y = temp.y + 1;
-			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.y = dragon.pos.y + 1;
 			break;
 		case 3: 
-			temp.x = temp.x + 1;
-			if(analiseNewDragonPosition(charAt(temp)))
 			dragon.pos.x = dragon.pos.x + 1;
 			break;
 		}
-		
-	
 	}
-	
-	public boolean analiseNewDragonPosition(char letra)
+
+	public boolean analiseNewDragonPosition()
 	{
-		switch(letra)
+		char letter = this.charAt(this.dragon.pos);
+		
+		switch(letter)
 			{
 			case 'X': 
 				return false;
@@ -195,52 +250,34 @@ public class Game {
 		return false;
 	}
 	
+	public void moveDragon()
+	{
+		this.getNewDragonPosition();
+		if(!this.analiseNewDragonPosition())
+			this.dragon.pos = this.dragon.prePos;
+		
+		else
+		{
+			this.maze.updateMaze(this.dragon.prePos, '0');
+			
+			if(this.dragon.visible)
+				this.maze.updateMaze(this.dragon.pos, this.dragon.letter);
+		}
+	}
+	
+	
 	public static void main(String[] args) 
 	{
 		Game game = new Game();
 		
 		game.initGame();
 		
-		game.maze.printMaze();
+		game.showGame();
 		
-		while(!(game.end)){
-		game.maze.updateMaze(game.hero.getPosition(), '0');
-		game.maze.updateMaze(game.dragon.getPosition(), '0');
-			
-		game.getNewHeroPosition();
+		game.updateGame('s');
 		
-		if(game.hero.getVisible() == true)
-			game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
-		else
-			game.maze.updateMaze(game.hero.getPosition(),'0');
-
-		game.getNewDragonPosition();
-			
-		if(game.dragon.getVisible() == true)
-			game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
-		else
-			game.maze.updateMaze(game.dragon.getPosition(),'0');
-		
-		game.maze.printMaze();
-		
-		if(!game.hero.getArmed())
-			System.out.println("Get The Sword!");
-		else
-			{if(!game.dragon.getDeathStatus())
-				System.out.println("Kill The Dragon!");
-			else
-				System.out.println("Get Out!");
-			}
-		}
 	}
 	
-	public void initGame()
-	{
-	hero.updatePosition(maze.findPos(hero.getLetter())); // initial Position of the "H" letter
-	dragon.updatePosition(maze.findPos(dragon.getLetter()));
-	sword.updatePosition(maze.findPos(sword.getLetter()));
-	
-	}
 	
 	
 }

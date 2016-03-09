@@ -19,9 +19,19 @@ public class Interface {
 		
 		char dragonMode = i.getDragonMode();
 		
-		char move = i.makeAPlay();
+		i.game.initGame();
+
+		while (!i.game.getEnd())
+		{
+			i.game.showGame();
+			
+			char move = i.makeAPlay();
+			
+			i.game.updateGame(move);
+			
+		}
 	}	
-	
+
 	/**
 	 * This function receives the dragon mode which the player desires to play against.
 	 * @return It returns a character: 

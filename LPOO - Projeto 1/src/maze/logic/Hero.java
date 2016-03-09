@@ -15,8 +15,6 @@ public class Hero extends Creature{
 		this.dead = false;
 		this.armed = false;
 		this.visible = true;
-		
-		this.pos = pos;
 	}
 	
 	/**----Those which obtain attributes**/
