@@ -3,12 +3,12 @@ package maze.logic;
 public class Creature {
 
 	//ATRIBUTES
-	protected boolean dead;			 
-	protected char letter;					
-	protected boolean visible;	
+	private boolean dead;			 
+	private char letter;					
+	private boolean visible;	
 	
-	protected Position pos = new Position();
-	protected Position prePos = new Position();
+	private Position pos = new Position();
+	private Position prePos = new Position();
 	
 	// ---- READ FUNCTIONS BEGIN
 	

@@ -2,33 +2,71 @@ package maze.logic;
 
 public class Hero extends Creature{
 	
-	/****ATRIBUTOS****/	
+	//---ATTRIBUTES
 	private boolean armed;
 	
-	//private boolean deadDragon = false
-
-	/****METHODS****/
-	
-	public Hero()
-	{
-		this.letter = 'H';
-		this.dead = false;
-		this.armed = false;
-		this.visible = true;
-	}
-	
-	/**----Those which obtain attributes**/
-	
+	//---GET ATTRIBUTES FUNCTIONS
 	public boolean getArmed()
 	{
 		return this.armed;
 	}
-	
-	/**----Those which change attribute values**/
-	
-	
+
+	//---UPDATE ATTRIBUTES FUNCTIONS
+
 	public void updateArmed(boolean bool)
 	{
 		armed = bool;
+		
+		if(armed)
+			this.updateLetter('A');
+		else
+			this.updateLetter('H');
 	}
+
+
+	//METHODS
+	
+	public Hero()
+	{
+		this.updateLetter('H');
+		this.updateDeathStatus(false);
+		this.updateVisible(true);
+		
+		this.armed = false;
+	}
+	
+	private Position calculateMove(char move)
+	{
+		Position temp = new Position (this.getPosition());	// copy of current hero position
+		
+		switch(move)
+		{
+		case 'w':
+			temp.moveUp();
+			break;
+			
+		case 's':
+			temp.moveDown();
+			break;
+			
+		case 'd':
+			temp.moveRight();
+			break;
+			
+		case 'a':
+			temp.moveLeft();
+			break;
+		}
+		
+		return temp;
+	}
+	
+	private int checkPosition(Position newPos, Maze maze)
+	{
+		char letter = maze.getMaze()[newPos.getX()][newPos.getY()];	// letter in the new position
+		
+		switch
+	}
+	
+	
 }

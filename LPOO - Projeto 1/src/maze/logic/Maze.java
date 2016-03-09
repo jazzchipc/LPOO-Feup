@@ -2,7 +2,7 @@ package maze.logic;
 
 public class Maze {
 	// array bidimensional com o labirinto da iteração 1
-	char[][] symbols = 	
+	private char[][] symbols = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
 				{'X','H','0','0','0','0','0','0','0','X'},
@@ -21,6 +21,11 @@ public class Maze {
 	//maze é o array de símbolos do labirinto
 	private char[][] maze = symbols;
 	private Position exit = this.findPos('S');
+	
+	public char[][] getMaze()
+	{
+		return this.maze;
+	}
 	
 
 	/****MÉTODOS****/
