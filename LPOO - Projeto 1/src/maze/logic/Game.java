@@ -137,6 +137,10 @@ public class Game {
 		Random in = new Random();
 		int move = in.nextInt(4);
 
+//		Scanner in = new Scanner(System.in);
+//		char move;
+//		System.out.println("Move: ");
+//		move = in.next().charAt(0);
 		
 		switch (move)
 		{
@@ -221,8 +225,8 @@ public class Game {
 		
 		if(game.sword.getVisible() == true)
 			game.maze.updateMaze(game.sword.getPosition(),game.sword.getLetter());
-		else
-			game.maze.updateMaze(game.sword.getPosition(), '0');
+//		else
+//			game.maze.updateMaze(game.sword.getPosition(), '0');
 		
 		game.maze.printMaze();
 		
