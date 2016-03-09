@@ -61,12 +61,36 @@ public class Hero extends Creature{
 		return temp;
 	}
 	
-	private int checkPosition(Position newPos, Maze maze)
+	/**
+	 * Checks hero's new position and returns a boolean that says if it's valid.
+	 * @param newPos Hero's new position.
+	 * @param maze Game's maze.
+	 * @return False if hero can't occupy case. True if it can.
+	 */
+	private boolean checkPosition(Position newPos, Maze maze)
 	{
 		char letter = maze.getMaze()[newPos.getX()][newPos.getY()];	// letter in the new position
 		
-		switch
+		switch(letter)
+		{
+		case '0':
+			return true;
+			
+		case 'S':
+			return true;
+			
+		default: return false;
+		}
 	}
 	
+	public void newPosition(Maze maze, char command)
+	{
+		Position newPos = this.calculateMove(command);
+		
+		if(this.checkPosition(newPos, maze))
+		{
+			this.updatePosition(newPos);
+		}
+	}
 	
 }

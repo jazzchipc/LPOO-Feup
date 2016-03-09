@@ -1,35 +1,41 @@
 package maze.logic;
 
 public class Maze {
-	// array bidimensional com o labirinto da iteração 1
-	private char[][] symbols = 	
-		{
-				{'X','X','X','X','X','X','X','X','X','X'},
-				{'X','H','0','0','0','0','0','0','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','D','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','0','0','0','0','0','X','0','S'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','E','X','X','0','0','0','0','0','X'},
-				{'X','X','X','X','X','X','X','X','X','X'}
-		};
-
-	/****ATRIBUTOS****/
+	//---ATTRIBUTES
 	
-	//maze é o array de símbolos do labirinto
-	private char[][] maze = symbols;
+	private char[][] maze;
 	private Position exit = this.findPos('S');
+	
+	//---GET ATTRIBUTES FUNCTIONS
 	
 	public char[][] getMaze()
 	{
 		return this.maze;
 	}
 	
-
-	/****MÉTODOS****/
+	public Position getExit()
+	{
+		return this.exit;
+	}
 	
+	//---UPDATE ATTRIBUTES FUNCTIONS
+	
+	public void updateMaze(char[][] maze)
+	{
+		this.maze = maze;
+	}
+
+	//METHODS
+	
+	public Maze()
+	{
+		
+	}
+	
+	public Maze(char[][] symbols)
+	{
+		this.maze = symbols;
+	}
 	
 	// Imprime o labirinto com os símbolos
 	public void printMaze()
@@ -60,8 +66,8 @@ public class Maze {
 			{
 				if(maze[i][j] == letra)
 				{
-					pos.y = i;
-					pos.x = j;
+					pos.updateY(i);
+					pos.updateX(j);
 				}
 			}
 		}
@@ -71,6 +77,6 @@ public class Maze {
 	
 	public void updateMaze(Position pos, char letter)
 	{
-				this.maze[pos.y][pos.x] = letter;
+				this.maze[pos.getY()][pos.getX()] = letter;
 	}
 }
