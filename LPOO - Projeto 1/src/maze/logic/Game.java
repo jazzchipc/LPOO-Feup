@@ -91,6 +91,7 @@ public class Game {
 			case 'E': 
 				hero.updateArmed(true);
 				hero.updateLetter('A');
+				sword.updateVisible(false);
 				return true;
 			case 'D':
 				hero.dead = true;
@@ -133,9 +134,15 @@ public class Game {
 		temp.x = dragon.pos.x;
 		temp.y = dragon.pos.y;
 		
-		Random in = new Random();
-		int move = in.nextInt(4);
+		//Random in = new Random();
+		//int move = in.nextInt(4);
 
+		Scanner in = new Scanner(System.in);
+		int move;
+		System.out.println("MoveD: ");
+		move = in.nextInt();
+		
+		
 		switch (move)
 		{
 		case 0: 
@@ -173,13 +180,15 @@ public class Game {
 				return false;
 			case '0':
 				dragon.updateLetter('D');
+				sword.updateLetter('E');
 				return true;
 			case 'E': 
 				dragon.updateLetter('F');
+				sword.updateLetter('F');
 				return true;
 			case 'H':
 				hero.updateDeathStatus(true);
-				hero.updateVisible(false);;
+				hero.updateVisible(false);
 				return true;
 			case 'A':
 				dragon.updateDeathStatus(true);	
@@ -214,6 +223,11 @@ public class Game {
 			game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
 		else
 			game.maze.updateMaze(game.dragon.getPosition(),'0');
+		
+		if(game.sword.getVisible() == true)
+			game.maze.updateMaze(game.sword.getPosition(),game.sword.getLetter());
+		else
+			game.maze.updateMaze(game.sword.getPosition(), '0');
 		
 		game.maze.printMaze();
 		

@@ -16,6 +16,11 @@ public class Sword {
 		this.visible = visible;
 	}
 	
+	public void updateLetter(char letter)
+	{
+		this.letter = letter;
+	}
+	
 	public Position getPosition()
 	{
 		return this.pos;
