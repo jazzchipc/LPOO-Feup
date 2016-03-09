@@ -134,14 +134,9 @@ public class Game {
 		temp.x = dragon.pos.x;
 		temp.y = dragon.pos.y;
 		
-		//Random in = new Random();
-		//int move = in.nextInt(4);
+		Random in = new Random();
+		int move = in.nextInt(4);
 
-		Scanner in = new Scanner(System.in);
-		int move;
-		System.out.println("MoveD: ");
-		move = in.nextInt();
-		
 		
 		switch (move)
 		{
