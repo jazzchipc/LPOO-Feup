@@ -1,11 +1,11 @@
 package maze.logic;
 
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Game {
 	
-	/****ATRIBUTOS****/
+	//ATTRIBUTES
 	
 	private Maze maze = new Maze();
 	private Hero hero = new Hero();
@@ -13,8 +13,14 @@ public class Game {
 	private Sword sword = new Sword();
 	private boolean end = false;
 
+	//GET ATTRIBUTES FUNCTIONS
 	
-	/****METODOS****/ 
+	public Maze getMaze()
+	{
+		return this.maze;
+	}
+	
+	//METHODS
 	
 	public char charAt(Position pos)
 	{
@@ -202,13 +208,13 @@ public class Game {
 		game.maze.updateMaze(game.dragon.getPosition(), '0');
 			
 		game.getNewHeroPosition();
-
-		game.getNewDragonPosition();
 		
 		if(game.hero.getVisible() == true)
 			game.maze.updateMaze(game.hero.getPosition(), game.hero.getLetter());
 		else
 			game.maze.updateMaze(game.hero.getPosition(),'0');
+
+		game.getNewDragonPosition();
 			
 		if(game.dragon.getVisible() == true)
 			game.maze.updateMaze(game.dragon.getPosition(), game.dragon.getLetter());
@@ -230,12 +236,10 @@ public class Game {
 	
 	public void initGame()
 	{
-		
 	hero.updatePosition(maze.findPos(hero.getLetter())); // initial Position of the "H" letter
 	dragon.updatePosition(maze.findPos(dragon.getLetter()));
 	sword.updatePosition(maze.findPos(sword.getLetter()));
 	
-
 	}
 	
 	

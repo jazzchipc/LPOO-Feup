@@ -1,13 +1,10 @@
 package maze.logic;
-import java.util.Scanner;
-
 
 public class Hero extends Creature{
 	
-	/****ATRIBUTOS****/
+	/****ATRIBUTOS****/	
+	private boolean armed;
 	
-	
-	private boolean armed = false;
 	//private boolean deadDragon = false
 
 	/****METHODS****/
@@ -18,6 +15,8 @@ public class Hero extends Creature{
 		this.dead = false;
 		this.armed = false;
 		this.visible = true;
+		
+		this.pos = pos;
 	}
 	
 	/**----Those which obtain attributes**/
@@ -34,13 +33,4 @@ public class Hero extends Creature{
 	{
 		armed = bool;
 	}
-	
-	
-	public void moveHero(Position pos)
-	{
-		this.prePos = this.pos;
-		this.pos = pos;
-	}
-	
-	
 }
