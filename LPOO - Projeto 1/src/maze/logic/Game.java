@@ -5,18 +5,18 @@ import java.util.Scanner;
 
 public class Game {
 	
-	// iteration 1 maze
+	// iteration 1 maze, without elements
 	private char[][] symbols1 = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
-				{'X','H','0','0','0','0','0','0','0','X'},
+				{'X','0','0','0','0','0','0','0','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','D','X','X','0','X','0','X','0','X'},
+				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','0','0','0','0','0','X','0','S'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','E','X','X','0','0','0','0','0','X'},
+				{'X','0','X','X','0','0','0','0','0','X'},
 				{'X','X','X','X','X','X','X','X','X','X'}
 		};
 	
@@ -26,6 +26,8 @@ public class Game {
 	private Hero hero;
 	private Dragon dragon;
 	private Sword sword;
+	
+	//---GAME STATE
 	
 	private boolean end;
 
@@ -41,9 +43,12 @@ public class Game {
 		return this.end;
 	}
 	
+	/**
+	 * Deafult constructor
+	 */
 	public Game()
 	{
-		this.maze = new Maze(symbols1);
+		this.maze = new Maze();
 		this.hero = new Hero();
 		this.dragon = new Dragon();
 		this.sword = new Sword();
@@ -53,17 +58,38 @@ public class Game {
 	
 	//GAME METHODS
 	
-	public void initGame()
+	public void initGame(char dragonMode)
 	{
-		hero.updatePosition(maze.findPos(hero.getLetter())); // initial Position of the "H" letter
-		dragon.updatePosition(maze.findPos(dragon.getLetter()));
-		sword.updatePosition(maze.findPos(sword.getLetter()));
+		//Initializing maze
+		maze.updateMaze(symbols1);
+		
+		//Initial elements' position
+		Position heroInitPos = new Position (1,1);
+		Position dragonInitPos = new Position (1,4);
+		Position swordInitPos = new Position (1,8);
+		
+		//Setting those positions
+		hero.updatePosition(heroInitPos);
+		dragon.updatePosition(dragonInitPos);
+		sword.updatePosition(swordInitPos);
+		
+		//Updating dragon's mode
+		dragon.setMode(dragonMode);
 	}
 	
+	//Printing the maze, its elements and hints
 	public void showGame()
 	{
 		this.maze.printMaze();
 
+		this.printHints();
+	}
+	
+	/**
+	 * Prints some hints to remember the player of his current objective.
+	 */
+	public void printHints()
+	{
 		if(!this.hero.getArmed())
 			System.out.println("Get The Sword!");
 		else
@@ -74,227 +100,33 @@ public class Game {
 				System.out.println("Get Out!");
 		}
 	}
-//	
-//	public void updateGame(char command)
-//	{
-//		this.moveHero(command);
-//		
-//		this.moveDragon();
-//		
-//		if(this.end)
-//		{
-//			this.endGame();
-//			return;
-//		}
-//	}
-////	
-////	public void endGame()
-////	{
-//		if (this.hero.dead)
-//		{
-//			System.out.println("Next time, try to reach the sword first.");
-//		}
-//		else
-//		{
-//			System.out.println("Well done! You got away from the maze!");
-//		}
-//	}
-//
-//	//MAZE METHODS
-//	
-//	public char charAt(Position pos)
-//	{
-//		char aux = '0';
-//		
-//		for (int i = 0; i < maze.getMaze().length; i++)
-//		{
-//			for (int j = 0; j < maze.getMaze()[i].length; j++)
-//			{
-//				if((i == pos.getY()) && (j == pos.getX()))
-//				{
-//					aux = maze.getMaze()[i][j];
-//				}
-//			}
-//		}
-//		
-//		return aux;
-//	}
-//
-//	//HERO METHODS
-//	
-//	public void heroKillsDragon()
-//	{
-//		this.dragon.dead = true;
-//		this.dragon.visible = false;
-//	}
-//	
-//	public void heroPicksSword()
-//	{
-//		this.hero.updateArmed(true);
-//		this.hero.letter = 'A';
-//	}
-//	
-//	public void getNewHeroPosition(char move)
-//	{
-//		this.hero.prePos.x = this.hero.pos.x;
-//		this.hero.prePos.y = this.hero.pos.y;// saving current hero position on his previous position variable	
-//
-//		switch (move)
-//		{
-//		case 'w':
-//			hero.pos.y = hero.pos.y - 1;			
-//			break;
-//		case 'a': 
-//			hero.pos.x = hero.pos.x - 1;
-//			break;
-//		case 's': 
-//			hero.pos.y = hero.pos.y + 1;
-//			break;
-//		case 'd': 
-//			hero.pos.x = hero.pos.x + 1;
-//			break;
-//		}
-//	}
-//		
-//	public boolean analiseNewHeroPosition()
-//	{
-//		char letter = this.charAt(this.hero.pos);	// letter in hero's next case
-//		
-//		if(!(hero.getArmed()))
-//		{
-//			switch(letter)
-//			{
-//			case 'X': 
-//				return false;
-//			case '0':
-//				return true;
-//			case 'E': 
-//				this.heroPicksSword();
-//				return true;
-//			case 'D':
-//				this.dragonKillsHero();
-//				return true;
-//			case 'S':
-//				return false;				
-//			}
-//		}
-//		else
-//		{
-//			switch(letter)
-//			{
-//			case 'X': 
-//				return false;
-//			case '0':
-//				return true;			
-//			case 'D':
-//				this.heroKillsDragon();
-//				return true;
-//			case 'S':
-//				if(dragon.getDeathStatus())
-//					{	
-//						return true;
-//					}
-//				else
-//					{
-//						return false;
-//					}
-//			}
-//		}
-//		return false;
-//	}
-//	
-//	public void moveHero(char command)
-//	{
-//		this.maze.updateMaze(this.hero.pos, '0');
-//
-//		this.getNewHeroPosition(command);
-//		if(!this.analiseNewHeroPosition())
-//			this.hero.pos = this.hero.prePos;	// reverse move
-//
-//		this.maze.updateMaze(this.hero.pos, this.hero.letter);
-//
-//	}
-//	
-//	//DRAGON METHODS
-//	
-//	public void dragonKillsHero()
-//	{
-//		this.hero.dead = true;
-//		this.hero.visible = false;
-//		this.end = true;
-//	}
-//	
-//	public void getNewDragonPosition()
-//	{
-//		this.dragon.prePos = this.dragon.pos;
-//
-//		Random in = new Random();
-//		int move = in.nextInt(4);
-//
-//		switch (move)
-//		{
-//		case 0: 
-//			dragon.pos.y = dragon.pos.y - 1;
-//			break;
-//		case 1:
-//			dragon.pos.x = dragon.pos.x - 1;
-//			break;
-//		case 2: 
-//			dragon.pos.y = dragon.pos.y + 1;
-//			break;
-//		case 3: 
-//			dragon.pos.x = dragon.pos.x + 1;
-//			break;
-//		}
-//	}
-//
-//	public boolean analiseNewDragonPosition()
-//	{
-//		char letter = this.charAt(this.dragon.pos);
-//		
-//		switch(letter)
-//			{
-//			case 'X': 
-//				return false;
-//			case 'S':
-//				return false;
-//			case '0':
-//				dragon.updateLetter('D');
-//				return true;
-//			case 'E': 
-//				dragon.updateLetter('F');
-//				return true;
-//			case 'H':
-//				this.dragonKillsHero();
-//				return true;
-//			case 'A':
-//				dragon.updateDeathStatus(true);	
-//				dragon.updateVisible(false);
-//				return true;
-//			}
-//		return false;
-//	}
-//	
-//	public void moveDragon()
-//	{
-//		this.maze.updateMaze(this.dragon.pos, '0');
-//
-//		this.getNewDragonPosition();
-//		if(!this.analiseNewDragonPosition())
-//			this.dragon.pos = this.dragon.prePos;
-//
-//		if(this.dragon.visible)
-//			this.maze.updateMaze(this.dragon.pos, this.dragon.letter);
-//
-//	}
-//	
-//	
-//	public static void main(String[] args) 
-//	{
-//		
-//		
-//	}
-//	
-//	
-//	
+	
+	/**
+	 * According to each of the elements state (dead, visible, asleep, ...)
+	 * updates the other dependent states.
+	 */
+	public void updateElements()
+	{
+		
+	}
+	
+	public void updateGame(char move)
+	{
+		hero.newPosition(maze, move);
+		dragon.newPosition(maze);
+	}
+
+
+	public static void main(String[] args) 
+	{
+		Game game = new Game();
+		
+		game.initGame('s');
+		game.showGame();
+		game.updateGame('d');
+		game.showGame();
+	}
+	
+	
+	
 }

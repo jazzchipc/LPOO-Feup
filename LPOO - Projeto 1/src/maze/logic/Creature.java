@@ -90,4 +90,13 @@ public class Creature {
 	}
 
 	// ---- UPDATE FUNCTIONS END
+	
+	/**
+	 * Kills a creature (hero or dragon) and updates its attributes accordingly.
+	 */
+	public void killCreature()
+	{
+		this.dead = true;
+		this.visible = false;
+	}
 }

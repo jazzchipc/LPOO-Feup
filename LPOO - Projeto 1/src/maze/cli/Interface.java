@@ -10,28 +10,32 @@ public class Interface {
 
 	//ATTRIBUTES
 	
-	Game game = new Game();
-	Scanner in = new Scanner(System.in);
+	private Game game;
+	private Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) 
 	{
+		//Initialize interface
 		Interface i = new Interface();
 		
+		//Get dragon mode from user
 		char dragonMode = i.getDragonMode();
 		
-		i.game.initGame();
+		//Initialize game
+		i.game.initGame(dragonMode);
 
+		//Game cycle
 		while (!i.game.getEnd())
 		{
 			i.game.showGame();
 			
 			char move = i.makeAPlay();
 			
-			i.game.updateGame(move);
+			//i.game.updateGame(move);
 			i.game.showGame();
 		}
 		
-		i.game.endGame();
+		//i.game.endGame();
 		
 		return;
 	}	

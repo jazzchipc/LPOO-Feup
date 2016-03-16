@@ -83,6 +83,11 @@ public class Hero extends Creature{
 		}
 	}
 	
+	/**
+	 * Updates a hero's position, if the position is valid.
+	 * @param maze Game's maze.
+	 * @param command Command given to hero.
+	 */
 	public void newPosition(Maze maze, char command)
 	{
 		Position newPos = this.calculateMove(command);
@@ -91,6 +96,12 @@ public class Hero extends Creature{
 		{
 			this.updatePosition(newPos);
 		}
+	}
+	
+	public void pickSword()
+	{
+		this.armed = true;
+		this.updateLetter('A');
 	}
 	
 }

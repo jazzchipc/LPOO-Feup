@@ -4,7 +4,7 @@ public class Maze {
 	//---ATTRIBUTES
 	
 	private char[][] maze;
-	private Position exit = this.findPos('S');
+	private Position exit;
 	
 	//---GET ATTRIBUTES FUNCTIONS
 	
@@ -35,6 +35,11 @@ public class Maze {
 	public Maze(char[][] symbols)
 	{
 		this.maze = symbols;
+		this.exit = this.findPos('S');
+	}
+	
+	public void updateElementPosition(Object obj)
+	{
 	}
 	
 	// Imprime o labirinto com os símbolos

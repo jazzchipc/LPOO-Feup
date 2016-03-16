@@ -35,13 +35,8 @@ public class Dragon extends Creature{
 		this.asleep = asleep;
 	}
 	
-	public void updateMode(Mode mode)
-	{
-		this.mode = mode;
-	}
-	
 	/**
-	 * Default constrcutor in which the dragon is still.
+	 * Default constructor in which the dragon is still.
 	 */
 	public Dragon()
 	{
@@ -55,9 +50,25 @@ public class Dragon extends Creature{
 	}
 	
 	/**
+	 * Receives a char, given by the player ate the beginning of the game,
+	 * to set dragon's mode.
+	 * @param dragonMode Char given by player.
+	 */
+	public void setMode(char dragonMode)
+	{
+		switch(dragonMode)
+		{
+		case 'i': this.mode = Mode.STILL; break;			// idle
+		case 'r': this.mode = Mode.RANDOM; break; 			// random
+		case 's': this.mode = Mode.RANDOM_ASLEEP; break; 	// sleepy
+		}
+	}
+	
+	//REDUNTANT CONSTRCUTOR!
+	/**
 	 * If chosen mode is STILL, the dragon won't move. RANDOM means it'll move 
 	 * randomly. RANDOM_ASLEEP means it'll move randomly, and may fall asleep as well.
-	 * @param mode Mode that'll choose the dragon's behaviour. 
+	 * @param mode Mode that'll choose the dragon's behavior. 
 	 */
 	public Dragon(Mode mode)
 	{
@@ -156,9 +167,9 @@ public class Dragon extends Creature{
 		this.asleep = this.in.nextBoolean();
 		
 		if(this.asleep)
-			this.updateLetter('d');	// updates the letter to lower case if dragon is sleeping
+			this.updateLetter(Character.toLowerCase(this.getLetter()));	// updates the letter to lower case if dragon is sleeping
 		else
-			this.updateLetter('D');
+			this.updateLetter(Character.toUpperCase(this.getLetter()));   
 	}
 
 	//**MAIN**
