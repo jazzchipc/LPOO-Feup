@@ -16,23 +16,7 @@ public class Game {
 	
 	/****METODOS****/ 
 	
-	public char charAt(Position pos)
-	{
-		char aux = '0';
-		
-		for (int i = 0; i < maze.symbols.length; i++)
-		{
-			for (int j = 0; j < maze.symbols[i].length; j++)
-			{
-				if((i == pos.y )&&( j == pos.x))
-				{
-					aux = maze.symbols[i][j];
-				}
-			}
-		}
-		
-		return aux;
-	}
+
 
 	
 	public void getNewHeroPosition()
@@ -56,22 +40,22 @@ public class Game {
 			{
 			case 'w':
 				temp.y = temp.y - 1;
-				if(analiseNewHeroPosition(charAt(temp)))
+				if(analiseNewHeroPosition(maze.charAt(temp)))
 				hero.pos.y = hero.pos.y - 1;			
 				break;
 			case 'a': 
 				temp.x = temp.x - 1;
-				if(analiseNewHeroPosition(charAt(temp)))
+				if(analiseNewHeroPosition(maze.charAt(temp)))
 				hero.pos.x = hero.pos.x - 1;
 				break;
 			case 's': 
 				temp.y = temp.y + 1;
-				if(analiseNewHeroPosition(charAt(temp)))
+				if(analiseNewHeroPosition(maze.charAt(temp)))
 				hero.pos.y = hero.pos.y + 1;
 				break;
 			case 'd': 
 				temp.x = temp.x + 1;
-				if(analiseNewHeroPosition(charAt(temp)))
+				if(analiseNewHeroPosition(maze.charAt(temp)))
 				hero.pos.x = hero.pos.x + 1;
 				break;
 			}
@@ -146,22 +130,22 @@ public class Game {
 		{
 		case 0: 
 			temp.y = temp.y - 1;
-			if(analiseNewDragonPosition(charAt(temp)))
+			if(analiseNewDragonPosition(maze.charAt(temp)))
 			dragon.pos.y = dragon.pos.y - 1;
 			break;
 		case 1: 
 			temp.x = temp.x - 1;
-			if(analiseNewDragonPosition(charAt(temp)))
+			if(analiseNewDragonPosition(maze.charAt(temp)))
 			dragon.pos.x = dragon.pos.x - 1;
 			break;
 		case 2: 
 			temp.y = temp.y + 1;
-			if(analiseNewDragonPosition(charAt(temp)))
+			if(analiseNewDragonPosition(maze.charAt(temp)))
 			dragon.pos.y = dragon.pos.y + 1;
 			break;
 		case 3: 
 			temp.x = temp.x + 1;
-			if(analiseNewDragonPosition(charAt(temp)))
+			if(analiseNewDragonPosition(maze.charAt(temp)))
 			dragon.pos.x = dragon.pos.x + 1;
 			break;
 		}
