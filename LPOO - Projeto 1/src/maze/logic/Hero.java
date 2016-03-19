@@ -67,7 +67,7 @@ public class Hero extends Creature{
 	 * @param maze Game's maze.
 	 * @return False if hero can't occupy case. True if it can.
 	 */
-	private boolean checkPosition(Position newPos, Maze maze)
+	private boolean checkPosition(Position newPos, Maze maze, boolean exit)
 	{
 		char letter = maze.getMaze()[newPos.getX()][newPos.getY()];	// letter in the new position
 		
@@ -77,7 +77,10 @@ public class Hero extends Creature{
 			return true;
 			
 		case 'S':
-			return true;
+			if(exit)
+				return true;
+			else
+				return false;
 			
 		default: return false;
 		}
@@ -88,11 +91,13 @@ public class Hero extends Creature{
 	 * @param maze Game's maze.
 	 * @param command Command given to hero.
 	 */
-	public void newPosition(Maze maze, char command)
+	public void newPosition(Maze maze, char command, boolean exit)
 	{
+		this.updatePrePosition(new Position(this.getPosition()));
+		
 		Position newPos = this.calculateMove(command);
 		
-		if(this.checkPosition(newPos, maze))
+		if(this.checkPosition(newPos, maze, exit))
 		{
 			this.updatePosition(newPos);
 		}

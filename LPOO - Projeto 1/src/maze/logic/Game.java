@@ -30,6 +30,7 @@ public class Game {
 	//---GAME STATE
 	
 	private boolean end;
+	private boolean exit;
 
 	//---GET ATTRIBUTES FUNCTIONS
 	
@@ -54,6 +55,7 @@ public class Game {
 		this.sword = new Sword();
 		
 		this.end = false;
+		this.exit = false;
 	}
 	
 	//GAME METHODS
@@ -102,20 +104,19 @@ public class Game {
 	}
 	
 	/**
-	 * According to each of the elements state (dead, visible, asleep, ...)
-	 * updates the other dependent states.
+	 * Updates creatures positions and also writes the maze accordingly.
+	 * @param move
 	 */
 	public void updatePositions(char move)
 	{
-		//Cleaning elements previous positions
-		maze.updateMaze(hero.getPosition(), '0');
-		maze.updateMaze(dragon.getPosition(), '0');
-		
 		//New positions
-		hero.newPosition(maze, move);
+		hero.newPosition(maze, move, exit);
 		dragon.newPosition(maze);
 		
 		//Rewriting elements on maze
+		maze.updateMaze(hero.getPrePosition(), '0');
+		maze.updateMaze(dragon.getPrePosition(), '0');
+		
 		maze.updateMaze(hero.getPosition(), hero.getLetter());
 		maze.updateMaze(dragon.getPosition(), dragon.getLetter());
 	}
@@ -123,11 +124,6 @@ public class Game {
 	public void updateEnd()
 	{
 	
-	}
-	
-	public void updateGame(char move)
-	{
-		updatePositions(move);
 	}
 
 
@@ -137,7 +133,7 @@ public class Game {
 		
 		game.initGame('s');
 		game.showGame();
-		game.updateGame('d');
+		//game.updateGame('d');
 		game.showGame();
 	}
 	

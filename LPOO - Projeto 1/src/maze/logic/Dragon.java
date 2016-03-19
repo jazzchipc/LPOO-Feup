@@ -88,6 +88,8 @@ public class Dragon extends Creature{
 	 */
 	public void newPosition(Maze maze)
 	{
+		this.updatePrePosition(new Position(this.getPosition()));
+		
 		switch(this.mode)
 		{
 		case STILL:

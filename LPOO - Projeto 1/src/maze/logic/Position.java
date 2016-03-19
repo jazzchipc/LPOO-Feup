@@ -58,6 +58,11 @@ public class Position {
 		this.y = toClone.y;
 	}
 	
+	public double distanceTo(Position pos)
+	{
+		return (Math.sqrt(Math.pow(this.x - pos.x, 2) + Math.pow(this.y - pos.y, 2)));	// sqrt(x^2 + y^2)
+	}
+	
 	
 	//---MOVE FUNCTIONS
 	
