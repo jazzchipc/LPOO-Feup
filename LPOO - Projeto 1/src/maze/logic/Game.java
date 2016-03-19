@@ -120,6 +120,11 @@ public class Game {
 		maze.updateMaze(dragon.getPosition(), dragon.getLetter());
 	}
 	
+	public void updateEnd()
+	{
+	
+	}
+	
 	public void updateGame(char move)
 	{
 		updateElements(move);
