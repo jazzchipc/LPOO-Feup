@@ -105,7 +105,7 @@ public class Game {
 	 * According to each of the elements state (dead, visible, asleep, ...)
 	 * updates the other dependent states.
 	 */
-	public void updateElements(char move)
+	public void updatePositions(char move)
 	{
 		//Cleaning elements previous positions
 		maze.updateMaze(hero.getPosition(), '0');
@@ -127,7 +127,7 @@ public class Game {
 	
 	public void updateGame(char move)
 	{
-		updateElements(move);
+		updatePositions(move);
 	}
 
 
