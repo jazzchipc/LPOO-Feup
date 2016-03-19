@@ -9,14 +9,14 @@ public class Game {
 	private char[][] symbols1 = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
-				{'X','0','0','0','0','0','0','0','0','X'},
+				{'X','H','0','0','0','0','0','0','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
+				{'X','D','X','X','0','X','0','X','0','X'},
 				{'X','0','0','0','0','0','0','X','0','S'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','0','0','0','0','X'},
+				{'X','E','X','X','0','0','0','0','0','X'},
 				{'X','X','X','X','X','X','X','X','X','X'}
 		};
 	
@@ -64,14 +64,14 @@ public class Game {
 		maze.updateMaze(symbols1);
 		
 		//Initial elements' position
-		Position heroInitPos = new Position (1,1);
+		/*Position heroInitPos = new Position (1,1);
 		Position dragonInitPos = new Position (1,4);
-		Position swordInitPos = new Position (1,8);
+		Position swordInitPos = new Position (1,8);*/
 		
 		//Setting those positions
-		hero.updatePosition(heroInitPos);
-		dragon.updatePosition(dragonInitPos);
-		sword.updatePosition(swordInitPos);
+		hero.updatePosition(this.maze.findPos(this.hero.getLetter()));
+		dragon.updatePosition(this.maze.findPos(this.dragon.getLetter()));
+		sword.updatePosition(this.maze.findPos(this.sword.getLetter()));
 		
 		//Updating dragon's mode
 		dragon.setMode(dragonMode);
@@ -105,15 +105,24 @@ public class Game {
 	 * According to each of the elements state (dead, visible, asleep, ...)
 	 * updates the other dependent states.
 	 */
-	public void updateElements()
+	public void updateElements(char move)
 	{
+		//Cleaning elements previous positions
+		maze.updateMaze(hero.getPosition(), '0');
+		maze.updateMaze(dragon.getPosition(), '0');
 		
+		//New positions
+		hero.newPosition(maze, move);
+		dragon.newPosition(maze);
+		
+		//Rewriting elements on maze
+		maze.updateMaze(hero.getPosition(), hero.getLetter());
+		maze.updateMaze(dragon.getPosition(), dragon.getLetter());
 	}
 	
 	public void updateGame(char move)
 	{
-		hero.newPosition(maze, move);
-		dragon.newPosition(maze);
+		updateElements(move);
 	}
 
 
