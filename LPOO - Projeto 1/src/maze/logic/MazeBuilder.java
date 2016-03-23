@@ -15,7 +15,6 @@ public class MazeBuilder implements IMazeBuilder{
 	
 	public void buildFrame()
 	{
-		
 		for (int i = 0; i < size; i++)
 		{
 			for (int j = 0; j < size; j++)
@@ -23,16 +22,16 @@ public class MazeBuilder implements IMazeBuilder{
 				if(i == 0 || i == size-1 || j == 0 || j == size-1)
 					m[i][j] = 'X';
 			}
-			
+	
 		}
+		
 	}
 	
 	public char[][] buildMaze(int size)
 	{
 		this.size = size;
-		
+
 		mazebuilder.buildFrame();
-		
 		
 		for (int i = 0; i < size; i++)
 		{
@@ -41,24 +40,24 @@ public class MazeBuilder implements IMazeBuilder{
 				Random in = new Random();
 				int rand = in.nextInt(2);
 				
-				if(i == 0 || i == size-1 || j == 0 || j == size-1)
-					m[i][j] = 'X';
-				else if(rand == 0)
+				if(i != 0 && i != size-1  && j != 0  && j != size-1)
 				{
-					m[i][j] = 'X';
-					if(m[i-1][j-1] == 'X' && 
-							m[i][j-1] == 'X' && 
-							m[i-1][j] == 'X' && 
-							m[i-2][j-2] == 'X' && 
-							m[i-2][j] == 'X' && 
-							m[i][j-2] == 'X' &&
-							m[i-1][j-2] == 'X' &&
-							m[i-2][j-1] == 'X')
+					if(rand == 0)
+					{
+						m[i][j] = 'X';
+//						if(m[i-1][j-1] == 'X' && 
+//							m[i][j-1] == 'X' && 
+//							m[i-1][j] == 'X' && 
+//							m[i-2][j-2] == 'X' && 
+//							m[i-2][j] == 'X' && 
+//							m[i][j-2] == 'X' &&
+//							m[i-1][j-2] == 'X' &&
+//							m[i-2][j-1] == 'X')
+//						m[i][j] = ' ';
+					}
+					else if(rand == 1)
 						m[i][j] = ' ';
 				}
-				else if(rand == 1)
-					m[i][j] = ' ';
-					
 			}
 
 		}
