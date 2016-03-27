@@ -123,9 +123,12 @@ public class Game {
 		maze.updateMaze(hero.getPosition(), hero.getLetter());	
 		
 		// Dragon moves after hero
-		dragon.newPosition(maze);
-		maze.updateMaze(dragon.getPrePosition(), '0');
-		maze.updateMaze(dragon.getPosition(), dragon.getLetter());	// rewrites dragon in new position
+		if(!dragon.getDeathStatus())
+		{
+			dragon.newPosition(maze);
+			maze.updateMaze(dragon.getPrePosition(), '0');
+			maze.updateMaze(dragon.getPosition(), dragon.getLetter());	// rewrites dragon in new position
+		}
 		
 		if (this.hero.getPosition().equals(this.maze.getExit()))
 			this.end = End.END_WIN;
@@ -136,6 +139,7 @@ public class Game {
 		if (this.hero.getArmed())
 		{
 			this.dragon.killCreature();	// kill dragon
+			maze.updateMaze(dragon.getPosition(), '0'); // make a path where the dragon was killed
 			this.exit = true; // open door
 		}
 
@@ -149,7 +153,8 @@ public class Game {
 	
 	private void updateDragonHero()
 	{
-		if(this.hero.getPosition().distanceTo(this.dragon.getPosition()) <= 1)	// if the dragon is adjacent to the hero
+		if((this.hero.getPosition().distanceTo(this.dragon.getPosition()) <= 1) && (!this.dragon.getDeathStatus()))	
+			// if the dragon is adjacent to the hero, and it's still alive
 		{
 			heroVSDragon();
 		}
