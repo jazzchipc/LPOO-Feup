@@ -63,9 +63,25 @@ public class Position {
 		return (Math.sqrt(Math.pow(this.x - pos.x, 2) + Math.pow(this.y - pos.y, 2)));	// sqrt(x^2 + y^2)
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Position))
+			return false;
+		
+		if (obj == this)
+			return true; 	// same object
+		
+		Position rhs = (Position) obj;
+		
+		if(rhs.x == this.x && rhs.y == this.y)
+			return true;
+		else
+			return false;
+
+	}
 	
 	//---MOVE FUNCTIONS
-	
+
 	public void moveUp()
 	{
 		this.y = this.y - 1;

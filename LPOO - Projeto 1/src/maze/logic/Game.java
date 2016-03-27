@@ -9,13 +9,13 @@ public class Game {
 	private char[][] symbols1 = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
-				{'X','H','0','0','0','0','0','0','0','X'},
+				{'X','0','0','0','0','0','0','0','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','0','X','X','0','X','0','X','0','X'},
 				{'X','D','X','X','0','X','0','X','0','X'},
 				{'X','0','0','0','0','0','0','X','0','S'},
 				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
+				{'X','H','X','X','0','X','0','X','0','X'},
 				{'X','E','X','X','0','0','0','0','0','X'},
 				{'X','X','X','X','X','X','X','X','X','X'}
 		};
@@ -29,7 +29,14 @@ public class Game {
 	
 	//---GAME STATE
 	
-	private boolean end;
+	public enum End {
+		END_NOT,
+		END_FORCED,
+		END_WIN,
+		END_LOSS
+	};
+	
+	private End end;
 	private boolean exit;
 
 	//---GET ATTRIBUTES FUNCTIONS
@@ -39,13 +46,13 @@ public class Game {
 		return this.maze;
 	}
 	
-	public boolean getEnd()
+	public End getEnd()
 	{
 		return this.end;
 	}
 	
 	/**
-	 * Deafult constructor
+	 * Default constructor
 	 */
 	public Game()
 	{
@@ -54,7 +61,7 @@ public class Game {
 		this.dragon = new Dragon();
 		this.sword = new Sword();
 		
-		this.end = false;
+		this.end = End.END_NOT;
 		this.exit = false;
 	}
 	
@@ -84,7 +91,8 @@ public class Game {
 	{
 		this.maze.printMaze();
 
-		this.printHints();
+		if (this.end == End.END_NOT)
+			this.printHints();
 	}
 	
 	/**
@@ -107,25 +115,63 @@ public class Game {
 	 * Updates creatures positions and also writes the maze accordingly.
 	 * @param move
 	 */
-	public void updatePositions(char move)
+	private void updatePositions(char move)
 	{
-		//New positions
-		hero.newPosition(maze, move, exit);
+		// Hero moves first
+		hero.newPosition(maze, move, exit);	// generates new position
+		maze.updateMaze(hero.getPrePosition(), '0');	
+		maze.updateMaze(hero.getPosition(), hero.getLetter());	
+		
+		// Dragon moves after hero
 		dragon.newPosition(maze);
-		
-		//Rewriting elements on maze
-		maze.updateMaze(hero.getPrePosition(), '0');
 		maze.updateMaze(dragon.getPrePosition(), '0');
+		maze.updateMaze(dragon.getPosition(), dragon.getLetter());	// rewrites dragon in new position
 		
-		maze.updateMaze(hero.getPosition(), hero.getLetter());
-		maze.updateMaze(dragon.getPosition(), dragon.getLetter());
+		if (this.hero.getPosition().equals(this.maze.getExit()))
+			this.end = End.END_WIN;
 	}
 	
-	public void updateEnd()
+	private void heroVSDragon()
 	{
-	
-	}
+		if (this.hero.getArmed())
+		{
+			this.dragon.killCreature();	// kill dragon
+			this.exit = true; // open door
+		}
 
+		else
+			if (!this.dragon.getAsleep())	// if the hero is not armed and dragon is awake
+			{
+				this.hero.killCreature();
+				this.end = End.END_LOSS;
+			}
+	}
+	
+	private void updateDragonHero()
+	{
+		if(this.hero.getPosition().distanceTo(this.dragon.getPosition()) <= 1)	// if the dragon is adjacent to the hero
+		{
+			heroVSDragon();
+		}
+	}
+	
+	
+	
+	public void updateGame(char move)
+	{
+		this.updatePositions(move);
+		this.updateDragonHero();
+	}
+	
+	public void endGame()
+	{
+		switch(this.end)
+		{
+		case END_WIN: System.out.println("Well done! You're out of the maze!"); break;
+		case END_LOSS: System.out.println("Bad luck. Next time try to get the sword first."); break;
+		default: break;
+		}
+	}
 
 	public static void main(String[] args) 
 	{

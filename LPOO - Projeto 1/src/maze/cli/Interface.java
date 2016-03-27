@@ -1,6 +1,7 @@
 package maze.cli;
 
 import maze.logic.Game;
+import maze.logic.Game.End;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ public class Interface {
 
 	//ATTRIBUTES
 	
-	private Game game;
+	private Game game = new Game();
 	private Scanner in = new Scanner(System.in);
 	
 	public static void main(String[] args) 
@@ -23,19 +24,21 @@ public class Interface {
 		
 		//Initialize game
 		i.game.initGame(dragonMode);
-
+		
+		//Show board
+		i.game.showGame();
+		
 		//Game cycle
-		while (!i.game.getEnd())
-		{
-			i.game.showGame();
-			
+		while (i.game.getEnd() == End.END_NOT)
+		{	
 			char move = i.makeAPlay();
 			
-			//i.game.updateGame(move);
+			i.game.updateGame(move);
 			i.game.showGame();
+			
 		}
 		
-		//i.game.endGame();
+		i.game.endGame();
 		
 		return;
 	}	
@@ -78,9 +81,7 @@ public class Interface {
 	 * 'd' to go right;
 	 */
 	public char makeAPlay()
-	{
-		this.game.getMaze().printMaze();
-		
+	{	
 		char move;
 		
 		while (true)

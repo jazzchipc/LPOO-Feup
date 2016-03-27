@@ -69,7 +69,7 @@ public class Hero extends Creature{
 	 */
 	private boolean checkPosition(Position newPos, Maze maze, boolean exit)
 	{
-		char letter = maze.getMaze()[newPos.getX()][newPos.getY()];	// letter in the new position
+		char letter = maze.getMaze()[newPos.getY()][newPos.getX()];	// letter in the new position
 		
 		switch(letter)
 		{
@@ -81,6 +81,9 @@ public class Hero extends Creature{
 				return true;
 			else
 				return false;
+		case 'E':
+			this.pickSword();
+			return true;
 			
 		default: return false;
 		}
@@ -105,8 +108,7 @@ public class Hero extends Creature{
 	
 	public void pickSword()
 	{
-		this.armed = true;
-		this.updateLetter('A');
+		this.updateArmed(true);
 	}
 	
 }

@@ -114,7 +114,7 @@ public class Dragon extends Creature{
 	 */
 	private boolean checkPosition(Position newPos, Maze maze)
 	{
-		char letter = maze.getMaze()[newPos.getX()][newPos.getY()];	// letter in the new position
+		char letter = maze.getMaze()[newPos.getY()][newPos.getX()];	// letter in the new position
 		
 		if (letter == '0')	// if it is a path, it may walk there
 			return true;
