@@ -56,7 +56,7 @@ public class Game {
 	 */
 	public Game()
 	{
-		this.maze = new Maze();
+		this.maze = new Maze(symbols1);
 		this.hero = new Hero();
 		this.dragon = new Dragon();
 		this.sword = new Sword();
@@ -68,10 +68,7 @@ public class Game {
 	//GAME METHODS
 	
 	public void initGame(char dragonMode)
-	{
-		//Initializing maze
-		maze.updateMaze(symbols1);
-		
+	{	
 		//Initial elements' position
 		/*Position heroInitPos = new Position (1,1);
 		Position dragonInitPos = new Position (1,4);
@@ -141,6 +138,7 @@ public class Game {
 			this.dragon.killCreature();	// kill dragon
 			maze.updateMaze(dragon.getPosition(), '0'); // make a path where the dragon was killed
 			this.exit = true; // open door
+			System.out.println("You killed the dragon!");
 		}
 
 		else
