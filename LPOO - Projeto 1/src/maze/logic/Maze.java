@@ -1,38 +1,45 @@
 package maze.logic;
 
 public class Maze {
-	// array bidimensional com o labirinto da iteração 1
-	char[][] symbols = 	
-		{
-				{'X','X','X','X','X','X','X','X','X','X'},
-				{'X','H','0','0','0','0','0','0','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','D','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','0','0','0','0','0','X','0','S'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','E','X','X','0','0','0','0','0','X'},
-				{'X','X','X','X','X','X','X','X','X','X'}
-		};
-
-	/****ATRIBUTOS****/
+	//---ATTRIBUTES
 	
-	//maze é o array de símbolos do labirinto
-	private char[][] maze = symbols;
-	private Position exit = this.findPos('S');
+	private char[][] maze;
+	private Position exit;
 	
+	//---GET ATTRIBUTES FUNCTIONS
+	
+	public char[][] getMaze()
+	{
+		return this.maze;
+	}
+	
+	public Position getExit()
+	{
+		return this.exit;
+	}
+	
+	//---UPDATE ATTRIBUTES FUNCTIONS
+	
+	public void updateMaze(char[][] maze)
+	{
+		this.maze = maze;
+	}
 
-	/****MÉTODOS****/
+	//METHODS
+	
 	public Maze()
 	{
 		
 	}
 	
-	
-	public Maze(char[][] m1)
+	public Maze(char[][] symbols)
 	{
-		this.maze = m1;
+		this.maze = symbols;
+		this.exit = this.findPos('S');
+	}
+	
+	public void updateElementPosition(Object obj)
+	{
 	}
 	
 	// Imprime o labirinto com os símbolos
@@ -64,8 +71,8 @@ public class Maze {
 			{
 				if(maze[i][j] == letra)
 				{
-					pos.y = i;
-					pos.x = j;
+					pos.updateY(i);
+					pos.updateX(j);
 				}
 			}
 		}
@@ -73,26 +80,8 @@ public class Maze {
 		return pos;
 	}
 	
-	public char charAt(Position pos)
-	{
-		char aux = '0';
-		
-		for (int i = 0; i < this.symbols.length; i++)
-		{
-			for (int j = 0; j < this.symbols[i].length; j++)
-			{
-				if((i == pos.y )&&( j == pos.x))
-				{
-					aux = this.symbols[i][j];
-				}
-			}
-		}
-		
-		return aux;
-	}
-	
 	public void updateMaze(Position pos, char letter)
 	{
-				this.maze[pos.y][pos.x] = letter;
+				this.maze[pos.getY()][pos.getX()] = letter;
 	}
 }
