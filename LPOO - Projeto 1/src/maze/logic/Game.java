@@ -195,7 +195,11 @@ public class Game {
 		{
 			for (int j = 0; j < 10; j++)
 			{
-				ret = ret + this.maze.getMaze()[i][j] + "  ";
+				char c = this.maze.getMaze()[i][j];
+				
+				if (c == '0')
+					c = ' ';
+				ret = ret + c + " ";
 			}
 			ret = ret + "\n";
 		}

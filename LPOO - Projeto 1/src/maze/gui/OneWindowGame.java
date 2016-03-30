@@ -3,6 +3,7 @@ package maze.gui;
 import maze.logic.*;
 import java.lang.*;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -96,10 +97,14 @@ public class OneWindowGame {
 		btnExit.setBounds(72, 201, 115, 29);
 		frame.getContentPane().add(btnExit);
 		
+		//New font
+		Font font = new Font ("Consolas", Font.BOLD, 18);
+		
 		final JTextArea mazeView = new JTextArea();
 		mazeView.setEnabled(false);
 		mazeView.setEditable(false);
 		mazeView.setBounds(42, 286, 424, 334);
+		mazeView.setFont(font);
 		frame.getContentPane().add(mazeView);
 		
 		final JButton btnUp = new JButton("Up");
@@ -131,8 +136,7 @@ public class OneWindowGame {
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
 				
-				
-				
+				//Print the maze
 				mazeView.setText(game.mazeToString());
 			}
 		});
