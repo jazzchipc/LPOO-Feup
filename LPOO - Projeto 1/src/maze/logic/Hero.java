@@ -73,7 +73,7 @@ public class Hero extends Creature{
 		
 		switch(letter)
 		{
-		case '0':
+		case ' ':
 			return true;
 			
 		case 'S':

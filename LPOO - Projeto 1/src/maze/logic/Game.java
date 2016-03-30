@@ -9,14 +9,14 @@ public class Game {
 	private char[][] symbols1 = 	
 		{
 				{'X','X','X','X','X','X','X','X','X','X'},
-				{'X','0','0','0','0','0','0','0','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','D','X','X','0','X','0','X','0','X'},
-				{'X','0','0','0','0','0','0','X','0','S'},
-				{'X','0','X','X','0','X','0','X','0','X'},
-				{'X','H','X','X','0','X','0','X','0','X'},
-				{'X','E','X','X','0','0','0','0','0','X'},
+				{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
+				{'X',' ','X','X',' ','X',' ','X',' ','X'},
+				{'X',' ','X','X',' ','X',' ','X',' ','X'},
+				{'X','D','X','X',' ','X',' ','X',' ','X'},
+				{'X',' ',' ',' ',' ',' ',' ','X',' ','S'},
+				{'X',' ','X','X',' ','X',' ','X',' ','X'},
+				{'X','H','X','X',' ','X',' ','X',' ','X'},
+				{'X','E','X','X',' ',' ',' ',' ',' ','X'},
 				{'X','X','X','X','X','X','X','X','X','X'}
 		};
 	
@@ -137,14 +137,14 @@ public class Game {
 	{
 		// Hero moves first
 		hero.newPosition(maze, move, exit);	// generates new position
-		maze.updateMaze(hero.getPrePosition(), '0');	
+		maze.updateMaze(hero.getPrePosition(), ' ');	
 		maze.updateMaze(hero.getPosition(), hero.getLetter());	
 		
 		// Dragon moves after hero
 		if(!dragon.getDeathStatus())
 		{
 			dragon.newPosition(maze);
-			maze.updateMaze(dragon.getPrePosition(), '0');
+			maze.updateMaze(dragon.getPrePosition(), ' ');
 			maze.updateMaze(dragon.getPosition(), dragon.getLetter());	// rewrites dragon in new position
 		}
 		
