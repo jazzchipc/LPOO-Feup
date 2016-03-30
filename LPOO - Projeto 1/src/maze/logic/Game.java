@@ -46,6 +46,16 @@ public class Game {
 		return this.maze;
 	}
 	
+	public Hero getHero()
+	{
+		return this.hero;
+	}
+	
+	public Dragon getDragon()
+	{
+		return this.dragon;
+	}
+	
 	public End getEnd()
 	{
 		return this.end;
@@ -123,7 +133,7 @@ public class Game {
 	 * Updates creatures positions and also writes the maze accordingly.
 	 * @param move
 	 */
-	private void updatePositions(char move)
+	public void updatePositions(char move)
 	{
 		// Hero moves first
 		hero.newPosition(maze, move, exit);	// generates new position
@@ -197,6 +207,39 @@ public class Game {
 		game.showGame();
 	}
 	
+	public void updateHeroPosition(Position pos)
+	{
+		hero.updatePosition(pos);
+	}
 	
+	public void moveHeroUp()
+	{
+		Position temp = new Position();
+		temp = hero.getPosition();
+		temp.updateY(temp.getY() - 1);
+		hero.updatePosition(temp);
+	}
 	
+	public void moveHeroDown()
+	{
+		Position temp = new Position();
+		temp = hero.getPosition();
+		temp.updateY(temp.getY() + 1);
+		hero.updatePosition(temp);
+	}
+	
+	public void moveHeroLeft()
+	{
+		Position temp = new Position(hero.getPosition());
+		temp.updateX(temp.getX() - 1);
+		hero.updatePosition(temp);
+	}
+	
+	public void moveHeroRight()
+	{
+		Position temp = new Position();
+		temp = hero.getPosition();
+		temp.updateX(temp.getX() + 1);
+		hero.updatePosition(temp);
+	}
 }

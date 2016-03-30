@@ -88,5 +88,6 @@ public class Maze {
 	public char charAt(Position pos)
 	{
 		return this.maze[pos.getY()][pos.getX()];
+		
 	}
 }

@@ -99,7 +99,7 @@ public class MazeBuilder implements IMazeBuilder{
 	{
 		for (int i = 1; i < size-1; i++)
 		{
-			for (int j = 1; j < size-1; j++)
+			for (int j = 1; j < size-2; j++)
 			{
 				if(m[i][j] == 'X' && m[i+1][j] == 'X' && m[i][j+1] == 'X' && m[i+1][j+1] == 'X' && m[i-1][j] == 'X' && m[i][j-1] == 'X' && m[i-1][j-1] == 'X' && m[i+1][j-1] == 'X' && m[i-1][j+1] == 'X')
 					m[i][j] = ' ';
