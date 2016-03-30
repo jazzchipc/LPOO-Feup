@@ -1,4 +1,4 @@
-package maze.logic;
+	package maze.logic;
 
 public class Maze {
 	//---ATTRIBUTES
@@ -83,5 +83,10 @@ public class Maze {
 	public void updateMaze(Position pos, char letter)
 	{
 				this.maze[pos.getY()][pos.getX()] = letter;
+	}
+	
+	public char charAt(Position pos)
+	{
+		return this.maze[pos.getY()][pos.getX()];
 	}
 }

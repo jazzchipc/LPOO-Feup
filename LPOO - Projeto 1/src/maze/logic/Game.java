@@ -30,10 +30,10 @@ public class Game {
 	//---GAME STATE
 	
 	public enum End {
-		END_NOT,
-		END_FORCED,
-		END_WIN,
-		END_LOSS
+		END_NOT,		// means the game is still running
+		END_FORCED,		// the user exited
+		END_WIN,		// the player won
+		END_LOSS		// the player died
 	};
 	
 	private End end;
@@ -57,6 +57,17 @@ public class Game {
 	public Game()
 	{
 		this.maze = new Maze(symbols1);
+		this.hero = new Hero();
+		this.dragon = new Dragon();
+		this.sword = new Sword();
+		
+		this.end = End.END_NOT;
+		this.exit = false;
+	}
+	
+	public Game(char[][] maze)
+	{
+		this.maze = new Maze(maze);
 		this.hero = new Hero();
 		this.dragon = new Dragon();
 		this.sword = new Sword();
