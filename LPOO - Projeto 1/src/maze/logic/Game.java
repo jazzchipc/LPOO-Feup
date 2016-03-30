@@ -234,32 +234,21 @@ public class Game {
 	
 	public void moveHeroUp()
 	{
-		Position temp = new Position();
-		temp = hero.getPosition();
-		temp.updateY(temp.getY() - 1);
-		hero.updatePosition(temp);
+		this.updatePositions('w');
 	}
 	
 	public void moveHeroDown()
 	{
-		Position temp = new Position();
-		temp = hero.getPosition();
-		temp.updateY(temp.getY() + 1);
-		hero.updatePosition(temp);
+		this.updatePositions('s');
 	}
 	
 	public void moveHeroLeft()
 	{
-		Position temp = new Position(hero.getPosition());
-		temp.updateX(temp.getX() - 1);
-		hero.updatePosition(temp);
+		this.updatePositions('a');
 	}
 	
 	public void moveHeroRight()
 	{
-		Position temp = new Position();
-		temp = hero.getPosition();
-		temp.updateX(temp.getX() + 1);
-		hero.updatePosition(temp);
+		this.updatePositions('d');
 	}
 }

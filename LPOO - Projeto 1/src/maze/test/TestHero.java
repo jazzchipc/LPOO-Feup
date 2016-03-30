@@ -7,14 +7,15 @@ import maze.logic.*;
 public class TestHero {
 
 	char [][] m1 = {{'X', 'X', 'X', 'X', 'X'},
-					{'X', ' ', ' ', 'H', 'S'},
-					{'X', ' ', 'X', ' ', 'X'},
-					{'X', 'E', ' ', 'D', 'X'},
+					{'X', '0', '0', 'H', 'S'},
+					{'X', '0', 'X', '0', 'X'},
+					{'X', 'E', '0', 'D', 'X'},
 					{'X', 'X', 'X', 'X', 'X'}};
 	@Test
 
 	public void testMoveHeroToFreeCell() {
 		Game game = new Game(m1);
+		game.initGame('i'); 	// idle dragon
 		Maze maze = game.getMaze();
 		
 		Position p1 = new Position(3,1);
@@ -30,6 +31,7 @@ public class TestHero {
 	public void testFailToMoveAgainstWall()
 	{
 		Game game = new Game(m1);
+		game.initGame('i'); 	// idle dragon
 		Maze maze = game.getMaze();
 		
 		Position p1 = new Position(3,1);
