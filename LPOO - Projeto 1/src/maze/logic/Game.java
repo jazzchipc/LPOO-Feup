@@ -187,6 +187,22 @@ public class Game {
 		}
 	}
 
+	public String mazeToString()
+	{
+		String ret = "";
+		
+		for (int i = 0; i < 10; i++)	// TODO:change to match maze dimension
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				ret = ret + this.maze.getMaze()[i][j] + "  ";
+			}
+			ret = ret + "\n";
+		}
+		
+		return ret;
+	}
+	
 	public static void main(String[] args) 
 	{
 		Game game = new Game();
