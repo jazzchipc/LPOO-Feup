@@ -7,11 +7,11 @@ public class MazeBuilder implements IMazeBuilder{
 	private int size;
 	private char[][] m ;
 	
-	
 	public MazeBuilder()
 	{
 		
 	}
+
 	
 	public void putExit(char[][] m,int size)
 	{

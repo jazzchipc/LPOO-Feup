@@ -90,4 +90,9 @@ public class Maze {
 		return this.maze[pos.getY()][pos.getX()];
 		
 	}
+	
+	public int getSize()
+	{
+		return this.maze.length;
+	}
 }

@@ -11,8 +11,23 @@ public class TestHero {
 					{'X', '0', 'X', '0', 'X'},
 					{'X', 'E', '0', 'D', 'X'},
 					{'X', 'X', 'X', 'X', 'X'}};
+	
 	@Test
-
+	public void testValidCoords()
+	{
+		Game game = new Game(m1);
+		game.initGame('i'); 	// idle dragon
+		Maze maze = game.getMaze();
+		Hero hero = game.getHero();
+		
+		assertTrue(hero.getPosition().getX() > 0);
+		assertTrue(hero.getPosition().getY() > 0);
+		assertTrue(hero.getPosition().getX() < maze.getSize()-1);
+		assertTrue(hero.getPosition().getY() < maze.getSize()-1);
+		
+	}
+	
+	@Test
 	public void testMoveHeroToFreeCell() {
 		Game game = new Game(m1);
 		game.initGame('i'); 	// idle dragon
