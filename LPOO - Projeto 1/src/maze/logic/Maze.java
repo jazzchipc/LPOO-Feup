@@ -4,6 +4,7 @@ public class Maze {
 	//---ATTRIBUTES
 	
 	private char[][] maze;
+	private int sizeX, sizeY;
 	private Position exit;
 	
 	//---GET ATTRIBUTES FUNCTIONS
