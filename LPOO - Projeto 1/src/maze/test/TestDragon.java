@@ -8,7 +8,7 @@ import maze.logic.*;
 public class TestDragon {
 
 	@Test
-	public void test() {
+	public void testValidCoords() {
 		fail("Not yet implemented");
 	}
 

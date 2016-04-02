@@ -60,7 +60,9 @@ public class TestHero {
 	public void testHeroGetSword()
 	{
 		Game game = new Game(m1);
+		game.initGame('i');
 		Maze maze = game.getMaze();
+		Hero hero = game.getHero();
 		
 		Position p1 = new Position(1,2);
 		Position p2 = new Position(1,3);
@@ -69,8 +71,10 @@ public class TestHero {
 		
 		assertEquals(maze.charAt(p1), 'H');
 		assertEquals(maze.charAt(p2), 'E');
+		assertFalse(hero.getArmed());
 		game.moveHeroDown();
 		assertEquals(maze.charAt(p2), 'A');
+		assertTrue(hero.getArmed());
 	
 	}
 	
@@ -128,6 +132,22 @@ public class TestHero {
 		Hero hero = game.getHero();
 		Dragon dragon = game.getDragon();
 		
+		Position p1 = new Position(1,2);
+		Position p2 = new Position(1,3);
+		
+		game.updateHeroPosition(p1);
+		assertEquals(maze.charAt(p1), 'H');
+		assertFalse(hero.getArmed());
+		game.moveHeroDown();
+		assertEquals(maze.charAt(p2), 'A');
+		assertTrue(hero.getArmed());
+		game.moveHeroRight();
+		assertTrue(dragon.getDeathStatus());
+		assertTrue(game.getExit());
+		game.moveHeroRight();
+		game.moveHeroUp();
+		game.moveHeroRight();
+		//assertEquals(game.getEnd(),!END_NOT);
 		
 	}
 	
@@ -142,6 +162,20 @@ public class TestHero {
 		Position p1 = new Position(3,1);
 		
 		assertEquals(maze.charAt(p1), 'H');
+		assertFalse(hero.getArmed());
+		game.moveHeroRight();
+		//verificar que nao funcionou;
+	}
+	
+	@Test
+	public void testExitAliveDragon()
+	{
+		Game game = new Game(m1);
+		Maze maze = game.getMaze();
+		Hero hero = game.getHero();
+		Dragon dragon = game.getDragon();
+		
+		
 	}
 //	@Test
 //	public void testHeroDies() {

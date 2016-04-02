@@ -61,6 +61,10 @@ public class Game {
 		return this.end;
 	}
 	
+	public boolean getExit()
+	{
+		return exit;
+	}
 	/**
 	 * Default constructor
 	 */
