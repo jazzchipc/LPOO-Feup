@@ -22,7 +22,8 @@ public class MazeBuilder implements IMazeBuilder{
 	public char[][] buildMaze(int size)
 	{
 		this.maze = new char[size][size];
-	
+		visitedCells = new boolean[size - 2][size - 2];
+		
 		for(int i = 0; i < size; i++)
 		{
 			for(int j = 0; j < size; j++)
