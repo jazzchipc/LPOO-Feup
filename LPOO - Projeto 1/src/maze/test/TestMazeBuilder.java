@@ -129,7 +129,10 @@ public class TestMazeBuilder {
 		Random rand = new Random(); 
 		
 		for (int i = 0; i < numMazes; i++) {
-			int size = maxMazeSize == minMazeSize? minMazeSize : minMazeSize + 2 * rand.nextInt((maxMazeSize - minMazeSize)/2);
+			int size;
+			do{
+			size = maxMazeSize == minMazeSize? minMazeSize : minMazeSize + 2 * rand.nextInt((maxMazeSize - minMazeSize)/2);
+			}while(size % 2 == 0);
 			char[][]m = builder.buildMaze(size);
 			assertTrue("Invalid maze boundaries in maze:\n" + m, checkBoundaries(m));			
 			assertTrue("Invalid walls in maze:\n" + m, ! hasSquare(m, badWalls));
