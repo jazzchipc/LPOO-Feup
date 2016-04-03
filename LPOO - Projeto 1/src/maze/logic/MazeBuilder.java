@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class MazeBuilder implements IMazeBuilder{
 
-	private int size;
+	//private int size;
 	private char[][] maze;
 	private boolean[][] visitedCells;
 	private Stack<Position> pathHistory;
@@ -22,7 +22,7 @@ public class MazeBuilder implements IMazeBuilder{
 	public char[][] buildMaze(int size)
 	{
 		this.maze = new char[size][size];
-		visitedCells = new boolean[size - 2][size - 2];
+		visitedCells = new boolean[(size-1)/2][(size-1)/2];
 		
 		for(int i = 0; i < size; i++)
 		{
@@ -62,21 +62,23 @@ public class MazeBuilder implements IMazeBuilder{
 				break;
 			
 			Random r = new Random();
-			int dir = r.nextInt(3);
+			int dir = r.nextInt(4);
 			
 			switch (dir) 
 			{
-			case 0:
+			case 0:  //up
 				maze[guideCell.getY() * 2][guideCell.getX() * 2 + 1] = ' ';
 				break;
-			case 1:
+			case 1:  //right
 				maze[guideCell.getY() * 2 + 1][(guideCell.getX() + 1) * 2] = ' ';
 				break;
-			case 2:
+			case 2:  //down
 				maze[(guideCell.getY() + 1) * 2][guideCell.getX() * 2 + 1] = ' ';
 				break;
-			case 3:
+			case 3:  //left
 				maze[guideCell.getY() * 2 + 1][guideCell.getX() * 2] = ' ';
+				break;
+			case 4:
 				break;
 			}
 			
@@ -87,84 +89,6 @@ public class MazeBuilder implements IMazeBuilder{
 		
 		return maze;
 	}
-	
-	
-//	public void putHero(char[][] m,int size)
-//	{
-//		while(true)
-//		{
-//			
-//		Random in1 = new Random();
-//		int rand1 = in1.nextInt(size-2);
-//		Random in2 = new Random();
-//		int rand2 = in2.nextInt(size-2);
-//		
-//			if(m[rand1+1][rand2+1] == ' ')
-//			{
-//				m[rand1+1][rand2+1] = 'H';
-//				break;
-//			}
-//		}
-//	}
-//	
-//	public void putDragon(char[][] m,int size)
-//	{
-//		while(true)
-//		{
-//			
-//		Random in1 = new Random();
-//		int rand1 = in1.nextInt(size-2);
-//		Random in2 = new Random();
-//		int rand2 = in2.nextInt(size-2);
-//		
-//			if(m[rand1+1][rand2+1] == ' ')
-//			{
-//				m[rand1+1][rand2+1] = 'D';
-//				break;
-//			}
-//		}
-//	}
-//	
-//	public void putSword(char[][] m,int size)
-//	{
-//		while(true)
-//		{
-//			
-//		Random in1 = new Random();
-//		int rand1 = in1.nextInt(size-2);
-//		Random in2 = new Random();
-//		int rand2 = in2.nextInt(size-2);
-//		
-//			if(m[rand1+1][rand2+1] == ' ')
-//			{
-//				m[rand1+1][rand2+1] = 'E';
-//				break;
-//			}
-//		}
-//	}
-//	
-//	public void correct(char[][] m, int size)
-//	{
-//		for (int i = 1; i < size-1; i++)
-//		{
-//			for (int j = 1; j < size-2; j++)
-//			{
-//				if(m[i][j] == 'X' && m[i+1][j] == 'X' && m[i][j+1] == 'X' && m[i+1][j+1] == 'X' && m[i-1][j] == 'X' && m[i][j-1] == 'X' && m[i-1][j-1] == 'X' && m[i+1][j-1] == 'X' && m[i-1][j+1] == 'X')
-//					m[i][j] = ' ';
-//				
-//				if(m[i][j] == ' ' && m[i+1][j] == ' ' && m[i][j+1] == ' ' && m[i+1][j+1] == ' ')
-//					m[i][j] = 'X';
-//	
-//				if(m[i][j] == 'X' && m[i+1][j] == ' ' && m[i][j+1] == ' ' && m[i+1][j+1] == 'X')
-//					m[i][j] = ' ';
-//				
-//				if(m[i][j] == ' ' && m[i+1][j] == 'X' && m[i][j+1] == 'X' && m[i+1][j+1] == ' ')
-//					m[i][j] = 'X';
-//
-//			}
-//		}
-//	}
-//	
 
 	private void putExit()
 	{
@@ -337,7 +261,7 @@ public class MazeBuilder implements IMazeBuilder{
 	{
 		MazeBuilder mazebuilder = new MazeBuilder();
 		
-		char[][] m = mazebuilder.buildMaze(10);
+		char[][] m = mazebuilder.buildMaze(7);
 
 		
 		mazebuilder.printMaze(m);
