@@ -50,12 +50,9 @@ public class Maze {
 		{
 			for (int j = 0; j < this.maze[i].length; j++)
 			{
-				if(maze[i][j] == '0')
-					System.out.print(' ');
-				else
-					System.out.print(maze[i][j]); // imprime a letra do array
-				System.out.print("|");
-				
+				System.out.print(maze[i][j]); // imprime a letra do array
+				System.out.print(" ");
+
 			}
 			System.out.print("\n");
 		}
