@@ -3,6 +3,12 @@ package maze.logic;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * 
+ * This class aggregates all other classes, in order to create and update the game itself. 
+ * Most classes interact here.
+ *
+ */
 public class Game {
 	
 	// iteration 1 maze, without elements
