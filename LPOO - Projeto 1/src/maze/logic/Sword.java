@@ -1,5 +1,10 @@
 package maze.logic;
 
+/**
+ * 
+ * Represents the sword in-game.
+ *
+ */
 public class Sword {
 	
 	private char letter = 'E';

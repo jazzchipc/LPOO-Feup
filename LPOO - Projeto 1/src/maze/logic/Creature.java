@@ -1,5 +1,12 @@
 package maze.logic;
 
+/**
+ * 
+ * This class represents a creature, that in this game is either a Hero or a Dragon.
+ * 
+ * It is used to separate the Sword (which is a still object) from living characters.
+ *
+ */
 public class Creature {
 
 	//ATRIBUTES

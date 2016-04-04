@@ -1,5 +1,10 @@
 package maze.logic;
 
+/**
+ * 
+ * Class created to make it easier to locate and spawn elements in the maze.
+ *
+ */
 public class Position {
 	
 	//---ATTRIUBTES

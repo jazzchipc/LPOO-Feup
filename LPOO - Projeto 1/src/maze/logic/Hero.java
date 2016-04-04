@@ -1,5 +1,10 @@
 package maze.logic;
 
+/**
+ * 
+ * Represents a hero in-game.
+ *
+ */
 public class Hero extends Creature{
 	
 	//---ATTRIBUTES
@@ -98,6 +103,8 @@ public class Hero extends Creature{
 				return false;
 		case 'E':
 			this.pickSword();
+			return true;
+		case 'D':
 			return true;
 			
 		default: return false;

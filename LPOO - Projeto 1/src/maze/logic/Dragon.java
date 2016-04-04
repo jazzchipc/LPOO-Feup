@@ -3,6 +3,11 @@ package maze.logic;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * 
+ * Represents a dragon in-game. 
+ *
+ */
 public class Dragon extends Creature{
 
 	//---ATTRIBUTES
