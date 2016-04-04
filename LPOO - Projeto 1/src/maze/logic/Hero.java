@@ -104,6 +104,8 @@ public class Hero extends Creature{
 		case 'E':
 			this.pickSword();
 			return true;
+		case 'D':
+			return true;
 			
 		default: return false;
 		}
