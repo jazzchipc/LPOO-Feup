@@ -1,4 +1,4 @@
-package maze.gui;
+package maze.gui;	
 
 import maze.logic.*;
 import maze.logic.Game.End;

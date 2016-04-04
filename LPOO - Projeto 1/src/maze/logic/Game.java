@@ -112,15 +112,32 @@ public class Game {
 	 */
 	public Game(char[][] maze)
 	{
-		
+
 		this.maze = new Maze(maze);
 		this.hero = new Hero();
 		this.dragon = new Dragon();
 		this.sword = new Sword();
-		
+	
 		this.end = End.END_NOT;
 		this.exit = false;
+		
 	}
+
+	/**
+	 * Constructor where a maze is generated and assigned to the Game.
+	 * @param mazeSize Size of the maze to be generated.
+	 */
+//	public Game(int mazeSize)
+//	{
+//		
+//		this.maze = new Maze(mazeBuilder.buildMaze(mazeSize));
+//		this.hero = new Hero();
+//		this.dragon = new Dragon();
+//		this.sword = new Sword();
+//		
+//		this.end = End.END_NOT;
+//		this.exit = false;
+//	}
 
 	
 	//GAME METHODS
