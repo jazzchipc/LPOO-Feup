@@ -156,7 +156,7 @@ public class Game {
 			this.end = End.END_WIN;
 	}
 	
-	private void heroVSDragon()
+	public void heroVSDragon()
 	{
 		if (this.hero.getArmed())
 		{
@@ -234,6 +234,8 @@ public class Game {
 	public void updateHeroPosition(Position pos)
 	{
 		hero.updatePosition(pos);
+		maze.updateMaze(hero.getPrePosition(), ' ');	
+		maze.updateMaze(hero.getPosition(), hero.getLetter());
 	}
 	
 	public void moveHeroUp()

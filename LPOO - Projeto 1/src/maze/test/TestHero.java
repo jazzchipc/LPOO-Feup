@@ -88,11 +88,13 @@ public class TestHero {
 		
 		Position p1 = new Position(3,1);
 		Position p2 = new Position(3,3);
+		
 
 		
 		assertEquals(maze.charAt(p1), 'H');
 		assertEquals(maze.charAt(p2), 'D');
 		game.moveHeroDown();
+		game.heroVSDragon();
 		assertTrue(hero.getDeathStatus());
 		assertFalse(dragon.getDeathStatus());
 	}
@@ -108,6 +110,7 @@ public class TestHero {
 		Position p1 = new Position(1,2);
 		Position p2 = new Position(1,3);
 		Position p3 = new Position(3,3);
+		
 		game.updateHeroPosition(p1);
 		
 		assertEquals(maze.charAt(p1), 'H');
@@ -118,6 +121,7 @@ public class TestHero {
 		assertEquals(maze.charAt(p1), 'A');
 		assertTrue(hero.getArmed());
 		game.moveHeroRight();
+		game.heroVSDragon();
 		assertFalse(hero.getDeathStatus());
 		assertTrue(dragon.getDeathStatus());
 		assertEquals(maze.charAt(p3), ' ');
