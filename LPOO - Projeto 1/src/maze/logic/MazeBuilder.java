@@ -12,6 +12,7 @@ public class MazeBuilder implements IMazeBuilder{
 	private Position guideCell;
 	private Position exit;
 	
+	Random r = new Random();
 	
 	public MazeBuilder()
 	{
@@ -44,48 +45,69 @@ public class MazeBuilder implements IMazeBuilder{
 		markAsVisited();
 		
 		pathHistory = new Stack<Position>();
-		addPosToStack();
 		
-		while(!pathHistory.empty())
+		// While there are unvisited cells
+		while (!allCellsVisited())
 		{
-			while (!guideCellCanGoSomewhere()) 
-			{
-				pathHistory.pop();
-				
-				if (pathHistory.empty())
-					break;
-				else
-					guideCell = pathHistory.peek();
-			}
+			//printMaze(maze);
+			//System.out.println("");
 			
-			if(pathHistory.empty())
-				break;
-			
-			Random r = new Random();
-			int dir = r.nextInt(4);
-			
-			switch (dir) 
-			{
-			case 0:  //up
-				maze[guideCell.getX() * 2][guideCell.getY() * 2 + 1] = ' ';
-				break;
-			case 1:  //right
-				maze[(guideCell.getX() + 1) * 2][guideCell.getY() * 2 + 1] = ' ';
-				break;
-			case 2:  //down
-				maze[guideCell.getX()* 2 + 1][guideCell.getY() * 2] = ' ';
-				break;
-			case 3:  //left
-				maze[guideCell.getX() * 2][guideCell.getY() * 2 + 1] = ' ';
-				break;
-			case 4:
-				break;
-			}
-			
-			moveGuideCell(dir);
+			// Set as visited
 			markAsVisited();
-			addPosToStack();
+			
+			// If the cell can "jump" somewhere
+			if (guideCellCanGoSomewhere())
+			{	
+				// Push current position
+				addPosToStack();
+				
+				int dir = r.nextInt(4);
+				
+				// Select direction to "jump"
+				while(!guideCellCanMove(dir))
+				{
+					dir = r.nextInt(4);
+				}
+				
+				// Delete wall
+				switch (dir) 
+				{
+				case 0:  //up
+					maze[guideCell.getY() * 2][guideCell.getX() * 2 + 1] = ' ';
+					break;
+				case 1:  //right
+					maze[guideCell.getY() * 2 + 1][guideCell.getX() * 2 + 2] = ' ';
+					break;
+				case 2:  //down
+					maze[guideCell.getY()* 2 + 2][guideCell.getX() * 2 + 1] = ' ';
+					break;
+				case 3:  //left	
+					maze[guideCell.getY() * 2 + 1][guideCell.getX() * 2] = ' ';
+					break;
+				default:
+					break;
+				}
+				
+				// Move the cell
+				moveGuideCell(dir);
+				
+			}
+			
+			else
+			{
+				guideCell = pathHistory.pop();
+			}
+			
 		}
+		
+		//Add hero
+		randomAddLetterToMaze('H');
+		
+		//Add dragon
+		randomAddLetterToMaze('D');
+		
+		//Add sword
+		randomAddLetterToMaze('E');
 		
 		return maze;
 	}
@@ -154,11 +176,11 @@ public class MazeBuilder implements IMazeBuilder{
 				return false;
 			break;
 		case 1:
-			if (guideCell.getX() + 1 >= (maze.length - 1) / 2)
+			if ((guideCell.getX() + 1) >= visitedCells.length)
 				return false;
 			break;
 		case 2:
-			if (guideCell.getY() + 1 >= (maze.length - 1) / 2)
+			if ((guideCell.getY() + 1) >= visitedCells.length)
 				return false;
 			break;
 		case 3:
@@ -212,10 +234,10 @@ public class MazeBuilder implements IMazeBuilder{
 			guideCell.updateY(guideCell.getY() - 1);
 			break;
 		case 1:
-			guideCell.updateY(guideCell.getX() + 1);
+			guideCell.updateX(guideCell.getX() + 1);
 			break;
 		case 2:
-			guideCell.updateX(guideCell.getY() + 1);
+			guideCell.updateY(guideCell.getY() + 1);
 			break;
 		case 3:
 			guideCell.updateX(guideCell.getX() - 1);
@@ -236,12 +258,65 @@ public class MazeBuilder implements IMazeBuilder{
 
 	private void markAsVisited() 
 	{
-		visitedCells[guideCell.getX()][guideCell.getY()] = true;
+		visitedCells[guideCell.getY()][guideCell.getX()] = true;
 	}
-
-
 	
+	private boolean allCellsVisited()
+	{
+		boolean ret = true;
+		
+		for (int i = 0; i < this.visitedCells.length; i++)
+		{
+			for (int j = 0; j < this.visitedCells[i].length; j++)
+			{
+				if (this.visitedCells[i][j] == false)
+					ret = false;
+			}
+		}
+		
+		return ret;
+	}
 	
+	private void randomAddLetterToMaze(char letter)
+	{
+		int i, j;
+		
+		// Placing dragon non-adjacent to hero
+		if (letter == 'D')
+		{
+			Position hero = new Position();
+			for (int a = 0; a < this.maze.length; a++)
+			{
+				for (int b = 0; b < this.maze[a].length; b++)
+				{
+					if(maze[a][b] == 'H')
+					{
+						hero.updateY(a);
+						hero.updateX(b);
+					}
+				}
+			}
+			
+			do
+			{
+				i = r.nextInt(maze.length);
+				j = r.nextInt(maze[0].length);
+
+			} while ((maze[i][j] != ' ') || (new Position (j, i).distanceTo(hero) <= 1));
+		}
+		else
+		{
+			// find available spot
+			do
+			{
+				i = r.nextInt(maze.length);
+				j = r.nextInt(maze[0].length);
+			} while (maze[i][j] != ' ');
+		}
+
+		maze[i][j] = letter;
+
+	}
 
 	public void printMaze(char[][] m)
 	{
@@ -264,9 +339,8 @@ public class MazeBuilder implements IMazeBuilder{
 	{
 		MazeBuilder mazebuilder = new MazeBuilder();
 		
-		char[][] m = mazebuilder.buildMaze(5);
+		char[][] m = mazebuilder.buildMaze(7);
 
-		
 		mazebuilder.printMaze(m);
 		
 	}
