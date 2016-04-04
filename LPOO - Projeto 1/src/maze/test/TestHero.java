@@ -67,6 +67,7 @@ public class TestHero {
 		
 		Position p1 = new Position(1,2);
 		Position p2 = new Position(1,3);
+		
 		game.updateHeroPosition(p1);
 	
 		
@@ -120,13 +121,15 @@ public class TestHero {
 		assertEquals(maze.charAt(p3), 'D');
 		assertFalse(hero.getArmed());
 		game.moveHeroDown();
-		assertEquals(maze.charAt(p1), 'A');
+		
+		assertEquals(maze.charAt(p2), 'A');
 		assertTrue(hero.getArmed());
 		game.moveHeroRight();
 		game.heroVSDragon();
 		assertFalse(hero.getDeathStatus());
 		assertTrue(dragon.getDeathStatus());
-		assertEquals(maze.charAt(p3), '0');
+		
+		assertEquals(maze.charAt(p3), ' ');
 		
 	}
 	
@@ -134,6 +137,7 @@ public class TestHero {
 	public void testVictory()
 	{
 		Game game = new Game(m1);
+		game.initGame('i');
 		Maze maze = game.getMaze();
 		Hero hero = game.getHero();
 		Dragon dragon = game.getDragon();
@@ -141,18 +145,22 @@ public class TestHero {
 		Position p1 = new Position(1,2);
 		Position p2 = new Position(1,3);
 		
-		game.updateHeroPosition(p1);
+		game.updateHeroPosition(p1);	
+		
 		assertEquals(maze.charAt(p1), 'H');
 		assertFalse(hero.getArmed());
 		game.moveHeroDown();
 		assertEquals(maze.charAt(p2), 'A');
 		assertTrue(hero.getArmed());
 		game.moveHeroRight();
+		game.heroVSDragon();
 		assertTrue(dragon.getDeathStatus());
 		assertTrue(game.getExit());
-		game.moveHeroRight();
-		game.moveHeroUp();
-		game.moveHeroRight();
+		game.updateGame('d');
+		game.updateGame('w');
+		game.updateGame('w');
+		game.updateGame('d');
+
 		assertEquals(game.getEnd(),End.END_WIN);
 		
 	}

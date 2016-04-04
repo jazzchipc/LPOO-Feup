@@ -161,7 +161,7 @@ public class Game {
 		if (this.hero.getArmed())
 		{
 			this.dragon.killCreature();	// kill dragon
-			maze.updateMaze(dragon.getPosition(), '0'); // make a path where the dragon was killed
+			maze.updateMaze(dragon.getPosition(), ' '); // make a path where the dragon was killed
 			this.exit = true; // open door
 			System.out.println("You killed the dragon!");
 		}
