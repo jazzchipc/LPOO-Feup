@@ -1,5 +1,10 @@
 package maze.logic;
 
+/**
+ * 
+ * Represents a hero in-game.
+ *
+ */
 public class Hero extends Creature{
 	
 	//---ATTRIBUTES

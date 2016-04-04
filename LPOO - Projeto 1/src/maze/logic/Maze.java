@@ -1,5 +1,10 @@
 	package maze.logic;
 
+	/**
+	 * 
+	 * Class that saves the array of chars which represent the game and changes it acorrding to game state.
+	 *
+	 */
 public class Maze {
 	//---ATTRIBUTES
 	
