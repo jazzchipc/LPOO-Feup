@@ -154,17 +154,29 @@ public class Game {
 	/**
 	 * Prints some hints to remember the player of his current objective.
 	 */
-	public void printHints()
+	public String printHints()
 	{
 		if(!this.hero.getArmed())
+		{
 			System.out.println("Get The Sword!");
+			return "Get the sword!";
+		}
+		
 		else
 		{
 			if(!this.dragon.getDeathStatus())
+			{
 				System.out.println("Kill The Dragon!");
+				return "Kill the dragon!";
+			}
 			else
+			{
 				System.out.println("Get Out!");
+				return "Get out!";
+			}
 		}
+		
+		
 	}
 	
 	/**

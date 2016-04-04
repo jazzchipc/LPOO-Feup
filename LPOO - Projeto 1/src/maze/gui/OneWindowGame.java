@@ -1,6 +1,8 @@
 package maze.gui;
 
 import maze.logic.*;
+import maze.logic.Game.End;
+
 import java.lang.*;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -11,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
@@ -25,6 +28,7 @@ public class OneWindowGame{
 	private JTextField numberOfDimensions;
 	private JTextField numberOfDragons;
 	private JComboBox dragonType;
+	private JTextArea textHints;
 	
 	final JTextArea mazeView = new JTextArea();
 	
@@ -55,6 +59,40 @@ public class OneWindowGame{
 		
 		initialize();	
 		
+	}
+	
+	private void resetGame()
+	{
+		game = new Game();
+	}
+	
+	private void madeAPlay()
+	{
+		if (game.getEnd() == End.END_LOSS)
+		{
+			JOptionPane.showMessageDialog(frame,
+				    "Oh no! The dragon killed you! Next time try to get the sword first.",
+				    "A plain message",
+				    JOptionPane.PLAIN_MESSAGE);
+		}
+		
+		if (game.getEnd() == End.END_WIN)
+		{
+			JOptionPane.showMessageDialog(frame,
+				    "Congratulations! You managed not to burn to death!",
+				    "A plain message",
+				    JOptionPane.PLAIN_MESSAGE);
+		}
+		
+			
+		if (game.getEnd() == End.END_NOT)
+		{
+			//Print the maze
+			mazeView.setText(game.mazeToString());
+
+			//Print hints
+			textHints.setText(game.printHints());
+		}
 	}
 
 	/**
@@ -89,7 +127,7 @@ public class OneWindowGame{
 		frame.getContentPane().add(lblNumberOfDragons);
 		
 		final String[] dragonTypes = {"Still", "Random", "Sleepy"};
-		dragonType = new JComboBox<String>(dragonTypes);
+		dragonType = new JComboBox(dragonTypes);
 		dragonType.setBounds(205, 113, 78, 26);
 		
 		frame.getContentPane().add(dragonType);
@@ -121,7 +159,7 @@ public class OneWindowGame{
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.updateGame('w');
-				mazeView.setText(game.mazeToString());
+				madeAPlay();
 			}
 		});
 		btnUp.setEnabled(false);
@@ -132,7 +170,7 @@ public class OneWindowGame{
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.updateGame('s');
-				mazeView.setText(game.mazeToString());
+				madeAPlay();
 			}
 		});
 		btnDown.setEnabled(false);
@@ -143,8 +181,7 @@ public class OneWindowGame{
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				game.updateGame('a');
-				mazeView.setText(game.mazeToString());
-				
+				madeAPlay();
 			}
 		});
 		btnLeft.setEnabled(false);
@@ -155,7 +192,7 @@ public class OneWindowGame{
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.updateGame('d');
-				mazeView.setText(game.mazeToString());
+				madeAPlay();
 			}
 		});
 		btnRight.setEnabled(false);
@@ -172,9 +209,33 @@ public class OneWindowGame{
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
 				
-				mb = new MazeBuilder(Integer.parseInt(numberOfDragons.getText()));
+				int nDragons = Integer.parseInt(numberOfDragons.getText());
+				int nDimensions = Integer.parseInt(numberOfDimensions.getText());
 				
-				game = new Game(mb.buildMaze(Integer.parseInt(numberOfDimensions.getText())));
+				if (nDragons < 1)
+				{
+					JOptionPane.showMessageDialog(frame,
+						    "The number of dragons must be positive.");
+					return;
+				}
+				
+				if (nDragons > (nDimensions-3)*(nDimensions-3))
+				{
+					JOptionPane.showMessageDialog(frame,
+						    "The number of dragons is too high for the number of dimensions.");
+					return;
+				}
+				
+				if (nDimensions < 5 || nDimensions%2 == 0)
+				{
+					JOptionPane.showMessageDialog(frame,
+						    "The number of dimensions has to be odd and larger than 5.");
+					return;
+				}
+				
+				mb = new MazeBuilder(nDragons);
+				
+				game = new Game(mb.buildMaze(nDimensions));
 				
 				char dragonMode = 'i';
 				
@@ -189,10 +250,18 @@ public class OneWindowGame{
 				
 				//Print the maze
 				mazeView.setText(game.mazeToString());
+					
+				//Print hints
+				textHints.setText(game.printHints());
+				
+				
 			}
 		});
 		btnGenerateMaze.setBounds(237, 201, 157, 29);
 		frame.getContentPane().add(btnGenerateMaze);
+		
+		textHints = new JTextArea();
+		textHints.setBounds(491, 570, 207, 50);
+		frame.getContentPane().add(textHints);
 	}
-	
 }
