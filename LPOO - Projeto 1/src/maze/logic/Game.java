@@ -106,6 +106,7 @@ public class Game {
 	 */
 	public Game(char[][] maze)
 	{
+
 		this.maze = new Maze(maze);
 		this.hero = new Hero();
 		this.dragon = new Dragon();
@@ -115,6 +116,7 @@ public class Game {
 		this.exit = false;
 		
 	}
+
 	/**
 	 * Constructor where a maze is generated and assigned to the Game.
 	 * @param mazeSize Size of the maze to be generated.
@@ -130,6 +132,7 @@ public class Game {
 //		this.end = End.END_NOT;
 //		this.exit = false;
 //	}
+
 	
 	//GAME METHODS
 	
@@ -168,17 +171,29 @@ public class Game {
 	/**
 	 * Prints some hints to remember the player of his current objective.
 	 */
-	public void printHints()
+	public String printHints()
 	{
 		if(!this.hero.getArmed())
+		{
 			System.out.println("Get The Sword!");
+			return "Get the sword!";
+		}
+		
 		else
 		{
 			if(!this.dragon.getDeathStatus())
+			{
 				System.out.println("Kill The Dragon!");
+				return "Kill the dragon!";
+			}
 			else
+			{
 				System.out.println("Get Out!");
+				return "Get out!";
+			}
 		}
+		
+		
 	}
 	
 	/**
@@ -259,9 +274,9 @@ public class Game {
 	{
 		String ret = "";
 		
-		for (int i = 0; i < 10; i++)	// TODO:change to match maze dimension
+		for (int i = 0; i < this.maze.getMaze().length; i++)	// TODO:change to match maze dimension
 		{
-			for (int j = 0; j < 10; j++)
+			for (int j = 0; j < this.maze.getMaze().length; j++)
 			{
 				char c = this.maze.getMaze()[i][j];
 				

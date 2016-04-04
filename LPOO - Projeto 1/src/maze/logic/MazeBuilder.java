@@ -12,11 +12,18 @@ public class MazeBuilder implements IMazeBuilder{
 	private Position guideCell;
 	private Position exit;
 	
+	public int numberOfDragons = 1;
+	
 	Random r = new Random();
 	
 	public MazeBuilder()
 	{
 		
+	}
+	
+	public MazeBuilder(int numberOfDragons)
+	{
+		this.numberOfDragons = numberOfDragons;
 	}
 
 	
@@ -103,8 +110,9 @@ public class MazeBuilder implements IMazeBuilder{
 		//Add hero
 		randomAddLetterToMaze('H');
 		
-		//Add dragon
-		randomAddLetterToMaze('D');
+		//Add dragons
+		for (int i = 0; i < this.numberOfDragons; i++)
+			randomAddLetterToMaze('D');
 		
 		//Add sword
 		randomAddLetterToMaze('E');
