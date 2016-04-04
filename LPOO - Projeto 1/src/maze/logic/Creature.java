@@ -71,6 +71,7 @@ public class Creature {
 	
 	public void updatePosition(Position pos)
 	{
+		this.prePos = this.pos;
 		this.pos = pos ;
 	}
 	
