@@ -28,7 +28,7 @@ public class OneWindowGame implements KeyListener{
 	final JTextArea mazeView = new JTextArea();
 	
 	private Game game;
-	private MazeBuilder mb = new MazeBuilder();
+	private MazeBuilder mb;
 	
 
 	/**
@@ -120,6 +120,7 @@ public class OneWindowGame implements KeyListener{
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.updatePositions('w');
+				frame.repaint();
 			}
 		});
 		btnUp.setEnabled(false);
@@ -167,6 +168,8 @@ public class OneWindowGame implements KeyListener{
 				btnDown.setEnabled(true);
 				btnLeft.setEnabled(true);
 				btnRight.setEnabled(true);
+				
+				mb = new MazeBuilder(Integer.parseInt(numberOfDragons.getText()));
 				
 				game = new Game(mb.buildMaze(Integer.parseInt(numberOfDimensions.getText())));
 				
