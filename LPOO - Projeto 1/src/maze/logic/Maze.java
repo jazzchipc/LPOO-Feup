@@ -9,11 +9,19 @@ public class Maze {
 	
 	//---GET ATTRIBUTES FUNCTIONS
 	
+	/**
+	 * 
+	 * @return The bidimensional array of char's that makes up the maze.
+	 */
 	public char[][] getMaze()
 	{
 		return this.maze;
 	}
 	
+	/**
+	 * 
+	 * @return The Position of the exit.
+	 */
 	public Position getExit()
 	{
 		return this.exit;
@@ -21,6 +29,10 @@ public class Maze {
 	
 	//---UPDATE ATTRIBUTES FUNCTIONS
 	
+	/**
+	 * Assigns a new bidimensional array as the maze.
+	 * @param maze
+	 */
 	public void updateMaze(char[][] maze)
 	{
 		this.maze = maze;
@@ -28,17 +40,28 @@ public class Maze {
 
 	//METHODS
 	
+	/**
+	 * Default constructor with no arguments.
+	 */
 	public Maze()
 	{
 		
 	}
 	
+	/**
+	 * Constructor that assings a bidimensional array as the Maze.
+	 * @param symbols bidimensional array to be assigned.
+	 */
 	public Maze(char[][] symbols)
 	{
 		this.maze = symbols;
 		this.exit = this.findPos('S');
 	}
 	
+	/**
+	 * 
+	 * @param obj Element to have it's position updated
+	 */
 	public void updateElementPosition(Object obj)
 	{
 	}
@@ -59,6 +82,11 @@ public class Maze {
 	}
 	
 	// Procura e retorna a posição de uma determinada letra
+	/**
+	 * 
+	 * @param letra Element to find.
+	 * @return The Position of letra in the maze.
+	 */
 	public Position findPos(char letra)
 	{
 		Position pos = new Position();
@@ -78,17 +106,31 @@ public class Maze {
 		return pos;
 	}
 	
+	/**
+	 * 
+	 * @param pos Position for letter in the maze.
+	 * @param letter Element to be added to the maze in pos.
+	 */
 	public void updateMaze(Position pos, char letter)
 	{
 				this.maze[pos.getY()][pos.getX()] = letter;
 	}
 	
+	/**
+	 * 
+	 * @param pos Position to analyze.
+	 * @return The char at the given Position.
+	 */
 	public char charAt(Position pos)
 	{
 		return this.maze[pos.getY()][pos.getX()];
 		
 	}
 	
+	/**
+	 * 
+	 * @return The size the side of the maze.
+	 */
 	public int getSize()
 	{
 		return this.maze.length;

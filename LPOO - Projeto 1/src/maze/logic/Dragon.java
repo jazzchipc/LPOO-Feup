@@ -18,11 +18,19 @@ public class Dragon extends Creature{
 	
 	//---GET ATTRIBUTES FUNCTIONS
 	
+	/**
+	 * 
+	 * @return True if Dragon is asleep. False otherwise.
+	 */
 	public boolean getAsleep()
 	{
 		return this.asleep;
 	}
 	
+	/**
+	 * 
+	 * @return STILL if Dragon is idle, RANDOM if Dragon moves randomly, RANDOM_ASLEEP if Dragon moves randomly but starts asleep.
+	 */
 	public Mode getMode()
 	{
 		return this.mode;
@@ -30,6 +38,10 @@ public class Dragon extends Creature{
 	
 	//---UPDATE ATTRIBUTES FUNCTIONS
 	
+	/**
+	 * 
+	 * @param asleep New sleep Status(true if asleep, false if awake) of the Dragon.
+	 */
 	public void updateAsleep(boolean asleep)
 	{
 		this.asleep = asleep;

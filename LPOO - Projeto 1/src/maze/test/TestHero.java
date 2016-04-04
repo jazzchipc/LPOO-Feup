@@ -129,7 +129,7 @@ public class TestHero {
 		assertFalse(hero.getDeathStatus());
 		assertTrue(dragon.getDeathStatus());
 		
-		assertEquals(maze.charAt(p3), ' ');
+		assertEquals(maze.charAt(p3), '0');
 		
 	}
 	
