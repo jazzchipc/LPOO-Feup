@@ -4,6 +4,7 @@ import maze.logic.*;
 import maze.logic.Game.End;
 
 import java.lang.*;
+import java.util.Locale;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -15,12 +16,18 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 
 public class OneWindowGame{
 
@@ -29,6 +36,7 @@ public class OneWindowGame{
 	private JTextField numberOfDragons;
 	private JComboBox dragonType;
 	private JTextArea textHints;
+	
 	
 	final JTextArea mazeView = new JTextArea();
 	
@@ -52,6 +60,7 @@ public class OneWindowGame{
 		});
 	}
 
+	
 	/**
 	 * Create the application.
 	 */
@@ -99,6 +108,7 @@ public class OneWindowGame{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 700);
@@ -128,12 +138,12 @@ public class OneWindowGame{
 		
 		final String[] dragonTypes = {"Still", "Random", "Sleepy"};
 		dragonType = new JComboBox(dragonTypes);
-		dragonType.setBounds(205, 113, 78, 26);
+		dragonType.setBounds(205, 102, 78, 26);
 		
 		frame.getContentPane().add(dragonType);
 		
 		JLabel lblDragonType = new JLabel("Dragon type");
-		lblDragonType.setBounds(42, 116, 108, 20);
+		lblDragonType.setBounds(42, 105, 108, 20);
 		frame.getContentPane().add(lblDragonType);
 		
 		JButton btnExit = new JButton("Exit");
@@ -142,7 +152,7 @@ public class OneWindowGame{
 				System.exit(0);
 			}
 		});
-		btnExit.setBounds(72, 201, 115, 29);
+		btnExit.setBounds(344, 64, 157, 29);
 		frame.getContentPane().add(btnExit);
 		
 		//New font
@@ -151,7 +161,7 @@ public class OneWindowGame{
 		
 		mazeView.setEnabled(false);
 		mazeView.setEditable(false);
-		mazeView.setBounds(42, 286, 424, 334);
+		mazeView.setBounds(42, 216, 533, 402);
 		mazeView.setFont(font);
 		frame.getContentPane().add(mazeView);
 		
@@ -163,7 +173,7 @@ public class OneWindowGame{
 			}
 		});
 		btnUp.setEnabled(false);
-		btnUp.setBounds(627, 316, 115, 29);
+		btnUp.setBounds(627, 101, 115, 29);
 		frame.getContentPane().add(btnUp);
 		
 		final JButton btnDown = new JButton("Down");
@@ -174,7 +184,7 @@ public class OneWindowGame{
 			}
 		});
 		btnDown.setEnabled(false);
-		btnDown.setBounds(627, 490, 115, 29);
+		btnDown.setBounds(627, 181, 115, 29);
 		frame.getContentPane().add(btnDown);
 		
 		final JButton btnLeft = new JButton("Left");
@@ -185,7 +195,7 @@ public class OneWindowGame{
 			}
 		});
 		btnLeft.setEnabled(false);
-		btnLeft.setBounds(491, 413, 115, 29);
+		btnLeft.setBounds(509, 141, 115, 29);
 		frame.getContentPane().add(btnLeft);
 		
 		final JButton btnRight = new JButton("Right");
@@ -196,7 +206,7 @@ public class OneWindowGame{
 			}
 		});
 		btnRight.setEnabled(false);
-		btnRight.setBounds(764, 413, 115, 29);
+		btnRight.setBounds(740, 141, 115, 29);
 		frame.getContentPane().add(btnRight);
 		
 		JButton btnGenerateMaze = new JButton("Generate Maze");
@@ -257,11 +267,11 @@ public class OneWindowGame{
 				
 			}
 		});
-		btnGenerateMaze.setBounds(237, 201, 157, 29);
+		btnGenerateMaze.setBounds(344, 28, 157, 29);
 		frame.getContentPane().add(btnGenerateMaze);
 		
 		textHints = new JTextArea();
-		textHints.setBounds(491, 570, 207, 50);
+		textHints.setBounds(612, 286, 187, 35);
 		frame.getContentPane().add(textHints);
 	}
 }
