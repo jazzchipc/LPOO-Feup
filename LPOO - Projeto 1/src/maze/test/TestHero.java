@@ -3,6 +3,7 @@ package maze.test;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import maze.logic.*;
+import maze.logic.Game.End;
 
 public class TestHero {
 
@@ -95,6 +96,7 @@ public class TestHero {
 		game.moveHeroDown();
 		assertTrue(hero.getDeathStatus());
 		assertFalse(dragon.getDeathStatus());
+		assertEquals(game.getEnd(),End.END_LOSS);
 	}
 	
 	@Test
@@ -120,7 +122,7 @@ public class TestHero {
 		game.moveHeroRight();
 		assertFalse(hero.getDeathStatus());
 		assertTrue(dragon.getDeathStatus());
-		assertEquals(maze.charAt(p3), ' ');
+		assertEquals(maze.charAt(p3), '0');
 		
 	}
 	
@@ -147,7 +149,7 @@ public class TestHero {
 		game.moveHeroRight();
 		game.moveHeroUp();
 		game.moveHeroRight();
-		//assertEquals(game.getEnd(),!END_NOT);
+		assertEquals(game.getEnd(),End.END_WIN);
 		
 	}
 	
@@ -164,16 +166,32 @@ public class TestHero {
 		assertEquals(maze.charAt(p1), 'H');
 		assertFalse(hero.getArmed());
 		game.moveHeroRight();
-		//verificar que nao funcionou;
+		assertEquals(maze.charAt(p1), 'H');
+		assertEquals(game.getEnd(),End.END_NOT);
 	}
 	
 	@Test
-	public void testExitAliveDragon()
+	public void testExitArmedAliveDragon()
 	{
 		Game game = new Game(m1);
 		Maze maze = game.getMaze();
 		Hero hero = game.getHero();
 		Dragon dragon = game.getDragon();
+		
+		Position p1 = new Position(3,1);
+		Position p2 = new Position(1,2);
+		Position p3 = new Position(1,3);
+		
+		assertEquals(maze.charAt(p1), 'H');
+		assertFalse(hero.getArmed());
+		game.updateHeroPosition(p2);
+		game.moveHeroDown();
+		assertEquals(maze.charAt(p3), 'A');
+		assertTrue(hero.getArmed());
+		game.updateHeroPosition(p1);
+		game.moveHeroRight();
+		assertEquals(maze.charAt(p1), 'A');
+		assertEquals(game.getEnd(),End.END_NOT);
 		
 		
 	}
