@@ -48,8 +48,8 @@ public class MazeBuilder implements IMazeBuilder{
 		
 		while(!pathHistory.empty())
 		{
-			while (!guideCellCanGoSomewhere()) {
-			
+			while (!guideCellCanGoSomewhere()) 
+			{
 				pathHistory.pop();
 				
 				if (pathHistory.empty())
@@ -67,16 +67,16 @@ public class MazeBuilder implements IMazeBuilder{
 			switch (dir) 
 			{
 			case 0:  //up
-				maze[guideCell.getY() * 2][guideCell.getX() * 2 + 1] = ' ';
+				maze[guideCell.getX() * 2][guideCell.getY() * 2 + 1] = ' ';
 				break;
 			case 1:  //right
-				maze[guideCell.getY() * 2 + 1][(guideCell.getX() + 1) * 2] = ' ';
+				maze[(guideCell.getX() + 1) * 2][guideCell.getY() * 2 + 1] = ' ';
 				break;
 			case 2:  //down
-				maze[(guideCell.getY() + 1) * 2][guideCell.getX() * 2 + 1] = ' ';
+				maze[guideCell.getX()* 2 + 1][guideCell.getY() * 2] = ' ';
 				break;
 			case 3:  //left
-				maze[guideCell.getY() * 2 + 1][guideCell.getX() * 2] = ' ';
+				maze[guideCell.getX() * 2][guideCell.getY() * 2 + 1] = ' ';
 				break;
 			case 4:
 				break;
@@ -154,7 +154,7 @@ public class MazeBuilder implements IMazeBuilder{
 				return false;
 			break;
 		case 1:
-			if (guideCell.getX() + 1 >= (maze[0].length - 1) / 2)
+			if (guideCell.getX() + 1 >= (maze.length - 1) / 2)
 				return false;
 			break;
 		case 2:
@@ -204,22 +204,25 @@ public class MazeBuilder implements IMazeBuilder{
 	
 	private void moveGuideCell(int dir)
 	{
+		if(guideCellCanMove(dir))
+		{
 		switch (dir) 
 		{
 		case 0:
 			guideCell.updateY(guideCell.getY() - 1);
 			break;
 		case 1:
-			guideCell.updateY(guideCell.getY() + 1);
+			guideCell.updateY(guideCell.getX() + 1);
 			break;
 		case 2:
-			guideCell.updateX(guideCell.getX() - 1);
+			guideCell.updateX(guideCell.getY() + 1);
 			break;
 		case 3:
-			guideCell.updateX(guideCell.getX() + 1);
+			guideCell.updateX(guideCell.getX() - 1);
 			break;
 		default:
 			break;
+		}
 		}
 	}
 
@@ -261,7 +264,7 @@ public class MazeBuilder implements IMazeBuilder{
 	{
 		MazeBuilder mazebuilder = new MazeBuilder();
 		
-		char[][] m = mazebuilder.buildMaze(7);
+		char[][] m = mazebuilder.buildMaze(5);
 
 		
 		mazebuilder.printMaze(m);
