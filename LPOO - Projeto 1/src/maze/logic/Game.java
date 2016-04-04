@@ -91,7 +91,7 @@ public class Game {
 	 */
 	public Game()
 	{
-		this.maze = new Maze();
+		this.maze = new Maze(symbols1);
 		this.hero = new Hero();
 		this.dragon = new Dragon();
 		this.sword = new Sword();
@@ -104,10 +104,10 @@ public class Game {
 	 * Constructor where a maze is assigned to the Game.
 	 * @param maze Maze to be assigned to the game.
 	 */
-	public Game(int mazeSize)
+	public Game(char[][] maze)
 	{
 		
-		this.maze = new Maze(mazeBuilder.buildMaze(mazeSize));
+		this.maze = new Maze(maze);
 		this.hero = new Hero();
 		this.dragon = new Dragon();
 		this.sword = new Sword();
