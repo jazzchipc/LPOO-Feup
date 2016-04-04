@@ -19,11 +19,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
-public class OneWindowGame implements KeyListener{
+public class OneWindowGame{
 
 	private JFrame frame;
 	private JTextField numberOfDimensions;
 	private JTextField numberOfDragons;
+	private JComboBox dragonType;
 	
 	final JTextArea mazeView = new JTextArea();
 	
@@ -87,8 +88,8 @@ public class OneWindowGame implements KeyListener{
 		lblNumberOfDragons.setBounds(42, 68, 148, 20);
 		frame.getContentPane().add(lblNumberOfDragons);
 		
-		String[] dragonTypes = {"Still", "Random", "Sleepy"};
-		JComboBox dragonType = new JComboBox(dragonTypes);
+		final String[] dragonTypes = {"Still", "Random", "Sleepy"};
+		dragonType = new JComboBox<String>(dragonTypes);
 		dragonType.setBounds(205, 113, 78, 26);
 		
 		frame.getContentPane().add(dragonType);
@@ -119,8 +120,8 @@ public class OneWindowGame implements KeyListener{
 		final JButton btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.updatePositions('w');
-				frame.repaint();
+				game.updateGame('w');
+				mazeView.setText(game.mazeToString());
 			}
 		});
 		btnUp.setEnabled(false);
@@ -130,7 +131,8 @@ public class OneWindowGame implements KeyListener{
 		final JButton btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.updatePositions('s');
+				game.updateGame('s');
+				mazeView.setText(game.mazeToString());
 			}
 		});
 		btnDown.setEnabled(false);
@@ -140,7 +142,8 @@ public class OneWindowGame implements KeyListener{
 		final JButton btnLeft = new JButton("Left");
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				game.updatePositions('a');
+				game.updateGame('a');
+				mazeView.setText(game.mazeToString());
 				
 			}
 		});
@@ -151,7 +154,7 @@ public class OneWindowGame implements KeyListener{
 		final JButton btnRight = new JButton("Right");
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.updatePositions('d');
+				game.updateGame('d');
 				mazeView.setText(game.mazeToString());
 			}
 		});
@@ -173,45 +176,23 @@ public class OneWindowGame implements KeyListener{
 				
 				game = new Game(mb.buildMaze(Integer.parseInt(numberOfDimensions.getText())));
 				
+				char dragonMode = 'i';
+				
+				if (dragonType.getSelectedItem() == dragonTypes[0])
+					dragonMode = 'i';
+				if (dragonType.getSelectedItem() == dragonTypes[1])
+					dragonMode = 'r';
+				if (dragonType.getSelectedItem() == dragonTypes[2])
+					dragonMode = 's';
+				
+				game.initGame(dragonMode);
+				
 				//Print the maze
 				mazeView.setText(game.mazeToString());
 			}
 		});
 		btnGenerateMaze.setBounds(237, 201, 157, 29);
 		frame.getContentPane().add(btnGenerateMaze);
-	}
-
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{	
-			game.updatePositions('d');
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			game.updatePositions('w');
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			game.updatePositions('a');
-		}
-		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			game.updatePositions('s');
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }
