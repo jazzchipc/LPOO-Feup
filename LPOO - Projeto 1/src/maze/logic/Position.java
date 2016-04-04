@@ -6,12 +6,19 @@ public class Position {
 	private int x,y;
 	
 	//---GET ATTRIBUTES FUNCTIONS
-	
+	/**
+	 * 
+	 * @return The x value of the position.
+	 */
 	public int getX()
 	{
 		return this.x;
 	}
 	
+	/**
+	 * 
+	 * @return The y value of the position.
+	 */
 	public int getY()
 	{
 		return this.y;
@@ -19,11 +26,19 @@ public class Position {
 	
 	//---UPDATE ATTRIBUTES FUNCTIONS
 	
+	/**
+	 * Updates the value of x.
+	 * @param x New x value.
+	 */
 	public void updateX(int x)
 	{
 		this.x = x;
 	}
 	
+	/**
+	 * Updates the value of y.
+	 * @param y New y value.
+	 */
 	public void updateY(int y)
 	{
 		this.y = y;
@@ -82,21 +97,33 @@ public class Position {
 	
 	//---MOVE FUNCTIONS
 
+	/**
+	 * Moves the Position Up.
+	 */
 	public void moveUp()
 	{
 		this.y = this.y - 1;
 	}
 	
+	/**
+	 * Moves the Position Down.
+	 */
 	public void moveDown()
 	{
 		this.y = this.y + 1;
 	}
 	
+	/**
+	 * Moves the Position to the Left.
+	 */
 	public void moveLeft()
 	{
 		this.x = this.x - 1;
 	}
 	
+	/**
+	 * Moves the Position to the Right.
+	 */
 	public void moveRight()
 	{
 		this.x = this.x + 1;

@@ -12,13 +12,18 @@ public class MazeBuilder implements IMazeBuilder{
 	private Position guideCell;
 	private Position exit;
 	
-	
+	/**
+	 * Default constructor with no arguments.
+	 */
 	public MazeBuilder()
 	{
 		
 	}
 
-	
+	/**
+	 * Generates a random maze with both sides measuring size.
+	 * @param size Size of the side of the maze to generate.
+	 */
 	public char[][] buildMaze(int size)
 	{
 		this.maze = new char[size][size];
@@ -90,6 +95,9 @@ public class MazeBuilder implements IMazeBuilder{
 		return maze;
 	}
 
+	/**
+	 * Makes one point in one of the walls of the maze as the Exit.
+	 */
 	private void putExit()
 	{
 		exit = new Position();
@@ -126,6 +134,9 @@ public class MazeBuilder implements IMazeBuilder{
 	
 	
 
+	/**
+	 * Calculates the position for the GuideCell.
+	 */
 	private void initializeGuideCell() 
 	{
 		Position cellNextToExit = new Position(exit.getX(), exit.getY());
@@ -145,6 +156,11 @@ public class MazeBuilder implements IMazeBuilder{
 		guideCell = new Position(guideCellX, guideCellY);
 	}
 
+	/**
+	 * Verifies if the GuideCell can move in the given direction.
+	 * @param dir 0 to move up, 1 to move to the right, 2 to move down, 3 to move to the left.
+	 * @return True if the GuideCell can move. False otherwise.
+	 */
 	private boolean guideCellCanMove(int dir) 
 	{
 		switch (dir) 
@@ -172,6 +188,10 @@ public class MazeBuilder implements IMazeBuilder{
 		return !cellNextToGuideCellHasBeenVisited(dir);
 	}
 	
+	/**
+	 * Verifies if the GuideCell can move in at least one direction.
+	 * @return True if the GuideCell can go somewhere. False otherwise.
+	 */
 	private boolean guideCellCanGoSomewhere() 
 	{
 		boolean ret = false;
@@ -183,6 +203,11 @@ public class MazeBuilder implements IMazeBuilder{
 		return ret;
 	}
 	
+	/**
+	 * Verifies if the cell in the given direction has been visited.
+	 * @param dir 0 to move up, 1 to move to the right, 2 to move down, 3 to move to the left.
+	 * @return True if the cell in question has been visited. False otherwise.
+	 */
 	private boolean cellNextToGuideCellHasBeenVisited(int dir) 
 	{
 		switch (dir) 
@@ -202,6 +227,10 @@ public class MazeBuilder implements IMazeBuilder{
 		return false;
 	}
 	
+	/**
+	 * Moves the GuideCell in the given direction.
+	 * @param dir 0 to move up, 1 to move to the right, 2 to move down, 3 to move to the left.
+	 */
 	private void moveGuideCell(int dir)
 	{
 		if(guideCellCanMove(dir))
@@ -226,6 +255,9 @@ public class MazeBuilder implements IMazeBuilder{
 		}
 	}
 
+	/**
+	 * Adds the GuideCell's Position to the pathHistory stack.
+	 */
 	private void addPosToStack() 
 	{
 		Position temp = new Position(guideCell.getX(),guideCell.getY());
@@ -234,15 +266,18 @@ public class MazeBuilder implements IMazeBuilder{
 	}
 
 
+	/**
+	 * Marks the GuideCell's Position as visited in the visitedCells array.
+	 */
 	private void markAsVisited() 
 	{
 		visitedCells[guideCell.getX()][guideCell.getY()] = true;
 	}
 
-
-	
-	
-
+	/**
+	 * Prints a maze.
+	 * @param m Bidimensional array to be printed.
+	 */
 	public void printMaze(char[][] m)
 	{
 		for (int i = 0; i < m.length; i++)

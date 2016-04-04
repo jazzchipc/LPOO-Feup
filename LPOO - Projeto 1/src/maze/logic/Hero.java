@@ -6,6 +6,10 @@ public class Hero extends Creature{
 	private boolean armed;
 	
 	//---GET ATTRIBUTES FUNCTIONS
+	/**
+	 * 
+	 * @return True if Hero is armed. False otherwise.
+	 */
 	public boolean getArmed()
 	{
 		return this.armed;
@@ -13,6 +17,10 @@ public class Hero extends Creature{
 
 	//---UPDATE ATTRIBUTES FUNCTIONS
 
+	/**
+	 * 
+	 * @param bool True if Hero has picked up the Sword. False otherwise.
+	 */
 	public void updateArmed(boolean bool)
 	{
 		armed = bool;
@@ -25,7 +33,9 @@ public class Hero extends Creature{
 
 
 	//METHODS
-	
+	/**
+	 * Default Constructor in which the Hero is not armed.
+	 */
 	public Hero()
 	{
 		this.updateLetter('H');
@@ -35,6 +45,11 @@ public class Hero extends Creature{
 		this.armed = false;
 	}
 	
+	/**
+	 * 
+	 * @param move w if Hero is to move Up, s for Down, d for Right and a for Left.
+	 * @return The new position of the Hero.
+	 */
 	private Position calculateMove(char move)
 	{
 		Position temp = new Position (this.getPosition());	// copy of current hero position
@@ -106,6 +121,9 @@ public class Hero extends Creature{
 		}
 	}
 	
+	/**
+	 * The Hero picks up the Sword.
+	 */
 	public void pickSword()
 	{
 		this.updateArmed(true);

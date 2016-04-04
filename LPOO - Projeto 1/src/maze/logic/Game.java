@@ -41,26 +41,46 @@ public class Game {
 
 	//---GET ATTRIBUTES FUNCTIONS
 	
+	/**
+	 * 
+	 * @return The maze of the Game.
+	 */
 	public Maze getMaze()
 	{
 		return this.maze;
 	}
 	
+	/**
+	 * 
+	 * @return The Hero of the Game.
+	 */
 	public Hero getHero()
 	{
 		return this.hero;
 	}
 	
+	/**
+	 * 
+	 * @return The Dragon of the Game.
+	 */
 	public Dragon getDragon()
 	{
 		return this.dragon;
 	}
 	
+	/**
+	 * 
+	 * @return THe End status of the Game(END_NOT,END_FORCED,END_WIN,END_LOSS).
+	 */
 	public End getEnd()
 	{
 		return this.end;
 	}
 	
+	/**
+	 * 
+	 * @return True if the Dragon is dead. False otherwise.
+	 */
 	public boolean getExit()
 	{
 		return exit;
@@ -78,7 +98,11 @@ public class Game {
 		this.end = End.END_NOT;
 		this.exit = false;
 	}
-	
+
+	/**
+	 * Constructor where a maze is assigned to the Game.
+	 * @param maze Maze to be assigned to the game.
+	 */
 	public Game(char[][] maze)
 	{
 		this.maze = new Maze(maze);
@@ -92,6 +116,10 @@ public class Game {
 	
 	//GAME METHODS
 	
+	/**
+	 * Sets up the positions of the Hero, the Dragon, and the Sword and Updates the Dragon's mode.
+	 * @param dragonMode i if Dragon is idle, r if Dragon moves randomly, s if Dragon is sleeping.
+	 */
 	public void initGame(char dragonMode)
 	{	
 		//Initial elements' position
@@ -109,6 +137,9 @@ public class Game {
 	}
 	
 	//Printing the maze, its elements and hints
+	/**
+	 * Prints the current maze, and hints for the player.
+	 */
 	public void showGame()
 	{
 		this.maze.printMaze();
@@ -156,6 +187,9 @@ public class Game {
 			this.end = End.END_WIN;
 	}
 	
+	/**
+	 * Resolves the confrontation between the Hero and the Dragon.
+	 */
 	public void heroVSDragon()
 	{
 		if (this.hero.getArmed())
@@ -174,6 +208,9 @@ public class Game {
 			}
 	}
 	
+	/**
+	 * Generates the conflict between the Hero and the Dragon if they are adjacent.
+	 */
 	private void updateDragonHero()
 	{
 		if((this.hero.getPosition().distanceTo(this.dragon.getPosition()) <= 1) && (!this.dragon.getDeathStatus()))	

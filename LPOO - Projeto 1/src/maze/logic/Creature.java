@@ -64,27 +64,42 @@ public class Creature {
 	
 	// ---- UPDATE FUNCTIONS BEGIN
 	
+	/**
+	 * @param letter The new letter of the Creature
+	 */
 	public void updateLetter(char letter)
 	{
 		this.letter = letter;
 	}
 	
+	/**
+	 * @param pos The new position of the Creature
+	 */
 	public void updatePosition(Position pos)
 	{
 		this.prePos = this.pos;
 		this.pos = pos ;
 	}
 	
+	/**
+	 * @param prePos The new previous position of the Creature
+	 */
 	public void updatePrePosition(Position prePos)
 	{
 		this.prePos = prePos ;
 	}
 	
+	/**
+	 * @param dead The new death status of the Creature
+	 */
 	public void updateDeathStatus(boolean dead)
 	{
 		this.dead = dead;
 	}
 	
+	/**
+	 * @param visible The new visibility status of the Creature
+	 */
 	public void updateVisible(boolean visible)
 	{
 		this.visible = visible;
