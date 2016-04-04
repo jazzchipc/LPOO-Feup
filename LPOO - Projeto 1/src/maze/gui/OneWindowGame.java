@@ -4,6 +4,8 @@ import maze.logic.*;
 import java.lang.*;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -13,9 +15,11 @@ import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 
-public class OneWindowGame {
+public class OneWindowGame implements KeyListener{
 
 	private JFrame frame;
 	private JTextField numberOfDimensions;
@@ -143,6 +147,42 @@ public class OneWindowGame {
 		btnGenerateMaze.setBounds(237, 201, 157, 29);
 		frame.getContentPane().add(btnGenerateMaze);
 	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+		{
+			game.updatePositions('d');
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_UP)
+		{
+			game.updatePositions('w');
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_LEFT)
+		{
+			game.updatePositions('a');
+		}
+		else if(e.getKeyCode() == KeyEvent.VK_DOWN)
+		{
+			game.updatePositions('s');
+		}
+		
+		//repaint();
+	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	
 }
