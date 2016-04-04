@@ -113,6 +113,7 @@ public class Game {
 		this.end = End.END_NOT;
 		this.exit = false;
 	}
+
 	
 	//GAME METHODS
 	
@@ -242,9 +243,9 @@ public class Game {
 	{
 		String ret = "";
 		
-		for (int i = 0; i < 10; i++)	// TODO:change to match maze dimension
+		for (int i = 0; i < this.maze.getMaze().length; i++)	// TODO:change to match maze dimension
 		{
-			for (int j = 0; j < 10; j++)
+			for (int j = 0; j < this.maze.getMaze().length; j++)
 			{
 				char c = this.maze.getMaze()[i][j];
 				
