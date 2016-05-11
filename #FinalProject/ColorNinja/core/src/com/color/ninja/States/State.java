@@ -20,7 +20,7 @@ public abstract class State {
     }
 
     /**
-     * 
+     *
      */
     protected abstract void handleInput();
 
