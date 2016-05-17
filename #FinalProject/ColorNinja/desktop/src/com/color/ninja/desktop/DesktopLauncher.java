@@ -7,6 +7,11 @@ import com.color.ninja.MyColorNinja;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+
+		config.width = MyColorNinja.WIDTH;
+		config.height = MyColorNinja.HEIGHT;
+		config.title = MyColorNinja.TITLE;
+
 		new LwjglApplication(new MyColorNinja(), config);
 	}
 }
