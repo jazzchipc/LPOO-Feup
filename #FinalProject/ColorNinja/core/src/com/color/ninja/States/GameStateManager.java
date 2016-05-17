@@ -1,4 +1,4 @@
-package com.color.ninja.States;
+package com.color.ninja.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

@@ -1,19 +1,20 @@
-package com.color.ninja.States;
+package com.color.ninja.states;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.color.ninja.MyColorNinja;
 
 /**
- * Created by JoséAleixo on 11/05/2016.
+ * CLass representing the MainMenu.
  */
 public class MainMenuState extends State {
 
     private Texture shape;
 
-    public MainMenuState(GameStateManager gsm) {
+    public MainMenuState(com.color.ninja.states.GameStateManager gsm) {
         super(gsm);
 
-        shape = new Texture("bola.png");
+        shape = new Texture("bolaazul.png");
     }
 
     @Override
@@ -28,6 +29,11 @@ public class MainMenuState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
+
+        sb.draw(shape, 0, 0, MyColorNinja.WIDTH, MyColorNinja.HEIGHT);
+
+        sb.end();   // Close batch.
 
     }
 }

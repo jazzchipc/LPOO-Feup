@@ -1,4 +1,4 @@
-package com.color.ninja.States;
+package com.color.ninja.states;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -20,7 +20,7 @@ public abstract class State {
     }
 
     /**
-     *
+     * Handles the input given by the user, utilizing LibGDX functions.
      */
     protected abstract void handleInput();
 
