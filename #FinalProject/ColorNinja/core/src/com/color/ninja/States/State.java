@@ -38,4 +38,9 @@ public abstract class State {
      */
     public abstract void render(SpriteBatch sb);
 
+    /**
+     * Disposes all textures and media used in a state to prevent memory leaks.
+     */
+    public abstract void dispose();
+
 }

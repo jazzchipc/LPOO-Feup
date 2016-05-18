@@ -8,6 +8,8 @@ import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
 
 public class MyColorNinja extends ApplicationAdapter {
+	// Physics settings
+	public static final int GRAVITY = -10;
 
 	// Window size in pixels
 	public static final int WIDTH = 480;
@@ -35,7 +37,7 @@ public class MyColorNinja extends ApplicationAdapter {
 
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		gsm.update(Gdx.graphics.getDeltaTime());
+		gsm.update(Gdx.graphics.getDeltaTime());	// makes all updates before putting out a frame
 		gsm.render(batch);
 	}
 }
