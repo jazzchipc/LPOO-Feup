@@ -17,6 +17,8 @@ import com.color.ninja.MyColorNinja;
 public class MainMenuState extends State {
     private Stage stage;
 
+    private Texture background;
+
     private Sprite title;
     private Sprite newGameBtnSprite;
     private Sprite settingsBtnSprite;
@@ -32,9 +34,12 @@ public class MainMenuState extends State {
     private float buttonsSpace; // space in the y-axis between 2 buttons
     private float buttonsBegin; // y-coordinate of the first button
 
+    private int sourceX = 0;
 
     public MainMenuState(GameStateManager gsm) {
         super(gsm);
+
+        background = new Texture("background.png");
 
         title = new Sprite(new Texture("title1.png"));
         newGameBtnSprite = new Sprite(new Texture ("new game1.png"));
@@ -101,6 +106,8 @@ public class MainMenuState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
+
+        sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
 
         // draws title sprite
 
