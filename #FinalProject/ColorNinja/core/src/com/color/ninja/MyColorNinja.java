@@ -8,9 +8,6 @@ import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
 
 public class MyColorNinja extends ApplicationAdapter {
-	// Physics settings
-	public static final int GRAVITY = -10;
-
 	// Window size in pixels
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;

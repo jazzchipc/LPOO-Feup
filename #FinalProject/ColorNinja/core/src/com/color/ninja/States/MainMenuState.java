@@ -65,31 +65,36 @@ public class MainMenuState extends State {
 
         // Buttons' position and size
         newGameBtn.setSize(buttonsWidth, buttonsHeight);
-        settingsBtnSprite.setSize(buttonsWidth, buttonsHeight);
-        scoresBtnSprite.setSize(buttonsWidth, buttonsHeight);
+        settingsBtn.setSize(buttonsWidth, buttonsHeight);
+        scoresBtn.setSize(buttonsWidth, buttonsHeight);
 
         newGameBtn.setX(MyColorNinja.WIDTH / 2 - newGameBtn.getWidth() / 2);
-        settingsBtnSprite.setCenterX(MyColorNinja.WIDTH / 2);
-        scoresBtnSprite.setCenterX(MyColorNinja.WIDTH / 2);
+        settingsBtn.setX(MyColorNinja.WIDTH / 2 - settingsBtn.getWidth() / 2);
+        scoresBtn.setX(MyColorNinja.WIDTH / 2 - scoresBtn.getWidth() / 2 );
 
         newGameBtn.setY(buttonsBegin);
-        settingsBtnSprite.setY(newGameBtn.getY() - buttonsHeight - buttonsSpace);
-        scoresBtnSprite.setY(settingsBtnSprite.getY() - buttonsHeight - buttonsSpace);
+        settingsBtn.setY(newGameBtn.getY() - buttonsHeight - buttonsSpace);
+        scoresBtn.setY(settingsBtn.getY() - buttonsHeight - buttonsSpace);
 
-        stage.addActor(newGameBtn);
-
+        // Setting up stage and actors
         Gdx.input.setInputProcessor(stage);
 
+        stage.addActor(newGameBtn);
+        stage.addActor(settingsBtn);
+        stage.addActor(scoresBtn);
+
+        setListeners();
+
+    }
+
+    private void setListeners()
+    {
         newGameBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("ClickListener works.");
-
+                gsm.set(new GameState(gsm));
             }
         });
-
-        System.out.println(newGameBtn.isTouchable());
-
     }
 
     @Override
