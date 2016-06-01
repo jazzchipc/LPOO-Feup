@@ -7,6 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
@@ -17,6 +21,7 @@ import com.color.ninja.MyColorNinja;
 public class SettingsMenuState extends com.color.ninja.states.State {
 
     private Stage stage;
+    private Skin skin;
 
     private Texture background;
 
@@ -25,15 +30,22 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
     private Button backBtn;
 
+    private Slider soundsVolSld;
+
     public SettingsMenuState(com.color.ninja.states.GameStateManager gsm) {
 
         super(gsm);
+
+       // skin = new Skin();
+       // skin.addRegions("ui/uiskin.atlas");
 
         background = new Texture("background.png");
         title = new Sprite(new Texture("title2.png"));
         BackBtnSprite = new Sprite(new Texture ("backbtn.png"));
 
         backBtn = new Button(new SpriteDrawable(BackBtnSprite));
+
+       // soundsVolSld = new Slider(0,100,1,false,skin);
 
         stage = new Stage();
 
@@ -87,6 +99,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         title.draw(sb);
 
         backBtn.draw(sb,1);
+
+      //  soundsVolSld.draw(sb,1);
 
         sb.end();   // Close batch.
 
