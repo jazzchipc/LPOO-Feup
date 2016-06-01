@@ -93,6 +93,13 @@ public class MainMenuState extends State {
                 gsm.set(new GameState(gsm));
             }
         });
+
+        settingsBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gsm.set(new SettingsMenuState(gsm));
+             }
+        });
     }
 
     @Override

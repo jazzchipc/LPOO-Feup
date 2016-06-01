@@ -1,35 +1,38 @@
-package com.color.ninja.States;
+package com.color.ninja.states;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.color.ninja.states.GameState;
-import com.color.ninja.states.GameStateManager;
 import com.color.ninja.MyColorNinja;
 
 /**
  * Class representing the Settings Menu
  */
-public class SettingsMenuState extends state {
+public class SettingsMenuState extends com.color.ninja.states.State {
+
     private Stage stage;
 
     private Texture background;
 
-    public SettingsMenuState(GameStateManager gsm) {
+    private Sprite title;
+
+
+    public SettingsMenuState(com.color.ninja.states.GameStateManager gsm) {
+
+        super(gsm);
 
         background = new Texture("background.png");
+        title = new Sprite(new Texture("title2.png"));
+
+        stage = new Stage();
+
+        //title's position and size
+        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 4);
+        title.setCenterX(MyColorNinja.WIDTH / 2);
+        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 20 - title.getHeight());
     }
 
-    private void setListeners()
-    {
-
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-
-            }
-        });
-    }
 
     @Override
     protected void handleInput() {
@@ -48,6 +51,7 @@ public class SettingsMenuState extends state {
 
         sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
 
+        title.draw(sb);
 
         sb.end();   // Close batch.
 
@@ -57,8 +61,5 @@ public class SettingsMenuState extends state {
     public void dispose() {
         background.dispose();
         title.getTexture().dispose();
-        newGameBtnSprite.getTexture().dispose();
-        settingsBtnSprite.getTexture().dispose();
-        scoresBtnSprite.getTexture().dispose();
     }
 }
