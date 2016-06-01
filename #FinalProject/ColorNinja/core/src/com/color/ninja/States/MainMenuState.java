@@ -124,6 +124,7 @@ public class MainMenuState extends State {
 
     @Override
     public void dispose() {
+        background.dispose();
         title.getTexture().dispose();
         newGameBtnSprite.getTexture().dispose();
         settingsBtnSprite.getTexture().dispose();
