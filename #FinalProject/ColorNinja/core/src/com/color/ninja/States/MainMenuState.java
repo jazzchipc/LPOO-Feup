@@ -34,8 +34,6 @@ public class MainMenuState extends State {
     private float buttonsSpace; // space in the y-axis between 2 buttons
     private float buttonsBegin; // y-coordinate of the first button
 
-    private int sourceX = 0;
-
     public MainMenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -112,10 +110,10 @@ public class MainMenuState extends State {
     public void render(SpriteBatch sb) {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
 
+        //draws background texture
         sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
 
         // draws title sprite
-
         title.draw(sb);
 
         // draws game options buttons
