@@ -1,5 +1,7 @@
 package com.color.ninja.sprites;
 
+import com.badlogic.gdx.physics.box2d.World;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,7 +35,7 @@ public class ShapeFactory implements AbstractFactory {
         return false;
     }
 
-    public Shape getShape(String shapeType, String color) {
+    public Shape getShape(World world, String shapeType, String color) {
         if(shapeType == null)
             return null;
 
@@ -43,11 +45,11 @@ public class ShapeFactory implements AbstractFactory {
         if(!(arrayListContainsCaseInsensitive(colors, color)))
             return null;
 
-        return new Shape(shapeType, color);
+        return new Shape(world, shapeType, color);
     }
 
     @Override
-    public Shape getRandomShape() {
+    public Shape getRandomShape(World world) {
 
         Random rand = new Random();
 
@@ -59,6 +61,6 @@ public class ShapeFactory implements AbstractFactory {
 
         String color = colors.get(i);
 
-        return new Shape(shapeType, color);
+        return new Shape(world, shapeType, color);
     }
 }

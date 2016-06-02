@@ -2,6 +2,7 @@ package com.color.ninja.states;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.color.ninja.sprites.*;
@@ -15,11 +16,15 @@ import java.util.ArrayList;
 public class GameState extends com.color.ninja.states.State {
 
     // World/physics settings
+    public static final float METERS_PER_PIXEL = 100f;  // scaling physics world
     private Vector2 gravity;
     private World world;
-    private ArrayList<Body> bodies;
 
-    // Shapes sprites
+    // Physics debugger
+    protected Box2DDebugRenderer debugRenderer;
+    protected Matrix4 debugMatrix;
+
+    // Shapes
     private ShapeFactory factory;
     private ArrayList<Shape> shapes;
 
@@ -28,50 +33,18 @@ public class GameState extends com.color.ninja.states.State {
 
         super(gsm);
 
-        gravity = new Vector2(0, -98f); // f stands for float
+        gravity = new Vector2(0, -9.8f); // f stands for float
         world = new World(gravity, true);
-        bodies = new ArrayList<Body>();
         factory = new ShapeFactory();
         shapes = new ArrayList<Shape>();
 
-        Shape s = factory.getRandomShape();
+        // Debug renderer
+        debugRenderer=new Box2DDebugRenderer();
+
+        Shape s = factory.getRandomShape(world);
         shapes.add(s);
-    }
+        shapes.get(0).sling();
 
-    /**
-     * Fills the bodies array with bodies corresponding to the shapes.
-     */
-    public void generateBodies()
-    {
-        for(int i = 0; i < shapes.size(); i++)
-        {
-            /*http://www.gamefromscratch.com/post/2014/08/27/LibGDX-Tutorial-13-Physics-with-Box2D-Part-1-A-Basic-Physics-Simulations.aspx*/
-
-            Shape currentShape = shapes.get(i);
-
-            // Creating the body
-            BodyDef bodyDef = new BodyDef();
-            bodyDef.type = BodyDef.BodyType.DynamicBody;
-            bodyDef.position.set(currentShape.sprite.getX(), currentShape.sprite.getY());
-
-            Body body = world.createBody(bodyDef);
-
-            // Defining the body's shape
-            PolygonShape shape = new PolygonShape();
-            shape.setAsBox(currentShape.sprite.getWidth()/2, currentShape.sprite.getHeight()/2);
-
-            // Defining body's fixture which includes some physical properties
-            FixtureDef fixtureDef = new FixtureDef();
-            fixtureDef.shape = shape;
-            fixtureDef.density = 1f;
-
-            Fixture fixture = body.createFixture(fixtureDef);
-
-            // Shape is the only one disposable
-            shape.dispose();
-
-            bodies.add(body);
-        }
     }
 
     @Override
@@ -81,16 +54,24 @@ public class GameState extends com.color.ninja.states.State {
 
     @Override
     public void update(float dt) {
+        world.step(dt, 6, 2);
 
+        shapes.get(0).applyTorque();
+
+        shapes.get(0).update();
     }
 
     @Override
     public void render(SpriteBatch sb) {
+        debugMatrix = sb.getProjectionMatrix();
+
         sb.begin();
 
         shapes.get(0).sprite.draw(sb);
 
         sb.end();
+
+        debugRenderer.render(world, debugMatrix);
     }
 
     @Override
