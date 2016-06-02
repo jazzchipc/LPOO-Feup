@@ -64,9 +64,9 @@ public class MainMenuState extends State {
         buttonsBegin = 2 * MyColorNinja.HEIGHT / 4;
 
         // Title's position and size
-        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 4);
+        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 3);
         title.setCenterX(MyColorNinja.WIDTH / 2);
-        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 20 - title.getHeight());
+        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 35 - title.getHeight());
 
         // Buttons' position and size
         newGameBtn.setSize(buttonsWidth, buttonsHeight);
