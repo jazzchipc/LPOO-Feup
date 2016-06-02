@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
 import com.color.ninja.sprites.*;
 import com.color.ninja.sprites.Shape;
@@ -18,6 +22,9 @@ import java.util.ArrayList;
 public class GameState extends com.color.ninja.states.State {
 
     private Texture background;
+
+    private Sprite pauseBtnSprite;
+    private Button pauseBtn;
 
     // World/physics settings
     public static final float METERS_PER_PIXEL = 100f;  // scaling physics world
@@ -39,6 +46,12 @@ public class GameState extends com.color.ninja.states.State {
 
         background = new Texture("background.png");
 
+        pauseBtnSprite = new Sprite(new Texture("pause.png"));
+        pauseBtn = new Button(new SpriteDrawable(pauseBtnSprite));
+        pauseBtn.setSize(MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 14);
+        pauseBtn.setX(MyColorNinja.WIDTH - MyColorNinja.WIDTH/20 - pauseBtn.getWidth());
+        pauseBtn.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 10);
+
         gravity = new Vector2(0, -9.8f); // f stands for float
         world = new World(gravity, true);
         factory = new ShapeFactory();
@@ -50,6 +63,17 @@ public class GameState extends com.color.ninja.states.State {
         Shape s = factory.getRandomShape(world);
         shapes.add(s);
         shapes.get(0).sling();
+
+    }
+
+    private void setListeners()
+    {
+        pauseBtn.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                gsm.set(new PauseMenuState(gsm));
+            }
+        });
 
     }
 
@@ -74,6 +98,8 @@ public class GameState extends com.color.ninja.states.State {
         sb.begin();
 
         sb.draw(background,0,0, MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
+
+        pauseBtn.draw(sb,1);
 
         shapes.get(0).sprite.draw(sb);
 

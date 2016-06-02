@@ -145,35 +145,35 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     }
 
     private void setListeners()
-    {
-        backBtn.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
-                gsm.set(new MainMenuState(gsm));
-            }
-        });
+            {
+                backBtn.addListener(new ClickListener() {
+                    @Override
+                    public void clicked(InputEvent event, float x, float y) {
+                        kungfu.play(soundsVol);
+                        gsm.set(new MainMenuState(gsm));
+                    }
+                });
 
-        soundsVolSld.addListener(new InputListener(){
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                soundsVol = soundsVolSld.getValue();
-            }
+                soundsVolSld.addListener(new InputListener(){
+                    @Override
+                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                        super.touchUp(event, x, y, pointer, button);
+                        soundsVol = soundsVolSld.getValue();
+                    }
 
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return super.touchDown(event, x, y, pointer, button);
-            }
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                        return super.touchDown(event, x, y, pointer, button);
+                    }
 
-        });
+                });
 
-        musicVolSld.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-                musicVol = musicVolSld.getValue();
-            }
+                musicVolSld.addListener(new InputListener() {
+                    @Override
+                    public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                        super.touchUp(event, x, y, pointer, button);
+                        musicVol = musicVolSld.getValue();
+                    }
 
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
