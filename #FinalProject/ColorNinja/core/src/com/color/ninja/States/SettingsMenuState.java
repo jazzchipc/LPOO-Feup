@@ -44,8 +44,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private CheckBox mediumCheckBox;
     private CheckBox hardCheckBox;
 
-    public float soundsVol;
-    public float musicVol;
+    public static float soundsVol;
+    public static float musicVol;
 
     private Sound kungfu;
 
@@ -65,14 +65,18 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
         backBtn = new Button(new SpriteDrawable(BackBtnSprite));
 
-        soundsVolSld = new Slider(0,100,1f,false,skin);
-        musicVolSld = new Slider(0,100,1f,false,skin);
+        soundsVolSld = new Slider(0,1,0.05f,false,skin);
+        soundsVolSld.setValue(0.5f);
+        musicVolSld = new Slider(0,1,0.05f,false,skin);
+        musicVolSld.setValue(0.5f);
 
         easyCheckBox = new CheckBox("easy",skin);
         mediumCheckBox = new CheckBox("medium",skin);
+        mediumCheckBox.setChecked(true);
         hardCheckBox = new CheckBox("hard",skin);
 
         kungfu = Gdx.audio.newSound(Gdx.files.internal("sound/effects/kungfu.mp3"));
+
 
         stage = new Stage();
 
@@ -106,7 +110,7 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         difficultySprite.setY(3* MyColorNinja.HEIGHT / 10 - soundsVolSprite.getHeight());
 
         //easyCheckBox.setSize(MyColorNinja.WIDTH/10,MyColorNinja.HEIGHT/10);
-        easyCheckBox.setScale(2);
+       // easyCheckBox.setScale(2);
         easyCheckBox.setX(MyColorNinja.WIDTH / 4 );
         easyCheckBox.setY(3*MyColorNinja.HEIGHT /18);
 
@@ -121,26 +125,20 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         Gdx.input.setInputProcessor(stage);
 
         stage.addActor(backBtn);
+        stage.addActor(soundsVolSld);
+        stage.addActor(musicVolSld);
+        stage.addActor(easyCheckBox);
 
         setListeners();
 
     }
-
-    public float getSoundVol() {
-        return soundsVol;
-    }
-
-    public float getMusicVol() {
-        return musicVol;
-    }
-
 
     private void setListeners()
     {
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play();
+                kungfu.play(soundsVol);
                 gsm.set(new MainMenuState(gsm));
             }
         });
@@ -172,6 +170,16 @@ public class SettingsMenuState extends com.color.ninja.states.State {
             }
         });
 
+       /* easyCheckBox.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(easyCheckBox.isChecked())
+                    easyCheckBox.setChecked(false);
+                else
+                    easyCheckBox.setChecked(true);
+            }
+        });*/
     }
 
 

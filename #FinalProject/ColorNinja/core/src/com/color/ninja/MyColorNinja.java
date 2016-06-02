@@ -28,6 +28,7 @@ public class MyColorNinja extends ApplicationAdapter {
 	//private Music music5;
 	//private Music music6;
 
+	private float musicVol = SettingsMenuState.soundsVol;
 
 	@Override
 	public void create () {
@@ -44,7 +45,7 @@ public class MyColorNinja extends ApplicationAdapter {
 		//music5 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/strong.mp3"));
 		//music6 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/turn.mp3"));
 		music1.setLooping(true);
-		//music1.setVolume();
+		music1.setVolume(musicVol);
 		music1.play();
 
 		gsm.push(new MainMenuState(gsm));	// starts the game on the MainMenuState
