@@ -44,8 +44,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private CheckBox mediumCheckBox;
     private CheckBox hardCheckBox;
 
-    public static float soundsVol;
-    public static float musicVol;
+    public static float soundsVol = 0.5f;
+    public static float musicVol = 0.5f;
 
     private Sound kungfu;
 
@@ -128,6 +128,9 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         stage.addActor(soundsVolSld);
         stage.addActor(musicVolSld);
         stage.addActor(easyCheckBox);
+        stage.addActor(mediumCheckBox);
+        stage.addActor(hardCheckBox);
+
 
         setListeners();
 
@@ -170,16 +173,41 @@ public class SettingsMenuState extends com.color.ninja.states.State {
             }
         });
 
-       /* easyCheckBox.addListener(new ClickListener(){
+        easyCheckBox.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 super.clicked(event, x, y);
-                if(easyCheckBox.isChecked())
-                    easyCheckBox.setChecked(false);
-                else
-                    easyCheckBox.setChecked(true);
+                if(mediumCheckBox.isChecked() )
+                    mediumCheckBox.setChecked(false);
+                if(hardCheckBox.isChecked())
+                    hardCheckBox.setChecked(false);
+
             }
-        });*/
+        });
+
+        mediumCheckBox.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(easyCheckBox.isChecked() )
+                    easyCheckBox.setChecked(false);
+                if(hardCheckBox.isChecked())
+                    hardCheckBox.setChecked(false);
+
+            }
+        });
+
+        hardCheckBox.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(easyCheckBox.isChecked() )
+                    easyCheckBox.setChecked(false);
+                if(mediumCheckBox.isChecked())
+                    mediumCheckBox.setChecked(false);
+
+            }
+        });
     }
 
 
