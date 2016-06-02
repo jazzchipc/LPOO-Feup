@@ -28,7 +28,7 @@ public class MyColorNinja extends ApplicationAdapter {
 	//private Music music5;
 	//private Music music6;
 
-	private float musicVol;
+	private float musicVol = SettingsMenuState.musicVol;
 
 	@Override
 	public void create () {
