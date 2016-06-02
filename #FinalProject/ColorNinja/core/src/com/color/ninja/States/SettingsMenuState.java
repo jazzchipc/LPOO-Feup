@@ -44,6 +44,9 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private CheckBox mediumCheckBox;
     private CheckBox hardCheckBox;
 
+    public float soundsVol;
+    public float musicVol;
+
     private Sound kungfu;
 
 
@@ -123,6 +126,15 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
     }
 
+    public float getSoundVol() {
+        return soundsVol;
+    }
+
+    public float getMusicVol() {
+        return musicVol;
+    }
+
+
     private void setListeners()
     {
         backBtn.addListener(new ClickListener() {
@@ -133,10 +145,30 @@ public class SettingsMenuState extends com.color.ninja.states.State {
             }
         });
 
-        soundsVolSld.addListener(new ChangeListener(){
-            public void changed(ChangeEvent event, Actor actor) {
-                final int val = (int)soundsVolSld.getValue();
+        soundsVolSld.addListener(new InputListener(){
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                soundsVol = soundsVolSld.getValue();
+            }
 
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return super.touchDown(event, x, y, pointer, button);
+            }
+
+        });
+
+        musicVolSld.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+                musicVol = musicVolSld.getValue();
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return super.touchDown(event, x, y, pointer, button);
             }
         });
 
