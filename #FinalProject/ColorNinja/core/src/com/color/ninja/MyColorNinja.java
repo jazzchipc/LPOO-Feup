@@ -8,6 +8,7 @@ import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.color.ninja.states.SettingsMenuState;
 
 public class MyColorNinja extends ApplicationAdapter {
 	// Window size in pixels
@@ -43,7 +44,7 @@ public class MyColorNinja extends ApplicationAdapter {
 		//music5 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/strong.mp3"));
 		//music6 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/turn.mp3"));
 		music1.setLooping(true);
-		//music1.setVolume(0.5f);
+		//music1.setVolume();
 		music1.play();
 
 		gsm.push(new MainMenuState(gsm));	// starts the game on the MainMenuState
