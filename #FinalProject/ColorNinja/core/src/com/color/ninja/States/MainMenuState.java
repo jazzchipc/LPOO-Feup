@@ -1,6 +1,7 @@
 package com.color.ninja.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +35,8 @@ public class MainMenuState extends State {
     private float buttonsSpace; // space in the y-axis between 2 buttons
     private float buttonsBegin; // y-coordinate of the first button
 
+    private Sound kungfu;
+
     public MainMenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -47,6 +50,8 @@ public class MainMenuState extends State {
         newGameBtn = new Button(new SpriteDrawable(newGameBtnSprite));
         settingsBtn = new Button(new SpriteDrawable(settingsBtnSprite));
         scoresBtn = new Button(new SpriteDrawable(scoresBtnSprite));
+
+        kungfu = Gdx.audio.newSound(Gdx.files.internal("sound/effects/kungfu.mp3"));
 
         stage = new Stage();
 
@@ -90,6 +95,7 @@ public class MainMenuState extends State {
         newGameBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                kungfu.play();
                 gsm.set(new GameState(gsm));
             }
         });
@@ -97,6 +103,7 @@ public class MainMenuState extends State {
         settingsBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                kungfu.play();
                 gsm.set(new SettingsMenuState(gsm));
              }
         });
@@ -139,5 +146,6 @@ public class MainMenuState extends State {
         newGameBtnSprite.getTexture().dispose();
         settingsBtnSprite.getTexture().dispose();
         scoresBtnSprite.getTexture().dispose();
+        kungfu.dispose();
     }
 }

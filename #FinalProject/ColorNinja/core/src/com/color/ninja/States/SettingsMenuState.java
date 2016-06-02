@@ -1,6 +1,7 @@
 package com.color.ninja.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -43,7 +44,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private CheckBox mediumCheckBox;
     private CheckBox hardCheckBox;
 
-    int draggingPointer = -1;
+    private Sound kungfu;
+
 
     public SettingsMenuState(com.color.ninja.states.GameStateManager gsm) {
 
@@ -66,6 +68,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         easyCheckBox = new CheckBox("easy",skin);
         mediumCheckBox = new CheckBox("medium",skin);
         hardCheckBox = new CheckBox("hard",skin);
+
+        kungfu = Gdx.audio.newSound(Gdx.files.internal("sound/effects/kungfu.mp3"));
 
         stage = new Stage();
 
@@ -124,16 +128,17 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         backBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                kungfu.play();
                 gsm.set(new MainMenuState(gsm));
             }
         });
 
-        /*soundsVolSld.addListener(new ChangeListener(){
+        soundsVolSld.addListener(new ChangeListener(){
             public void changed(ChangeEvent event, Actor actor) {
                 final int val = (int)soundsVolSld.getValue();
 
             }
-        });*/
+        });
 
     }
 

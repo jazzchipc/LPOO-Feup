@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 
 public class MyColorNinja extends ApplicationAdapter {
 	// Window size in pixels
@@ -17,7 +19,15 @@ public class MyColorNinja extends ApplicationAdapter {
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;
-	
+
+	private Music music1;
+	//private Music music2;
+	//private Music music3;
+	//private Music music4;
+	//private Music music5;
+	//private Music music6;
+
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -25,6 +35,16 @@ public class MyColorNinja extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);	// the starting background color (R,G,B, alpha)
 
 		gsm = new GameStateManager();
+
+		music1 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/ninjamaster.mp3"));
+		//music2 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/kanpai.mp3"));
+		//music3 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/reverse.mp3"));
+		//music4 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/spirit.mp3"));
+		//music5 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/strong.mp3"));
+		//music6 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/turn.mp3"));
+		music1.setLooping(true);
+		//music1.setVolume(0.5f);
+		music1.play();
 
 		gsm.push(new MainMenuState(gsm));	// starts the game on the MainMenuState
 	}
@@ -36,5 +56,11 @@ public class MyColorNinja extends ApplicationAdapter {
 
 		gsm.update(Gdx.graphics.getDeltaTime());	// makes all updates before putting out a frame
 		gsm.render(batch);
+	}
+
+	@Override
+	public void dispose() {
+		super.dispose();
+		music1.dispose();
 	}
 }
