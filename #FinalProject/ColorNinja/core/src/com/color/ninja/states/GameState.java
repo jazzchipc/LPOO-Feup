@@ -1,10 +1,12 @@
 package com.color.ninja.states;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
+import com.color.ninja.MyColorNinja;
 import com.color.ninja.sprites.*;
 import com.color.ninja.sprites.Shape;
 
@@ -14,6 +16,8 @@ import java.util.ArrayList;
  * Class representing the game.
  */
 public class GameState extends com.color.ninja.states.State {
+
+    private Texture background;
 
     // World/physics settings
     public static final float METERS_PER_PIXEL = 100f;  // scaling physics world
@@ -32,6 +36,8 @@ public class GameState extends com.color.ninja.states.State {
     public GameState(com.color.ninja.states.GameStateManager gsm) {
 
         super(gsm);
+
+        background = new Texture("background.png");
 
         gravity = new Vector2(0, -9.8f); // f stands for float
         world = new World(gravity, true);
@@ -66,6 +72,8 @@ public class GameState extends com.color.ninja.states.State {
         debugMatrix = sb.getProjectionMatrix();
 
         sb.begin();
+
+        sb.draw(background,0,0, MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
 
         shapes.get(0).sprite.draw(sb);
 

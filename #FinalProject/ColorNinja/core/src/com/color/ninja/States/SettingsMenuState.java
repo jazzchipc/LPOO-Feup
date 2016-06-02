@@ -44,8 +44,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private CheckBox mediumCheckBox;
     private CheckBox hardCheckBox;
 
-    public float soundsVol = 0.5f;
-    public float musicVol = 0.5f;
+    public static float soundsVol = 0.5f;
+    public static float musicVol = 0.5f;
 
     private Sound kungfu;
 
