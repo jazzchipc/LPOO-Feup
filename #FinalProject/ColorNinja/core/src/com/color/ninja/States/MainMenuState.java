@@ -109,6 +109,14 @@ public class MainMenuState extends State {
                 gsm.set(new SettingsMenuState(gsm));
              }
         });
+
+        scoresBtn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                kungfu.play(soundsVol);
+                gsm.set(new ScoresMenuState(gsm));
+            }
+        });
     }
 
     @Override

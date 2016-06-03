@@ -30,7 +30,7 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private Texture background;
 
     private Sprite title;
-    private Sprite BackBtnSprite;
+    private Sprite backBtnSprite;
     private Sprite soundsVolSprite;
     private Sprite musicVolSprite;
     private Sprite difficultySprite;
@@ -58,12 +58,12 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
         background = new Texture("background.png");
         title = new Sprite(new Texture("title2.png"));
-        BackBtnSprite = new Sprite(new Texture ("backbtn.png"));
+        backBtnSprite = new Sprite(new Texture ("backbtn.png"));
         soundsVolSprite = new Sprite(new Texture("soundsvolume.png"));
         musicVolSprite = new Sprite(new Texture("musicvolume.png"));
         difficultySprite = new Sprite(new Texture("difficulty.png"));
 
-        backBtn = new Button(new SpriteDrawable(BackBtnSprite));
+        backBtn = new Button(new SpriteDrawable(backBtnSprite));
 
         soundsVolSld = new Slider(0,1,0.05f,false,skin);
         soundsVolSld.setValue(0.5f);
