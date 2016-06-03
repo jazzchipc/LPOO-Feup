@@ -25,6 +25,8 @@ public class GameState extends com.color.ninja.states.State {
 
     private Texture background;
 
+    private int paused = 0;
+
     private Sprite pauseBtnSprite;
     private Button pauseBtn;
 
@@ -73,6 +75,7 @@ public class GameState extends com.color.ninja.states.State {
         pauseBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                paused = 1;
                 gsm.set(new PauseMenuState(gsm));
             }
         });
