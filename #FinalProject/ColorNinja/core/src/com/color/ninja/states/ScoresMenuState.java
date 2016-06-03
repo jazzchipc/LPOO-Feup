@@ -33,7 +33,7 @@ public class ScoresMenuState extends State {
 
         background = new Texture("background.png");
 
-        title = new Sprite(new Texture("title1.png"));
+        title = new Sprite(new Texture("scorestitle.png"));
 
         backBtnSprite = new Sprite(new Texture ("backbtn.png"));
 
@@ -44,9 +44,9 @@ public class ScoresMenuState extends State {
         stage = new Stage();
 
         // Title's position and size
-        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 3);
+        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 5);
         title.setCenterX(MyColorNinja.WIDTH / 2);
-        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 35 - title.getHeight());
+        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 9 - title.getHeight());
 
         backBtn.setSize(MyColorNinja.WIDTH / 6, MyColorNinja.HEIGHT / 12);
         backBtn.setX(MyColorNinja.WIDTH / 5 - backBtn.getWidth());
