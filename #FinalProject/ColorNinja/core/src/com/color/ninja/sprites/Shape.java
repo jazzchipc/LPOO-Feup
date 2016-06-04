@@ -1,5 +1,6 @@
 package com.color.ninja.sprites;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -60,6 +61,7 @@ public class Shape {
         texture = new Texture(textureUrl);
         sprite = new Sprite(texture);
         sprite.setSize(MyColorNinja.WIDTH / 5, MyColorNinja.HEIGHT / 8);
+        sprite.setOriginCenter();
     }
 
     private void createBody()
@@ -70,15 +72,15 @@ public class Shape {
 
         // Because Box2D considers (0.0) the CENTER of a referential, and NOT lower left corner, sprite's position is
         //different than body's
-        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2)/ GameState.METERS_PER_PIXEL,
-                (sprite.getY() + sprite.getHeight() / 2) / GameState.METERS_PER_PIXEL);
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2)/ GameState.PIXELS_PER_METER,
+                (sprite.getY() + sprite.getHeight() / 2) / GameState.PIXELS_PER_METER);
 
         body = world.createBody(bodyDef);
 
         // Defining the body's shape
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(sprite.getWidth() / 2 / GameState.METERS_PER_PIXEL,
-                sprite.getHeight() / 2 / GameState.METERS_PER_PIXEL);
+        shape.setAsBox(sprite.getWidth() / 2 / GameState.PIXELS_PER_METER,
+                sprite.getHeight() / 2 / GameState.PIXELS_PER_METER);
 
         // Defining body's fixture which includes some physical properties
         FixtureDef fixtureDef = new FixtureDef();
@@ -95,31 +97,25 @@ public class Shape {
     {
         Random rand = new Random();
 
-        int minVelY = MyColorNinja.HEIGHT * 50;
-        int maxVelY = MyColorNinja.HEIGHT * 100;
-
-        int minVelX = MyColorNinja.WIDTH * 50;
-        int maxVelX = MyColorNinja.WIDTH * 100;
-
+        //h = vy^2 / 2g
+        float maxVelY = 3 * (float)Math.sqrt(MyColorNinja.HEIGHT / GameState.PIXELS_PER_METER / 2 * GameState.GRAVITY); // 3 times velocity needed to reach maximum height
+        float minVelY = maxVelY / 5;
 
         //int randomNum = rand.nextInt((max - min) + 1) + min;
-        int vy = rand.nextInt((maxVelY-minVelY)+1) + (minVelY);
+        //float randomFloat = rand.nextFloat() * (max - min) + min;
+        float vy = rand.nextFloat() * (maxVelY-minVelY) + (minVelY);
 
-        int vx = rand.nextInt((maxVelX - minVelX)+1) + (minVelX);
+        // reach = h * (vy/vx) / 4 <=> vx = h* vy / (4*reach)
+        float maxVelX = 2 * (MyColorNinja.HEIGHT / GameState.PIXELS_PER_METER) * vy / (4*MyColorNinja.WIDTH/GameState.PIXELS_PER_METER);    // 2 times the velocity needed to reach the screens width
+        float minVelX = maxVelX / 5;
 
-        float angularMult = rand.nextFloat();
+        float vx = rand.nextFloat() * (maxVelX-minVelX) + (minVelX);
 
         linearVelocity = new Vector2(vx, vy);
-        angularVelocity = angularMult * 4*Math.PI;
+        angularVelocity = rand.nextFloat() * 4*Math.PI;
 
-        //body.setAngularVelocity((float) angularVelocity);
-        //body.setAwake(true);
-
-    }
-
-    public void sling()
-    {
-        body.setLinearVelocity(0f, 10f);
+        body.setLinearVelocity(vx, vy);
+        body.setAngularVelocity((float) angularVelocity);
     }
 
     public void applyTorque()
@@ -130,8 +126,8 @@ public class Shape {
     public void update()
     {
         // Compensating for position differences
-        sprite.setPosition((body.getPosition().x * GameState.METERS_PER_PIXEL) - sprite.getWidth() / 2,
-                (body.getPosition().y * GameState.METERS_PER_PIXEL) - sprite.getHeight() / 2);
+        sprite.setPosition((body.getPosition().x * GameState.PIXELS_PER_METER) - sprite.getWidth() / 2,
+                (body.getPosition().y * GameState.PIXELS_PER_METER) - sprite.getHeight() / 2);
         sprite.setRotation((float)Math.toDegrees(body.getAngle()));
     }
 
@@ -139,4 +135,9 @@ public class Shape {
     {
         texture.dispose();
     }
+
+    public Body getBody() {
+        return body;
+    }
+
 }

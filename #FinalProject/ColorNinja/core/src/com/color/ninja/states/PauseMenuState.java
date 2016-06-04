@@ -63,7 +63,7 @@ public class PauseMenuState extends State {
         buttonsWidth = MyColorNinja.WIDTH / 2;
         buttonsHeight = MyColorNinja.HEIGHT / 8;
         buttonsSpace = MyColorNinja.HEIGHT / 15;
-        buttonsBegin = 2 * MyColorNinja.HEIGHT / 4;
+        buttonsBegin = 3 * MyColorNinja.HEIGHT / 4;
 
         // Buttons' position and size
         resumeBtn.setSize(buttonsWidth, buttonsHeight);
