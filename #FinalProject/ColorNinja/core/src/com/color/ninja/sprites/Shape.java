@@ -2,6 +2,7 @@ package com.color.ninja.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -9,8 +10,16 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -24,7 +33,9 @@ public class Shape {
     protected String textureUrl;
     protected Texture texture;
 
-    public Sprite sprite;
+    private Sprite sprite;
+
+    private Button btn; // used to detect input
 
     //Physics
     protected Body body;
@@ -42,6 +53,8 @@ public class Shape {
         this.shapeType = shapeType;
 
         createSprite();
+        createButton();
+        setListener();
         createBody();
         setVelocities();
     }
@@ -60,6 +73,12 @@ public class Shape {
         sprite = new Sprite(texture);
         sprite.setSize(MyColorNinja.WIDTH / 5, MyColorNinja.HEIGHT / 8);
         sprite.setOriginCenter();
+    }
+
+    private void createButton()
+    {
+        btn = new Button(new SpriteDrawable(sprite));
+        btn.setOrigin(sprite.getOriginX(), sprite.getOriginY());
     }
 
     private void createBody()
@@ -116,17 +135,47 @@ public class Shape {
         body.setAngularVelocity((float) angularVelocity);
     }
 
-    public void applyTorque()
+    private void addToStage(Stage stage)
     {
-        body.applyTorque(0.0f, true);
+        stage.addActor(btn);
+    }
+
+    private void addToArray(ArrayList<Shape> array)
+    {
+        array.add(this);
+    }
+
+    public void addToGame(ArrayList<Shape> array, Stage stage)
+    {
+        addToArray(array);
+        addToStage(stage);
     }
 
     public void update()
     {
+        // Instead of the sprite, the button is the one that is moved
+
         // Compensating for position differences
-        sprite.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
+        btn.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
                 (body.getPosition().y * MyColorNinja.PIXELS_PER_METER) - sprite.getHeight() / 2);
-        sprite.setRotation((float)Math.toDegrees(body.getAngle()));
+
+        //sprite.setRotation((float)Math.toDegrees(body.getAngle()));
+    }
+
+    public void draw(SpriteBatch batch)
+    {
+        // This draws the sprite in current buttons position. Since Actors can't rotate, this was the easiest way to implement Shape as a Button.
+        batch.draw(sprite, btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
+    }
+
+    public void setListener()
+    {
+        btn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Clicked.");
+            }
+        });
     }
 
     public void dispose()

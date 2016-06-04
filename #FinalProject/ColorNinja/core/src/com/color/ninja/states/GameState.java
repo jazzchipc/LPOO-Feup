@@ -74,11 +74,14 @@ public class GameState extends com.color.ninja.states.State {
             debugRenderer=new Box2DDebugRenderer();
 
         Shape s = factory.getRandomShape(world);
-        shapes.add(s);
+        s.addToGame(shapes, stage);
 
         //Adding actors to scene
         setStageListeners();
         stage.addActor(pauseBtn);
+
+        if(MyColorNinja.DEBUG)
+            System.out.println("Hey!");
     }
 
     private void setStageListeners()
@@ -102,8 +105,6 @@ public class GameState extends com.color.ninja.states.State {
     public void update(float dt) {
         world.step(dt, 6, 2);
 
-        shapes.get(0).applyTorque();
-
         shapes.get(0).update();
     }
 
@@ -120,7 +121,7 @@ public class GameState extends com.color.ninja.states.State {
 
         pauseBtn.draw(sb,1);
 
-        shapes.get(0).sprite.draw(sb);
+        shapes.get(0).draw(sb);
 
         sb.end();
 
