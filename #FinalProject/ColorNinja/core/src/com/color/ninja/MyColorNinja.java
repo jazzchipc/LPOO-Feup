@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
 import com.badlogic.gdx.audio.Music;
@@ -22,11 +23,13 @@ public class MyColorNinja extends ApplicationAdapter {
 	private SpriteBatch batch;
 
 	private Music music1;
-	//private Music music2;
-	//private Music music3;
-	//private Music music4;
-	//private Music music5;
-	//private Music music6;
+	private Music music2;
+	private Music music3;
+	private Music music4;
+	private Music music5;
+	private Music music6;
+
+	private Array<Music> music;
 
 	private float musicVol = SettingsMenuState.musicVol;
 
@@ -39,14 +42,24 @@ public class MyColorNinja extends ApplicationAdapter {
 		gsm = new GameStateManager();
 
 		music1 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/ninjamaster.mp3"));
-		//music2 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/kanpai.mp3"));
-		//music3 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/reverse.mp3"));
-		//music4 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/spirit.mp3"));
-		//music5 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/strong.mp3"));
-		//music6 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/turn.mp3"));
-		music1.setLooping(true);
-		music1.setVolume(musicVol);
-		music1.play();
+		music2 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/kanpai.mp3"));
+		music3 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/reverse.mp3"));
+		music4 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/spirit.mp3"));
+		music5 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/strong.mp3"));
+		music6 = Gdx.audio.newMusic(Gdx.files.internal("sound/music/turn.mp3"));
+
+		music = new Array<Music>();
+
+		music.add(music1);
+		music.add(music2);
+		music.add(music3);
+		music.add(music4);
+		music.add(music5);
+		music.add(music6);
+
+		music3.setLooping(true);
+		music3.setVolume(musicVol);
+		music3.play();
 
 		gsm.push(new MainMenuState(gsm));	// starts the game on the MainMenuState
 	}
@@ -64,5 +77,10 @@ public class MyColorNinja extends ApplicationAdapter {
 	public void dispose() {
 		super.dispose();
 		music1.dispose();
+		music2.dispose();
+		music3.dispose();
+		music4.dispose();
+		music5.dispose();
+		music6.dispose();
 	}
 }
