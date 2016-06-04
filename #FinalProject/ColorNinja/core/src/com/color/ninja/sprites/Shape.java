@@ -1,6 +1,5 @@
 package com.color.ninja.sprites;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -11,7 +10,6 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.color.ninja.MyColorNinja;
-import com.color.ninja.states.GameState;
 
 import java.util.Random;
 
@@ -72,15 +70,15 @@ public class Shape {
 
         // Because Box2D considers (0.0) the CENTER of a referential, and NOT lower left corner, sprite's position is
         //different than body's
-        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2)/ GameState.PIXELS_PER_METER,
-                (sprite.getY() + sprite.getHeight() / 2) / GameState.PIXELS_PER_METER);
+        bodyDef.position.set((sprite.getX() + sprite.getWidth() / 2)/ MyColorNinja.PIXELS_PER_METER,
+                (sprite.getY() + sprite.getHeight() / 2) / MyColorNinja.PIXELS_PER_METER);
 
         body = world.createBody(bodyDef);
 
         // Defining the body's shape
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(sprite.getWidth() / 2 / GameState.PIXELS_PER_METER,
-                sprite.getHeight() / 2 / GameState.PIXELS_PER_METER);
+        shape.setAsBox(sprite.getWidth() / 2 / MyColorNinja.PIXELS_PER_METER,
+                sprite.getHeight() / 2 / MyColorNinja.PIXELS_PER_METER);
 
         // Defining body's fixture which includes some physical properties
         FixtureDef fixtureDef = new FixtureDef();
@@ -98,7 +96,7 @@ public class Shape {
         Random rand = new Random();
 
         //h = vy^2 / 2g
-        float maxVelY = 3 * (float)Math.sqrt(MyColorNinja.HEIGHT / GameState.PIXELS_PER_METER / 2 * GameState.GRAVITY); // 3 times velocity needed to reach maximum height
+        float maxVelY = 3 * (float)Math.sqrt(MyColorNinja.HEIGHT / MyColorNinja.PIXELS_PER_METER / 2 * MyColorNinja.GRAVITY); // 3 times velocity needed to reach maximum height
         float minVelY = maxVelY / 5;
 
         //int randomNum = rand.nextInt((max - min) + 1) + min;
@@ -106,7 +104,7 @@ public class Shape {
         float vy = rand.nextFloat() * (maxVelY-minVelY) + (minVelY);
 
         // reach = h * (vy/vx) / 4 <=> vx = h* vy / (4*reach)
-        float maxVelX = 2 * (MyColorNinja.HEIGHT / GameState.PIXELS_PER_METER) * vy / (4*MyColorNinja.WIDTH/GameState.PIXELS_PER_METER);    // 2 times the velocity needed to reach the screens width
+        float maxVelX = 2 * (MyColorNinja.HEIGHT / MyColorNinja.PIXELS_PER_METER) * vy / (4*MyColorNinja.WIDTH/ MyColorNinja.PIXELS_PER_METER);    // 2 times the velocity needed to reach the screens width
         float minVelX = maxVelX / 5;
 
         float vx = rand.nextFloat() * (maxVelX-minVelX) + (minVelX);
@@ -126,8 +124,8 @@ public class Shape {
     public void update()
     {
         // Compensating for position differences
-        sprite.setPosition((body.getPosition().x * GameState.PIXELS_PER_METER) - sprite.getWidth() / 2,
-                (body.getPosition().y * GameState.PIXELS_PER_METER) - sprite.getHeight() / 2);
+        sprite.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
+                (body.getPosition().y * MyColorNinja.PIXELS_PER_METER) - sprite.getHeight() / 2);
         sprite.setRotation((float)Math.toDegrees(body.getAngle()));
     }
 

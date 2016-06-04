@@ -12,12 +12,19 @@ import com.badlogic.gdx.audio.Sound;
 import com.color.ninja.states.SettingsMenuState;
 
 public class MyColorNinja extends ApplicationAdapter {
+	// DEBUG
+	public static final boolean DEBUG = true;
+
 	// Window size in pixels
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 800;
 
 	// Window title
 	public static final String TITLE = "Color Ninja";
+
+	// Physics constants
+    public static final float PIXELS_PER_METER = 100f;  // scaling physics world
+	public static final float GRAVITY = 9.8f;
 
 	private GameStateManager gsm;
 	private SpriteBatch batch;

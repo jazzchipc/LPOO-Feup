@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
+import com.color.ninja.physics.MyBox;
 import com.color.ninja.sprites.*;
 import com.color.ninja.sprites.Shape;
 
@@ -30,13 +31,10 @@ public class GameState extends com.color.ninja.states.State {
     private Sprite pauseBtnSprite;
     private Button pauseBtn;
 
-    // World/physics settings
-    public static final float PIXELS_PER_METER = 100f;  // scaling physics world
-    public static final float GRAVITY = 9.8f;
-
+    // World/physics elements
     private Vector2 gravity;
     private World world;
-    private Body box;
+    private MyBox box;
 
     // Physics debugger
     protected Box2DDebugRenderer debugRenderer;
@@ -55,7 +53,6 @@ public class GameState extends com.color.ninja.states.State {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-
         // Setting up sprites
         background = new Texture("background.png");
 
@@ -65,18 +62,16 @@ public class GameState extends com.color.ninja.states.State {
         pauseBtn.setX(MyColorNinja.WIDTH - MyColorNinja.WIDTH/20 - pauseBtn.getWidth());
         pauseBtn.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 10);
 
-
-        // Setting up physics
-        gravity = new Vector2(0, -GRAVITY); // f stands for float
+        // Setting up physics and box
+        gravity = new Vector2(0, -MyColorNinja.GRAVITY); // f stands for float
         world = new World(gravity, true);
         factory = new ShapeFactory();
         shapes = new ArrayList<Shape>();
-
-        createBox();
-        setWorldListeners();
+        box = new MyBox(world);
 
         // Debug renderer
-        debugRenderer=new Box2DDebugRenderer();
+        if(MyColorNinja.DEBUG)
+            debugRenderer=new Box2DDebugRenderer();
 
         Shape s = factory.getRandomShape(world);
         shapes.add(s);
@@ -97,57 +92,6 @@ public class GameState extends com.color.ninja.states.State {
 
     }
 
-    private void setWorldListeners()
-    {
-        world.setContactListener(new ContactListener() {
-            @Override
-            public void beginContact(Contact contact) {
-                if((contact.getFixtureA().getBody() == box && contact.getFixtureB().getBody() == shapes.get(0).getBody()) ||
-                        (contact.getFixtureB().getBody() == box && contact.getFixtureA().getBody() == shapes.get(0).getBody()))
-                {
-                   System.out.println("Collision");
-                }
-
-            }
-
-            @Override
-            public void endContact(Contact contact) {
-
-            }
-
-            @Override
-            public void preSolve(Contact contact, Manifold oldManifold) {
-
-            }
-
-            @Override
-            public void postSolve(Contact contact, ContactImpulse impulse) {
-
-            }
-        });
-    }
-
-
-    private void createBox()
-    {
-        BodyDef bodyDef2 = new BodyDef();
-        bodyDef2.type = BodyDef.BodyType.StaticBody;
-        float width = MyColorNinja.WIDTH/PIXELS_PER_METER;
-
-        // Set the height to just 50 pixels above the bottom of the screen so we can see the edge in the
-        // debug renderer
-        float height = MyColorNinja.HEIGHT/PIXELS_PER_METER- 50/PIXELS_PER_METER;
-        bodyDef2.position.set(0,0);
-        FixtureDef fixtureDef2 = new FixtureDef();
-
-        EdgeShape edgeShape = new EdgeShape();
-        edgeShape.set(-width/2,-height/2,width/2,-height/2);
-        fixtureDef2.shape = edgeShape;
-
-        box = world.createBody(bodyDef2);
-        box.createFixture(fixtureDef2);
-        edgeShape.dispose();
-    }
 
     @Override
     protected void handleInput() {
@@ -165,8 +109,10 @@ public class GameState extends com.color.ninja.states.State {
 
     @Override
     public void render(SpriteBatch sb) {
-        debugMatrix = new Matrix4(sb.getProjectionMatrix());
-        debugMatrix.scale(PIXELS_PER_METER, PIXELS_PER_METER, 1);
+        if(MyColorNinja.DEBUG) {
+            debugMatrix = new Matrix4(sb.getProjectionMatrix());
+            debugMatrix.scale(MyColorNinja.PIXELS_PER_METER, MyColorNinja.PIXELS_PER_METER, 1);
+        }
 
         sb.begin();
 
@@ -178,7 +124,9 @@ public class GameState extends com.color.ninja.states.State {
 
         sb.end();
 
-        debugRenderer.render(world, debugMatrix);
+        if(MyColorNinja.DEBUG) {
+            debugRenderer.render(world, debugMatrix);
+        }
     }
 
     @Override
