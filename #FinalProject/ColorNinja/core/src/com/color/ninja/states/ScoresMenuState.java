@@ -42,13 +42,13 @@ public class ScoresMenuState extends State {
         stage = new Stage();
 
         // Title's position and size
-        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 5);
-        title.setCenterX(MyColorNinja.WIDTH / 2);
-        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 9 - title.getHeight());
+        title.setSize(8 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 5);
+        title.setCenterX(Gdx.graphics.getWidth() / 2);
+        title.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 9 - title.getHeight());
 
-        backBtn.setSize(MyColorNinja.WIDTH / 6, MyColorNinja.HEIGHT / 12);
-        backBtn.setX(MyColorNinja.WIDTH / 5 - backBtn.getWidth());
-        backBtn.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 10);
+        backBtn.setSize(Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 12);
+        backBtn.setX(Gdx.graphics.getWidth() / 5 - backBtn.getWidth());
+        backBtn.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 10);
 
         // Setting up stage and actors
         Gdx.input.setInputProcessor(stage);
@@ -87,7 +87,7 @@ public class ScoresMenuState extends State {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
 
         //draws background texture
-        sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
+        sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         // draws title sprite
         title.draw(sb);

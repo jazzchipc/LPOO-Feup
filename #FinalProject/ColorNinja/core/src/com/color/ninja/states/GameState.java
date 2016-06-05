@@ -58,9 +58,9 @@ public class GameState extends com.color.ninja.states.State {
 
         pauseBtnSprite = new Sprite(new Texture("pause.png"));
         pauseBtn = new Button(new SpriteDrawable(pauseBtnSprite));
-        pauseBtn.setSize(MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 14);
-        pauseBtn.setX(MyColorNinja.WIDTH - MyColorNinja.WIDTH/20 - pauseBtn.getWidth());
-        pauseBtn.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 10);
+        pauseBtn.setSize(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 14);
+        pauseBtn.setX(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/20 - pauseBtn.getWidth());
+        pauseBtn.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 10);
 
         // Setting up physics and box
         gravity = new Vector2(0, -MyColorNinja.GRAVITY); // f stands for float
@@ -117,7 +117,7 @@ public class GameState extends com.color.ninja.states.State {
 
         sb.begin();
 
-        sb.draw(background,0,0, MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
+        sb.draw(background,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         pauseBtn.draw(sb,1);
 

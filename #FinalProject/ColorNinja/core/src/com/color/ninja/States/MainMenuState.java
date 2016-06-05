@@ -56,24 +56,24 @@ public class MainMenuState extends State {
         stage = new Stage();
 
         // Menu button properties
-        buttonsWidth = MyColorNinja.WIDTH / 2;
-        buttonsHeight = MyColorNinja.HEIGHT / 8;
-        buttonsSpace = MyColorNinja.HEIGHT / 15;
-        buttonsBegin = 2 * MyColorNinja.HEIGHT / 4;
+        buttonsWidth = Gdx.graphics.getWidth() / 2;
+        buttonsHeight = Gdx.graphics.getHeight() / 8;
+        buttonsSpace = Gdx.graphics.getHeight() / 15;
+        buttonsBegin = 2 * Gdx.graphics.getHeight() / 4;
 
         // Title's position and size
-        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 3);
-        title.setCenterX(MyColorNinja.WIDTH / 2);
-        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 35 - title.getHeight());
+        title.setSize(8 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 3);
+        title.setCenterX(Gdx.graphics.getWidth() / 2);
+        title.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 35 - title.getHeight());
 
         // Buttons' position and size
         newGameBtn.setSize(buttonsWidth, buttonsHeight);
         settingsBtn.setSize(buttonsWidth, buttonsHeight);
         scoresBtn.setSize(buttonsWidth, buttonsHeight);
 
-        newGameBtn.setX(MyColorNinja.WIDTH / 2 - newGameBtn.getWidth() / 2);
-        settingsBtn.setX(MyColorNinja.WIDTH / 2 - settingsBtn.getWidth() / 2);
-        scoresBtn.setX(MyColorNinja.WIDTH / 2 - scoresBtn.getWidth() / 2 );
+        newGameBtn.setX(Gdx.graphics.getWidth() / 2 - newGameBtn.getWidth() / 2);
+        settingsBtn.setX(Gdx.graphics.getWidth() / 2 - settingsBtn.getWidth() / 2);
+        scoresBtn.setX(Gdx.graphics.getWidth() / 2 - scoresBtn.getWidth() / 2 );
 
         newGameBtn.setY(buttonsBegin);
         settingsBtn.setY(newGameBtn.getY() - buttonsHeight - buttonsSpace);
@@ -133,7 +133,7 @@ public class MainMenuState extends State {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
 
         //draws background texture
-        sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
+        sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         // draws title sprite
         title.draw(sb);

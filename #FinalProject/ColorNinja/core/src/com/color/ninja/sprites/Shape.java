@@ -1,5 +1,6 @@
 package com.color.ninja.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -71,7 +72,7 @@ public class Shape {
 
         texture = new Texture(textureUrl);
         sprite = new Sprite(texture);
-        sprite.setSize(MyColorNinja.WIDTH / 5, MyColorNinja.HEIGHT / 8);
+        sprite.setSize(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() / 8);
         sprite.setOriginCenter();
     }
 
@@ -115,7 +116,7 @@ public class Shape {
         Random rand = new Random();
 
         //h = vy^2 / 2g
-        float maxVelY = 3 * (float)Math.sqrt(MyColorNinja.HEIGHT / MyColorNinja.PIXELS_PER_METER / 2 * MyColorNinja.GRAVITY); // 3 times velocity needed to reach maximum height
+        float maxVelY = 3 * (float)Math.sqrt(Gdx.graphics.getHeight() / MyColorNinja.PIXELS_PER_METER / 2 * MyColorNinja.GRAVITY); // 3 times velocity needed to reach maximum height
         float minVelY = maxVelY / 5;
 
         //int randomNum = rand.nextInt((max - min) + 1) + min;
@@ -123,7 +124,7 @@ public class Shape {
         float vy = rand.nextFloat() * (maxVelY-minVelY) + (minVelY);
 
         // reach = h * (vy/vx) / 4 <=> vx = h* vy / (4*reach)
-        float maxVelX = 2 * (MyColorNinja.HEIGHT / MyColorNinja.PIXELS_PER_METER) * vy / (4*MyColorNinja.WIDTH/ MyColorNinja.PIXELS_PER_METER);    // 2 times the velocity needed to reach the screens width
+        float maxVelX = 2 * (Gdx.graphics.getHeight() / MyColorNinja.PIXELS_PER_METER) * vy / (4*Gdx.graphics.getWidth()/ MyColorNinja.PIXELS_PER_METER);    // 2 times the velocity needed to reach the screens width
         float minVelX = maxVelX / 5;
 
         float vx = rand.nextFloat() * (maxVelX-minVelX) + (minVelX);

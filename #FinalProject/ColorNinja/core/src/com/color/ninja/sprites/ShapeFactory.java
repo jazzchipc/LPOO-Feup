@@ -15,14 +15,14 @@ public class ShapeFactory implements AbstractFactory {
 
     public ShapeFactory() {
         shapes = new ArrayList<String>();
-        shapes.add("SQUARE");
-        shapes.add("TRIANGLE");
-        shapes.add("CIRCLE");
+        shapes.add("square");
+        shapes.add("triangle");
+        shapes.add("circle");
 
         colors = new ArrayList<String>();
-        colors.add("RED");
-        colors.add("GREEN");
-        colors.add("BLUE");
+        colors.add("red");
+        colors.add("green");
+        colors.add("blue");
     }
 
     public boolean arrayListContainsCaseInsensitive(ArrayList<String> a, String s)

@@ -82,42 +82,42 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         stage = new Stage();
 
         //title's position and size
-        title.setSize(8 * MyColorNinja.WIDTH / 10, MyColorNinja.HEIGHT / 5);
-        title.setCenterX(MyColorNinja.WIDTH / 2);
-        title.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 9 - title.getHeight());
+        title.setSize(8 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 5);
+        title.setCenterX(Gdx.graphics.getWidth() / 2);
+        title.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 9 - title.getHeight());
 
-        backBtn.setSize(MyColorNinja.WIDTH / 6, MyColorNinja.HEIGHT / 12);
-        backBtn.setX(MyColorNinja.WIDTH / 5 - backBtn.getWidth());
-        backBtn.setY(MyColorNinja.HEIGHT - MyColorNinja.HEIGHT / 10);
+        backBtn.setSize(Gdx.graphics.getWidth() / 6, Gdx.graphics.getHeight() / 12);
+        backBtn.setX(Gdx.graphics.getWidth() / 5 - backBtn.getWidth());
+        backBtn.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 10);
 
-        soundsVolSprite.setSize(MyColorNinja.WIDTH /2, MyColorNinja.HEIGHT / 15);
-        soundsVolSprite.setX(MyColorNinja.WIDTH / 2 - soundsVolSprite.getWidth()/2);
-        soundsVolSprite.setY(6* MyColorNinja.HEIGHT / 10 - soundsVolSprite.getHeight());
+        soundsVolSprite.setSize(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() / 15);
+        soundsVolSprite.setX(Gdx.graphics.getWidth() / 2 - soundsVolSprite.getWidth()/2);
+        soundsVolSprite.setY(6* Gdx.graphics.getHeight() / 10 - soundsVolSprite.getHeight());
 
-        soundsVolSld.setSize(5*MyColorNinja.WIDTH /6 - soundsVolSld.getWidth()/2, MyColorNinja.HEIGHT /5);
-        soundsVolSld.setX(MyColorNinja.WIDTH / 2 - soundsVolSld.getWidth() / 2);
-        soundsVolSld.setY(2 * MyColorNinja.HEIGHT /5);
+        soundsVolSld.setSize(5*Gdx.graphics.getWidth() /6 - soundsVolSld.getWidth()/2, Gdx.graphics.getHeight() /5);
+        soundsVolSld.setX(Gdx.graphics.getWidth() / 2 - soundsVolSld.getWidth() / 2);
+        soundsVolSld.setY(2 * Gdx.graphics.getHeight() /5);
 
-        musicVolSprite.setSize(MyColorNinja.WIDTH /2, MyColorNinja.HEIGHT / 15);
-        musicVolSprite.setX(MyColorNinja.WIDTH / 2 - soundsVolSprite.getWidth()/2);
-        musicVolSprite.setY(9* MyColorNinja.HEIGHT / 20 - soundsVolSprite.getHeight());
+        musicVolSprite.setSize(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() / 15);
+        musicVolSprite.setX(Gdx.graphics.getWidth() / 2 - soundsVolSprite.getWidth()/2);
+        musicVolSprite.setY(9* Gdx.graphics.getHeight() / 20 - soundsVolSprite.getHeight());
 
-        musicVolSld.setSize(5*MyColorNinja.WIDTH /6 - musicVolSld.getWidth()/2, MyColorNinja.HEIGHT /5);
-        musicVolSld.setX(MyColorNinja.WIDTH / 2 - musicVolSld.getWidth() / 2);
-        musicVolSld.setY(2 * MyColorNinja.HEIGHT /8);
+        musicVolSld.setSize(5*Gdx.graphics.getWidth() /6 - musicVolSld.getWidth()/2, Gdx.graphics.getHeight() /5);
+        musicVolSld.setX(Gdx.graphics.getWidth() / 2 - musicVolSld.getWidth() / 2);
+        musicVolSld.setY(2 * Gdx.graphics.getHeight() /8);
 
-        difficultySprite.setSize(MyColorNinja.WIDTH /2, MyColorNinja.HEIGHT / 15);
-        difficultySprite.setX(MyColorNinja.WIDTH / 2 - soundsVolSprite.getWidth()/2);
-        difficultySprite.setY(3* MyColorNinja.HEIGHT / 10 - soundsVolSprite.getHeight());
+        difficultySprite.setSize(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() / 15);
+        difficultySprite.setX(Gdx.graphics.getWidth() / 2 - soundsVolSprite.getWidth()/2);
+        difficultySprite.setY(3* Gdx.graphics.getHeight() / 10 - soundsVolSprite.getHeight());
 
-        easyCheckBox.setX(MyColorNinja.WIDTH / 4 );
-        easyCheckBox.setY(3*MyColorNinja.HEIGHT /18);
+        easyCheckBox.setX(Gdx.graphics.getWidth() / 4 );
+        easyCheckBox.setY(3*Gdx.graphics.getHeight() /18);
 
-        mediumCheckBox.setX(MyColorNinja.WIDTH / 4 );
-        mediumCheckBox.setY(2*MyColorNinja.HEIGHT /18);
+        mediumCheckBox.setX(Gdx.graphics.getWidth() / 4 );
+        mediumCheckBox.setY(2*Gdx.graphics.getHeight() /18);
 
-        hardCheckBox.setX(MyColorNinja.WIDTH / 4 );
-        hardCheckBox.setY(MyColorNinja.HEIGHT /18);
+        hardCheckBox.setX(Gdx.graphics.getWidth() / 4 );
+        hardCheckBox.setY(Gdx.graphics.getHeight() /18);
 
         Gdx.input.setInputProcessor(stage);
 
@@ -228,7 +228,7 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     public void render(SpriteBatch sb) {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
 
-        sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
+        sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         title.draw(sb);
 

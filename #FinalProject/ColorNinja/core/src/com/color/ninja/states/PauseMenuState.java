@@ -58,10 +58,10 @@ public class PauseMenuState extends State {
         stage = new Stage();
 
         // Menu button properties
-        buttonsWidth = MyColorNinja.WIDTH / 2;
-        buttonsHeight = MyColorNinja.HEIGHT / 8;
-        buttonsSpace = MyColorNinja.HEIGHT / 15;
-        buttonsBegin = 7 * MyColorNinja.HEIGHT / 10;
+        buttonsWidth = Gdx.graphics.getWidth() / 2;
+        buttonsHeight = Gdx.graphics.getHeight() / 8;
+        buttonsSpace = Gdx.graphics.getHeight() / 15;
+        buttonsBegin = 7 * Gdx.graphics.getHeight() / 10;
 
         // Buttons' position and size
         resumeBtn.setSize(buttonsWidth, buttonsHeight);
@@ -69,10 +69,10 @@ public class PauseMenuState extends State {
         settingsBtn.setSize(buttonsWidth, buttonsHeight);
         exitBtn.setSize(buttonsWidth, buttonsHeight);
 
-        resumeBtn.setX(MyColorNinja.WIDTH / 2 - resumeBtn.getWidth() / 2);
-        restartBtn.setX(MyColorNinja.WIDTH / 2 - restartBtn.getWidth() / 2);
-        settingsBtn.setX(MyColorNinja.WIDTH / 2 - settingsBtn.getWidth() / 2);
-        exitBtn.setX(MyColorNinja.WIDTH / 2 - exitBtn.getWidth() / 2 );
+        resumeBtn.setX(Gdx.graphics.getWidth() / 2 - resumeBtn.getWidth() / 2);
+        restartBtn.setX(Gdx.graphics.getWidth() / 2 - restartBtn.getWidth() / 2);
+        settingsBtn.setX(Gdx.graphics.getWidth() / 2 - settingsBtn.getWidth() / 2);
+        exitBtn.setX(Gdx.graphics.getWidth() / 2 - exitBtn.getWidth() / 2 );
 
         resumeBtn.setY(buttonsBegin);
         restartBtn.setY(resumeBtn.getY()- buttonsHeight - buttonsSpace);
@@ -142,7 +142,7 @@ public class PauseMenuState extends State {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
 
         //draws background texture
-        sb.draw(background,0,0,MyColorNinja.WIDTH,MyColorNinja.HEIGHT);
+        sb.draw(background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
         // draws game options buttons
         resumeBtn.draw(sb, 1);

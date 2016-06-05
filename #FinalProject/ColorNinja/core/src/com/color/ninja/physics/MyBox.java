@@ -1,5 +1,6 @@
 package com.color.ninja.physics;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Contact;
@@ -33,7 +34,7 @@ public class MyBox {
     }
 
     public MyBox(World world){
-        new MyBox(world, MyColorNinja.WIDTH / MyColorNinja.PIXELS_PER_METER, MyColorNinja.HEIGHT / MyColorNinja.PIXELS_PER_METER);
+        new MyBox(world, Gdx.graphics.getWidth() / MyColorNinja.PIXELS_PER_METER, Gdx.graphics.getHeight() / MyColorNinja.PIXELS_PER_METER);
     }
 
     private Body createEdgeBody(World world, float p1x, float p1y, float p2x, float p2y)
