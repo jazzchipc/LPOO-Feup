@@ -112,7 +112,7 @@ public class MainMenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 kungfu.play(SettingsMenuState.soundsVol);
-                gsm.set(new ScoresMenuState(gsm));
+                gsm.set(new PauseMenuState(gsm));
             }
         });
     }
