@@ -38,8 +38,6 @@ public class PauseMenuState extends State {
 
     private Sound kungfu;
 
-    private float soundsVol = SettingsMenuState.soundsVol;
-
     public PauseMenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -98,7 +96,7 @@ public class PauseMenuState extends State {
         resumeBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new GameState(gsm));
             }
         });
@@ -106,7 +104,7 @@ public class PauseMenuState extends State {
         restartBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new GameState(gsm));
             }
         });
@@ -114,7 +112,7 @@ public class PauseMenuState extends State {
         settingsBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new SettingsMenuState(gsm));
             }
         });
@@ -122,7 +120,7 @@ public class PauseMenuState extends State {
         exitBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new MainMenuState(gsm));
             }
         });

@@ -37,8 +37,6 @@ public class MainMenuState extends State {
 
     private Sound kungfu;
 
-    private float soundsVol = SettingsMenuState.soundsVol;
-
     public MainMenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -97,7 +95,7 @@ public class MainMenuState extends State {
         newGameBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new GameState(gsm));
             }
         });
@@ -105,7 +103,7 @@ public class MainMenuState extends State {
         settingsBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new SettingsMenuState(gsm));
              }
         });
@@ -113,7 +111,7 @@ public class MainMenuState extends State {
         scoresBtn.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                kungfu.play(soundsVol);
+                kungfu.play(SettingsMenuState.soundsVol);
                 gsm.set(new ScoresMenuState(gsm));
             }
         });

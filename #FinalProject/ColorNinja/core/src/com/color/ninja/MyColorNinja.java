@@ -38,8 +38,6 @@ public class MyColorNinja extends ApplicationAdapter {
 
 	private Array<Music> music;
 
-	private float musicVol = SettingsMenuState.musicVol;
-
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -65,7 +63,7 @@ public class MyColorNinja extends ApplicationAdapter {
 		music.add(music6);
 
 		music3.setLooping(true);
-		music3.setVolume(musicVol);
+		music3.setVolume(SettingsMenuState.musicVol);
 		music3.play();
 
 		gsm.push(new MainMenuState(gsm));	// starts the game on the MainMenuState
