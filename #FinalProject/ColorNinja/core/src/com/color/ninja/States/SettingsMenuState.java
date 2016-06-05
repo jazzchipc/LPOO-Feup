@@ -46,6 +46,7 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
     public static float soundsVol = 0.5f;
     public static float musicVol = 0.5f;
+    public static int difficulty = 1;
 
     private Sound kungfu;
 
@@ -109,16 +110,12 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         difficultySprite.setX(MyColorNinja.WIDTH / 2 - soundsVolSprite.getWidth()/2);
         difficultySprite.setY(3* MyColorNinja.HEIGHT / 10 - soundsVolSprite.getHeight());
 
-        //easyCheckBox.setSize(MyColorNinja.WIDTH/10,MyColorNinja.HEIGHT/10);
-       // easyCheckBox.setScale(2);
         easyCheckBox.setX(MyColorNinja.WIDTH / 4 );
         easyCheckBox.setY(3*MyColorNinja.HEIGHT /18);
 
-       // mediumCheckBox.setSize(MyColorNinja.WIDTH/5,MyColorNinja.HEIGHT/5);
         mediumCheckBox.setX(MyColorNinja.WIDTH / 4 );
         mediumCheckBox.setY(2*MyColorNinja.HEIGHT /18);
 
-        //hardCheckBox.setSize(MyColorNinja.WIDTH/10,MyColorNinja.HEIGHT/10);
         hardCheckBox.setX(MyColorNinja.WIDTH / 4 );
         hardCheckBox.setY(MyColorNinja.HEIGHT /18);
 
@@ -131,8 +128,9 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         stage.addActor(mediumCheckBox);
         stage.addActor(hardCheckBox);
 
-
         setListeners();
+
+        System.out.println(soundsVol);
 
     }
 
@@ -153,19 +151,19 @@ public class SettingsMenuState extends com.color.ninja.states.State {
                         gsm.set(new MainMenuState(gsm));
                     }
                 });
-
+/*
                 soundsVolSld.addListener(new InputListener(){
                     @Override
                     public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                         super.touchUp(event, x, y, pointer, button);
                         soundsVol = soundsVolSld.getValue();
+                        System.out.println(soundsVol);
                     }
 
                     @Override
                     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                         return super.touchDown(event, x, y, pointer, button);
                     }
-
                 });
 
                 musicVolSld.addListener(new InputListener() {
@@ -175,11 +173,25 @@ public class SettingsMenuState extends com.color.ninja.states.State {
                         musicVol = musicVolSld.getValue();
                     }
 
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return super.touchDown(event, x, y, pointer, button);
-            }
-        });
+                    @Override
+                    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                         return super.touchDown(event, x, y, pointer, button);
+                    }
+                });*/
+
+                soundsVolSld.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        soundsVol = soundsVolSld.getValue();
+                    }
+                });
+
+                musicVolSld.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        musicVol = musicVolSld.getValue();
+                    }
+                });
 
         easyCheckBox.addListener(new ClickListener(){
             @Override
@@ -189,7 +201,10 @@ public class SettingsMenuState extends com.color.ninja.states.State {
                     mediumCheckBox.setChecked(false);
                 if(hardCheckBox.isChecked())
                     hardCheckBox.setChecked(false);
+                if(!mediumCheckBox.isChecked() && !hardCheckBox.isChecked())
+                    easyCheckBox.setChecked(true);
 
+                difficulty = 0;
             }
         });
 
@@ -201,7 +216,10 @@ public class SettingsMenuState extends com.color.ninja.states.State {
                     easyCheckBox.setChecked(false);
                 if(hardCheckBox.isChecked())
                     hardCheckBox.setChecked(false);
+                if(!easyCheckBox.isChecked() && !hardCheckBox.isChecked())
+                    mediumCheckBox.setChecked(true);
 
+                difficulty = 1;
             }
         });
 
@@ -213,7 +231,10 @@ public class SettingsMenuState extends com.color.ninja.states.State {
                     easyCheckBox.setChecked(false);
                 if(mediumCheckBox.isChecked())
                     mediumCheckBox.setChecked(false);
+                if(!mediumCheckBox.isChecked() && !easyCheckBox.isChecked())
+                    hardCheckBox.setChecked(true);
 
+                difficulty = 2;
             }
         });
     }
@@ -242,9 +263,11 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
         soundsVolSprite.draw(sb,1);
         soundsVolSld.draw(sb,1);
+        soundsVolSld.setValue(soundsVol);
 
         musicVolSprite.draw(sb,1);
         musicVolSld.draw(sb,1);
+        musicVolSld.setValue(musicVol);
 
         difficultySprite.draw(sb,1);
         easyCheckBox.draw(sb,1);

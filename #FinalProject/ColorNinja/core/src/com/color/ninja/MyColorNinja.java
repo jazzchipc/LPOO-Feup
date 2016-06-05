@@ -76,6 +76,8 @@ public class MyColorNinja extends ApplicationAdapter {
 
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		music3.setVolume(SettingsMenuState.musicVol);
+
 		gsm.update(Gdx.graphics.getDeltaTime());	// makes all updates before putting out a frame
 		gsm.render(batch);
 	}
