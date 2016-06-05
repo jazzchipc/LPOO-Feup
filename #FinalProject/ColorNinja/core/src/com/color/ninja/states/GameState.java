@@ -105,7 +105,7 @@ public class GameState extends com.color.ninja.states.State {
     public void update(float dt) {
         world.step(dt, 6, 2);
 
-        shapes.get(0).update();
+        shapes.get(0).update(dt);
     }
 
     @Override

@@ -2,8 +2,7 @@ package com.color.ninja.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -34,9 +33,12 @@ public class Shape {
     protected String textureUrl;
     protected Texture texture;
 
-    private Sprite sprite;
+    protected Sprite sprite;
 
-    private Button btn; // used to detect input
+    protected Button btn; // used to detect input
+
+    protected String animationUrl;
+    protected Animation shapeExplosion;
 
     //Physics
     protected Body body;
@@ -57,6 +59,7 @@ public class Shape {
         createButton();
         setListener();
         createBody();
+        createAnimation();
         setVelocities();
     }
 
@@ -64,8 +67,8 @@ public class Shape {
     {
         StringBuilder strBld = new StringBuilder();
 
-        strBld.append(color);
         strBld.append(shapeType);
+        strBld.append(color);
         strBld.append(".png");
 
         textureUrl = strBld.toString();
@@ -80,6 +83,25 @@ public class Shape {
     {
         btn = new Button(new SpriteDrawable(sprite));
         btn.setOrigin(sprite.getOriginX(), sprite.getOriginY());
+    }
+
+    private void createAnimation()
+    {
+        StringBuilder strBld = new StringBuilder();
+
+        strBld.append("color ninja animacoes/");
+        strBld.append(shapeType);
+        strBld.append(color);
+        strBld.append("/");
+        strBld.append(shapeType);
+        strBld.append(color);
+        strBld.append("animation.png");
+
+        this.animationUrl = strBld.toString();
+
+        Texture spriteSheet = new Texture(animationUrl);
+
+        shapeExplosion = new Animation(new TextureRegion(spriteSheet), 7, 0.5f);
     }
 
     private void createBody()
@@ -152,7 +174,7 @@ public class Shape {
         addToStage(stage);
     }
 
-    public void update()
+    public void update(float dt)
     {
         // Instead of the sprite, the button is the one that is moved
 
@@ -160,13 +182,15 @@ public class Shape {
         btn.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
                 (body.getPosition().y * MyColorNinja.PIXELS_PER_METER) - sprite.getHeight() / 2);
 
-        //sprite.setRotation((float)Math.toDegrees(body.getAngle()));
+        shapeExplosion.update(dt);
     }
 
     public void draw(SpriteBatch batch)
     {
         // This draws the sprite in current buttons position. Since Actors can't rotate, this was the easiest way to implement Shape as a Button.
-        batch.draw(sprite, btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
+        //batch.draw(sprite, btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
+
+        batch.draw(shapeExplosion.getFrame(),btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
     }
 
     public void setListener()

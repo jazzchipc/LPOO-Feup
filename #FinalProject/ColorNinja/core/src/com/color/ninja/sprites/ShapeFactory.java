@@ -45,7 +45,7 @@ public class ShapeFactory implements AbstractFactory {
         if(!(arrayListContainsCaseInsensitive(colors, color)))
             return null;
 
-        return new Shape(world, shapeType, color);
+        return new Shape(world, color, shapeType);
     }
 
     @Override
@@ -61,6 +61,6 @@ public class ShapeFactory implements AbstractFactory {
 
         String color = colors.get(i);
 
-        return new Shape(world, shapeType, color);
+        return new Shape(world, color, shapeType);
     }
 }
