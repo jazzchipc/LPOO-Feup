@@ -44,6 +44,10 @@ public class GameState extends com.color.ninja.states.State {
     private ShapeFactory factory;
     private ArrayList<Shape> shapes;
 
+    // Game timer and score
+    private int score;
+    private float timer;    // in seconds
+
 
     public GameState(com.color.ninja.states.GameStateManager gsm) {
 
@@ -73,6 +77,10 @@ public class GameState extends com.color.ninja.states.State {
         if(MyColorNinja.DEBUG)
             debugRenderer=new Box2DDebugRenderer();
 
+        // Score and timer
+        this.score = 0;
+        this.timer = 0;
+
         Shape s = factory.getRandomShape(world);
         s.addToGame(shapes, stage);
 
@@ -95,6 +103,29 @@ public class GameState extends com.color.ninja.states.State {
 
     }
 
+    private void updateShapes(float dt)
+    {
+        for (int i = 0; i < shapes.size(); i++)
+        {
+            shapes.get(i).update(dt);
+        }
+    }
+
+    private void drawShapes(SpriteBatch sb)
+    {
+        for (int i = 0; i < shapes.size(); i++)
+        {
+            shapes.get(i).draw(sb);
+        }
+    }
+
+    private void disposeShapes()
+    {
+        for (int i = 0; i < shapes.size(); i++)
+        {
+            shapes.get(i).dispose();
+        }
+    }
 
     @Override
     protected void handleInput() {
@@ -105,7 +136,9 @@ public class GameState extends com.color.ninja.states.State {
     public void update(float dt) {
         world.step(dt, 6, 2);
 
-        shapes.get(0).update(dt);
+        timer = timer + dt;
+
+        updateShapes(dt);
     }
 
     @Override
@@ -121,7 +154,7 @@ public class GameState extends com.color.ninja.states.State {
 
         pauseBtn.draw(sb,1);
 
-        shapes.get(0).draw(sb);
+        drawShapes(sb);
 
         sb.end();
 
@@ -133,7 +166,7 @@ public class GameState extends com.color.ninja.states.State {
     @Override
     public void dispose() {
 
-        shapes.get(0).dispose();
+        disposeShapes();
         world.dispose();
     }
 }

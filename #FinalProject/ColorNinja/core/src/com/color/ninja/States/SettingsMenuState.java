@@ -130,7 +130,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
         setListeners();
 
-        System.out.println(soundsVol);
+        if(MyColorNinja.DEBUG)
+            System.out.println(soundsVol);
 
     }
 

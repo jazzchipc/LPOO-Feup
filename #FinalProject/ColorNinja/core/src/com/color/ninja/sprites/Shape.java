@@ -1,6 +1,7 @@
 package com.color.ninja.sprites;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -26,6 +27,10 @@ import java.util.Random;
  * General shape class
  */
 public class Shape {
+
+    private static float ANIMATION_TIME = 0.5f;
+    private static int NUM_OF_SPRITES = 7;
+
     //Sprite
     protected String color;
     protected String shapeType;
@@ -39,6 +44,10 @@ public class Shape {
 
     protected String animationUrl;
     protected Animation shapeExplosion;
+    protected float tExplosion;
+
+    protected boolean exploded;
+    protected boolean destroyed;
 
     //Physics
     protected Body body;
@@ -54,6 +63,9 @@ public class Shape {
         this.world = world;
         this.color = color;
         this.shapeType = shapeType;
+
+        this.exploded = false;
+        this.destroyed = false;
 
         createSprite();
         createButton();
@@ -85,6 +97,18 @@ public class Shape {
         btn.setOrigin(sprite.getOriginX(), sprite.getOriginY());
     }
 
+    private void setListener()
+    {
+        btn.addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(MyColorNinja.DEBUG)
+                    System.out.println("Clicked.");
+                explode();
+            }
+        });
+    }
+
     private void createAnimation()
     {
         StringBuilder strBld = new StringBuilder();
@@ -101,7 +125,14 @@ public class Shape {
 
         Texture spriteSheet = new Texture(animationUrl);
 
-        shapeExplosion = new Animation(new TextureRegion(spriteSheet), 7, 0.5f);
+        shapeExplosion = new Animation(new TextureRegion(spriteSheet), NUM_OF_SPRITES, ANIMATION_TIME);
+
+        tExplosion = 0;
+    }
+
+    private void explode()
+    {
+        this.exploded = true;
     }
 
     private void createBody()
@@ -158,6 +189,17 @@ public class Shape {
         body.setAngularVelocity((float) angularVelocity);
     }
 
+    private boolean checkIfDestroyed()
+    {
+        if(btn.getY() + (btn.getHeight() / MyColorNinja.PIXELS_PER_METER) < 0)
+            return true;
+
+        if(tExplosion >= ANIMATION_TIME)
+            return true;
+
+        return false;
+    }
+
     private void addToStage(Stage stage)
     {
         stage.addActor(btn);
@@ -174,33 +216,46 @@ public class Shape {
         addToStage(stage);
     }
 
+    private void removeFromStage(Stage stage) { btn.remove(); }
+
+    private void removeFromArray (ArrayList<Shape> shapes) {shapes.remove(this);}
+
+    public void removeFromGame(ArrayList<Shape> shapes, Stage stage)
+    {
+        removeFromArray(shapes);
+        removeFromStage(stage);
+    }
+
     public void update(float dt)
     {
         // Instead of the sprite, the button is the one that is moved
 
         // Compensating for position differences
+        if(!exploded)
         btn.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
                 (body.getPosition().y * MyColorNinja.PIXELS_PER_METER) - sprite.getHeight() / 2);
 
-        shapeExplosion.update(dt);
+        else {
+            shapeExplosion.update(dt);
+            tExplosion = tExplosion + dt;
+        }
+
+        destroyed = checkIfDestroyed();
+
+        if (MyColorNinja.DEBUG) {
+            System.out.println(destroyed);
+            System.out.println(btn.getY());
+        }
     }
 
     public void draw(SpriteBatch batch)
     {
         // This draws the sprite in current buttons position. Since Actors can't rotate, this was the easiest way to implement Shape as a Button.
-        //batch.draw(sprite, btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
+        if(!exploded)
+            batch.draw(sprite, btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
 
-        batch.draw(shapeExplosion.getFrame(),btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
-    }
-
-    public void setListener()
-    {
-        btn.addListener(new ClickListener(){
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Clicked.");
-            }
-        });
+        else if(!destroyed)
+            batch.draw(shapeExplosion.getFrame(),btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
     }
 
     public void dispose()
