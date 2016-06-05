@@ -2,6 +2,7 @@ package com.color.ninja.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
+import com.color.ninja.states.SettingsMenuState;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -56,6 +58,9 @@ public class Shape {
     protected double angularVelocity;
 
 
+    private Sound whoosh;
+    private Sound blop;
+
     public Shape(){}
 
     public Shape(World world, String color, String shapeType) {
@@ -66,6 +71,9 @@ public class Shape {
 
         this.exploded = false;
         this.destroyed = false;
+
+        whoosh = Gdx.audio.newSound(Gdx.files.internal("sound/effects/whoosh.mp3"));
+        blop = Gdx.audio.newSound(Gdx.files.internal("sound/effects/blop.mp3"));
 
         createSprite();
         createButton();
@@ -105,6 +113,7 @@ public class Shape {
                 if(MyColorNinja.DEBUG)
                     System.out.println("Clicked.");
                 explode();
+                blop.play(SettingsMenuState.soundsVol);
             }
         });
     }
@@ -212,6 +221,7 @@ public class Shape {
 
     public void addToGame(ArrayList<Shape> array, Stage stage)
     {
+        whoosh.play(SettingsMenuState.soundsVol);
         addToArray(array);
         addToStage(stage);
     }
