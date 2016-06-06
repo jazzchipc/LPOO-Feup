@@ -13,6 +13,12 @@ public class Animation {
     private int frameCount;
     private int frame;
 
+    /**
+     * Constructor
+     * @param region All the frames combined into one image
+     * @param frameCount Number of frames in the region
+     * @param cycleTime How long it takes to go around the entire region
+     */
     public Animation(TextureRegion region, int frameCount, float cycleTime){
         frames = new Array<TextureRegion>();
         int frameWidth = region.getRegionWidth()/frameCount;
@@ -24,6 +30,10 @@ public class Animation {
         frame = 0;
     }
 
+    /**
+     *Updates the animation
+     * @param dt The change in time between render cycles
+     */
     public void update(float dt){
         currentFrameTime += dt;
         if(currentFrameTime > maxFrameTime){
@@ -34,6 +44,10 @@ public class Animation {
             frame = 0;
     }
 
+    /**
+     *
+     * @return The frame the animation is currently on
+     */
     public  TextureRegion getFrame(){
         return frames.get(frame);
     }

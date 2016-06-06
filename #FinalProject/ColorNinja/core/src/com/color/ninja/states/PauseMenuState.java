@@ -38,6 +38,10 @@ public class PauseMenuState extends State {
 
     private Sound kungfu;
 
+    /**
+     * Default constructor
+     * @param gsm
+     */
     public PauseMenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -91,6 +95,9 @@ public class PauseMenuState extends State {
 
     }
 
+    /**
+     * Set the listeners for the options in the pause menu
+     */
     private void setListeners()
     {
         resumeBtn.addListener(new ClickListener() {
@@ -132,11 +139,19 @@ public class PauseMenuState extends State {
 
     }
 
+    /**
+     * Updates what the screen is outputting
+     * @param dt Update rate (in miliseconds).
+     */
     @Override
     public void update(float dt) {
         handleInput();
     }
 
+    /**
+     * Renders the SpriteBatch
+     * @param sb State's SpriteBatch.
+     */
     @Override
     public void render(SpriteBatch sb) {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
@@ -154,6 +169,9 @@ public class PauseMenuState extends State {
 
     }
 
+    /**
+     * Disposes the content after the execution
+     */
     @Override
     public void dispose() {
         background.dispose();
