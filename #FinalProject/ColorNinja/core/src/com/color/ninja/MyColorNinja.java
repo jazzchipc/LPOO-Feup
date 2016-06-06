@@ -69,6 +69,10 @@ public class MyColorNinja extends ApplicationAdapter {
 		gsm.push(new MainMenuState(gsm));	// starts the game on the MainMenuState
 	}
 
+	public Music getMusic(){
+		return music2;
+	}
+
 	@Override
 	public void render () {
 
