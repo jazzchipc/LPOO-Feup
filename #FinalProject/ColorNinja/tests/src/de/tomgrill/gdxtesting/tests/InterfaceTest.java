@@ -40,7 +40,7 @@ public class InterfaceTest {
 
     @Test
     public void musicIsPlaying(){
-        game.create();
+       // game.create();
         Music music = game.getMusic();
         assertEquals(true,music.isPlaying());
     }
