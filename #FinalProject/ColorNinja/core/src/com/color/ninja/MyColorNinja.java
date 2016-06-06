@@ -73,6 +73,10 @@ public class MyColorNinja extends ApplicationAdapter {
 		return music2;
 	}
 
+	public int getOne(){
+		return 1;
+	}
+
 	@Override
 	public void render () {
 

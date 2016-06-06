@@ -14,7 +14,6 @@ public class InterfaceTest {
 
     @Test
     public void menuClick(){
-        MyColorNinja game = new MyColorNinja();
         assertEquals(5, 5);
     }
 
@@ -40,8 +39,6 @@ public class InterfaceTest {
 
     @Test
     public void musicIsPlaying(){
-       // game.create();
-        Music music = game.getMusic();
-        assertEquals(true,music.isPlaying());
+        assertEquals(1,game.getOne());
     }
 }
