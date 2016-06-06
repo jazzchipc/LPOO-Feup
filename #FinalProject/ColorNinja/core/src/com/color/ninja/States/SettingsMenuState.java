@@ -51,6 +51,10 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     private Sound kungfu;
 
 
+    /**
+     * Default Constructor
+     * @param gsm
+     */
     public SettingsMenuState(com.color.ninja.states.GameStateManager gsm) {
 
         super(gsm);
@@ -143,6 +147,9 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         return musicVol;
     }
 
+    /**
+     * Sets the listeners for the options in the Settings menu.
+     */
     private void setListeners()
     {
         backBtn.addListener(new ClickListener() {
@@ -220,11 +227,19 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
     }
 
+    /**
+     * Updates what the screen is outputting
+     * @param dt Update rate (in miliseconds).
+     */
     @Override
     public void update(float dt) {
         handleInput();
     }
 
+    /**
+     * Renders the SpriteBatch
+     * @param sb State's SpriteBatch.
+     */
     @Override
     public void render(SpriteBatch sb) {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
@@ -252,6 +267,9 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
     }
 
+    /**
+     * Disposes the resources after the execution
+     */
     @Override
     public void dispose() {
         background.dispose();
