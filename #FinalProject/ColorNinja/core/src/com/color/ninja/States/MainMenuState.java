@@ -37,6 +37,11 @@ public class MainMenuState extends State {
 
     private Sound kungfu;
 
+
+    /**
+     * Default Constructor
+     * @param gsm
+     */
     public MainMenuState(GameStateManager gsm) {
         super(gsm);
 
@@ -90,6 +95,10 @@ public class MainMenuState extends State {
 
     }
 
+
+    /**
+     * Sets the Click listeners for the options in the Main Menu
+     */
     private void setListeners()
     {
         newGameBtn.addListener(new ClickListener() {
@@ -128,6 +137,10 @@ public class MainMenuState extends State {
         handleInput();
     }
 
+    /**
+     * Renders the SpriteBatch
+     * @param sb State's SpriteBatch.
+     */
     @Override
     public void render(SpriteBatch sb) {
         sb.begin(); // Open batch to add things to it. A batch works like a box which is filled with images.
@@ -147,6 +160,9 @@ public class MainMenuState extends State {
 
     }
 
+    /**
+     * Disposes the content after the execution
+     */
     @Override
     public void dispose() {
         background.dispose();
