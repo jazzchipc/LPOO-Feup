@@ -5,12 +5,13 @@ import com.badlogic.gdx.audio.Music;
 import com.color.ninja.MyColorNinja;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
 public class InterfaceTest {
 
-    MyColorNinja game = new MyColorNinja();
+    MyColorNinja game;
 
     @Test
     public void menuClick(){
@@ -39,6 +40,8 @@ public class InterfaceTest {
 
     @Test
     public void musicIsPlaying(){
-        assertEquals(1,game.getOne());
+        game.create();
+        Music music = game.getMusic();
+        assertEquals(true,music.isPlaying());
     }
 }
