@@ -72,7 +72,6 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     }
 }
-
 project(":tests") {
     apply plugin: "java"
 
@@ -88,9 +87,9 @@ project(":tests") {
          *
          */
 
-//        compile project(":android")
+       compile project(":android")
 //        compile project(":html")
-//        compile project(":desktop")
+       compile project(":desktop")
 
 
 //        if(System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
@@ -113,7 +112,6 @@ project(":tests") {
         testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
     }
 }
-
 tasks.eclipse.doLast {
     delete ".project"
 }
