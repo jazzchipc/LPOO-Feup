@@ -13,6 +13,6 @@ public class DesktopLauncher {
 		config.height = MyColorNinja.HEIGHT;
 		config.title = MyColorNinja.TITLE;
 
-		new LwjglApplication(new MyColorNinja(), config);
+		new LwjglApplication(MyColorNinja.getOurInstance(), config);
 	}
 }

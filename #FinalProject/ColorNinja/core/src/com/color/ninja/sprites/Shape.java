@@ -57,7 +57,6 @@ public class Shape {
     protected Vector2 linearVelocity;
     protected double angularVelocity;
 
-
     private Sound whoosh;
     private Sound blop;
 
@@ -80,7 +79,6 @@ public class Shape {
         setListener();
         createBody();
         createAnimation();
-        setVelocities();
     }
 
     private void createSprite()
@@ -97,6 +95,8 @@ public class Shape {
         sprite = new Sprite(texture);
         sprite.setSize(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() / 8);
         sprite.setOriginCenter();
+
+        randomPlacing();
     }
 
     private void createButton()
@@ -178,8 +178,8 @@ public class Shape {
         Random rand = new Random();
 
         //h = vy^2 / 2g
-        float maxVelY = 3 * (float)Math.sqrt(Gdx.graphics.getHeight() / MyColorNinja.PIXELS_PER_METER / 2 * MyColorNinja.GRAVITY); // 3 times velocity needed to reach maximum height
-        float minVelY = maxVelY / 5;
+        float maxVelY = 2.5f * (float)Math.sqrt(Gdx.graphics.getHeight() / MyColorNinja.PIXELS_PER_METER / 2 * MyColorNinja.GRAVITY); // 3 times velocity needed to reach maximum height
+        float minVelY = maxVelY / 3;
 
         //int randomNum = rand.nextInt((max - min) + 1) + min;
         //float randomFloat = rand.nextFloat() * (max - min) + min;
@@ -198,12 +198,42 @@ public class Shape {
         body.setAngularVelocity((float) angularVelocity);
     }
 
+    private void randomPlacing()
+    {
+        // Put Shape below the screen on a random x coordinate
+        Random rand = new Random();
+
+        float randomX = rand.nextInt(Gdx.graphics.getWidth() - (int)sprite.getWidth());
+
+        sprite.setPosition(randomX, -sprite.getHeight());
+
+        if(MyColorNinja.DEBUG)
+        {
+            System.out.print("X: ");
+            System.out.print(sprite.getX());
+            System.out.print(", Y: ");
+            System.out.println(sprite.getY());
+        }
+    }
+
+    public void sling()
+    {
+        setVelocities();
+
+        if(sprite.getX() > (Gdx.graphics.getWidth() / 2)) // if the object is thrown from the right half, it's thrown torwards the left wall
+        {
+            body.setLinearVelocity(-body.getLinearVelocity().x, body.getLinearVelocity().y);
+        }
+
+        whoosh.play(SettingsMenuState.soundsVol);
+    }
+
     private boolean checkIfDestroyed()
     {
-        if(btn.getY() + (btn.getHeight() / MyColorNinja.PIXELS_PER_METER) < 0)
+        if(btn.getY() + (btn.getHeight() / MyColorNinja.PIXELS_PER_METER) < -btn.getHeight() * 2)   // if it way down the screen
             return true;
 
-        if(tExplosion >= ANIMATION_TIME)
+        if(tExplosion >= ANIMATION_TIME)    // if it has already exploded
             return true;
 
         return false;
@@ -221,7 +251,6 @@ public class Shape {
 
     public void addToGame(ArrayList<Shape> array, Stage stage)
     {
-        whoosh.play(SettingsMenuState.soundsVol);
         addToArray(array);
         addToStage(stage);
     }
@@ -248,6 +277,9 @@ public class Shape {
         else {
             shapeExplosion.update(dt);
             tExplosion = tExplosion + dt;
+
+            if(this.body.getFixtureList().size != 0)
+                this.body.destroyFixture(this.body.getFixtureList().first());   // destroy fixture so it doesn't affect other throws
         }
 
         destroyed = checkIfDestroyed();
@@ -257,7 +289,6 @@ public class Shape {
             System.out.println(btn.getY());
         }
     }
-
     public void draw(SpriteBatch batch)
     {
         // This draws the sprite in current buttons position. Since Actors can't rotate, this was the easiest way to implement Shape as a Button.
@@ -276,5 +307,10 @@ public class Shape {
     public Body getBody() {
         return body;
     }
+
+    public boolean isDestroyed() {
+        return destroyed;
+    }
+
 
 }

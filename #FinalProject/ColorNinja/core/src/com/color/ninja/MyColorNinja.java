@@ -12,6 +12,16 @@ import com.badlogic.gdx.audio.Sound;
 import com.color.ninja.states.SettingsMenuState;
 
 public class MyColorNinja extends ApplicationAdapter {
+
+	private static MyColorNinja ourInstance = new MyColorNinja();
+
+	private MyColorNinja()
+	{}
+
+	public static MyColorNinja getOurInstance() {
+		return ourInstance;
+	}
+
 	// DEBUG
 	public static final boolean DEBUG = true;
 

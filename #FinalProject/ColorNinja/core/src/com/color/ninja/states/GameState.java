@@ -1,9 +1,11 @@
 package com.color.ninja.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -18,6 +20,8 @@ import com.color.ninja.sprites.*;
 import com.color.ninja.sprites.Shape;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Random;
 
 /**
  * Class representing the game.
@@ -42,11 +46,18 @@ public class GameState extends com.color.ninja.states.State {
 
     // Shapes
     private ShapeFactory factory;
-    private ArrayList<Shape> shapes;
+    private ArrayList<Shape> shapesFlying;
+    private PriorityQueue<Shape> shapesQueue;
+
+    private boolean slinging;
+    private float minThrowInterval;
+    private float maxThrowInterval;
 
     // Game timer and score
     private int score;
     private float timer;    // in seconds
+
+
 
 
     public GameState(com.color.ninja.states.GameStateManager gsm) {
@@ -66,11 +77,13 @@ public class GameState extends com.color.ninja.states.State {
         pauseBtn.setX(Gdx.graphics.getWidth() - Gdx.graphics.getWidth()/20 - pauseBtn.getWidth());
         pauseBtn.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 10);
 
+        factory = new ShapeFactory();
+        shapesFlying = new ArrayList<Shape>();
+        shapesQueue = new PriorityQueue<Shape>();
+
         // Setting up physics and box
         gravity = new Vector2(0, -MyColorNinja.GRAVITY); // f stands for float
         world = new World(gravity, true);
-        factory = new ShapeFactory();
-        shapes = new ArrayList<Shape>();
         box = new MyBox(world);
 
         // Debug renderer
@@ -80,9 +93,6 @@ public class GameState extends com.color.ninja.states.State {
         // Score and timer
         this.score = 0;
         this.timer = 0;
-
-        Shape s = factory.getRandomShape(world);
-        s.addToGame(shapes, stage);
 
         //Adding actors to scene
         setStageListeners();
@@ -105,26 +115,57 @@ public class GameState extends com.color.ninja.states.State {
 
     private void updateShapes(float dt)
     {
-        for (int i = 0; i < shapes.size(); i++)
+        for (int i = 0; i < shapesFlying.size(); i++)
         {
-            shapes.get(i).update(dt);
+            shapesFlying.get(i).update(dt);
         }
     }
 
     private void drawShapes(SpriteBatch sb)
     {
-        for (int i = 0; i < shapes.size(); i++)
+        for (int i = 0; i < shapesFlying.size(); i++)
         {
-            shapes.get(i).draw(sb);
+            shapesFlying.get(i).draw(sb);
         }
     }
 
     private void disposeShapes()
     {
-        for (int i = 0; i < shapes.size(); i++)
+        for (int i = 0; i < shapesFlying.size(); i++)
         {
-            shapes.get(i).dispose();
+            if(shapesFlying.get(i).isDestroyed()) {
+                slinging = false;
+                shapesFlying.get(i).dispose();
+                shapesFlying.get(i).removeFromGame(shapesFlying, stage);
+            }
         }
+    }
+
+    private boolean mayThrow()
+    {
+        //Random rand = new Random();
+
+        if((int)timer % 2 == 0) {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    private void throwShape()
+    {
+        Shape s = factory.getRandomShape(world);
+        s.addToGame(shapesFlying, stage);
+
+        s.sling();
+
+        slinging = true;
+
+        if(MyColorNinja.DEBUG) {
+            System.out.print("shapesFlying size: ");
+            System.out.println(shapesFlying.size());
+        }
+
     }
 
     @Override
@@ -138,7 +179,12 @@ public class GameState extends com.color.ninja.states.State {
 
         timer = timer + dt;
 
+        if(mayThrow() && !slinging)
+            throwShape();
+
         updateShapes(dt);
+
+        disposeShapes();
     }
 
     @Override
