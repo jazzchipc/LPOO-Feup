@@ -1,6 +1,7 @@
 package com.color.ninja.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -104,8 +105,8 @@ public class GameState extends com.color.ninja.states.State {
         this.lives = NUM_LIVES;
 
         this.scoreCounter = new IntegerCounter(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
-        this.timeCounter  = new IntegerCounter(5 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10);
-        this.livesCounter = new IntegerCounter(5 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
+        this.timeCounter  = new IntegerCounter(9 * Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
+        this.livesCounter = new IntegerCounter(17 * Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10);
         this.livesCounter.setValue(lives);
 
         //Adding actors to scene

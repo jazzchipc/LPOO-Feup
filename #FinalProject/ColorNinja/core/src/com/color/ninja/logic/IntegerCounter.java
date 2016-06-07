@@ -1,6 +1,7 @@
 package com.color.ninja.logic;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.color.ninja.ui.TextLabel;
 
