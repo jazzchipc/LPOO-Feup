@@ -112,6 +112,8 @@ public class GameState extends com.color.ninja.states.State {
 
         if(MyColorNinja.DEBUG)
             System.out.println("Hey!");
+
+
     }
 
     private void setStageListeners()
@@ -208,6 +210,9 @@ public class GameState extends com.color.ninja.states.State {
         livesCounter.update();
 
         disposeShapes();
+
+        if(livesCounter.equals(0))
+            gsm.set(new EndGameState(gsm));
     }
 
     @Override
