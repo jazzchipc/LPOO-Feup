@@ -3,6 +3,7 @@ package com.color.ninja.sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -64,6 +65,8 @@ public class Shape {
 
     public Shape(World world, String color, String shapeType) {
         // Setting parameters
+        this.cam = new OrthographicCamera();
+
         this.world = world;
         this.color = color;
         this.shapeType = shapeType;
