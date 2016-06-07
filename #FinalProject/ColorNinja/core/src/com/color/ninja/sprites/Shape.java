@@ -58,6 +58,8 @@ public class Shape {
     private Sound whoosh;
     private Sound blop;
 
+    float difMult;
+
     public Shape(){}
 
     public Shape(World world, String color, String shapeType) {
@@ -72,11 +74,23 @@ public class Shape {
         whoosh = Gdx.audio.newSound(Gdx.files.internal("sound/effects/whoosh.mp3"));
         blop = Gdx.audio.newSound(Gdx.files.internal("sound/effects/blop.mp3"));
 
+        defineDifMult();
         createSprite();
         createButton();
         setListener();
         createBody();
         createAnimation();
+    }
+
+    private void defineDifMult()
+    {
+        switch(MyColorNinja.getOurInstance().difficulty)
+        {
+            case 0: difMult = 0.75f; break;
+            case 1: difMult = 1; break;
+            case 2: difMult = 1.25f; break;
+            default: difMult = 1;
+        }
     }
 
     private void createSprite()
@@ -91,7 +105,7 @@ public class Shape {
 
         texture = new Texture(textureUrl);
         sprite = new Sprite(texture);
-        sprite.setSize(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() / 8);
+        sprite.setSize(Gdx.graphics.getWidth() / 5 / difMult, Gdx.graphics.getHeight() / 8 / difMult);
         sprite.setOriginCenter();
 
         randomPlacing();
@@ -202,6 +216,7 @@ public class Shape {
 
     private void setVelocities()
     {
+
         Random rand = new Random();
 
         //h = vy^2 / 2g
@@ -218,7 +233,7 @@ public class Shape {
 
         float vx = rand.nextFloat() * (maxVelX-minVelX) + (minVelX);
 
-        linearVelocity = new Vector2(vx, vy);
+        linearVelocity = new Vector2(vx * difMult, vy * difMult);
         angularVelocity = rand.nextFloat() * 4*Math.PI;
 
         body.setLinearVelocity(vx, vy);
