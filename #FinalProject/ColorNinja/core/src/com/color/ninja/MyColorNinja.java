@@ -25,7 +25,7 @@ public class MyColorNinja extends ApplicationAdapter {
 	}
 
 	// DEBUG
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	// Window size in pixels
 	public static final int WIDTH = 720;
