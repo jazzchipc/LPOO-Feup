@@ -117,6 +117,7 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         easyCheckBox.setX(Gdx.graphics.getWidth() / 4 );
         easyCheckBox.setY(3*Gdx.graphics.getHeight() /18);
 
+
         mediumCheckBox.setX(Gdx.graphics.getWidth() / 4 );
         mediumCheckBox.setY(2*Gdx.graphics.getHeight() /18);
 
