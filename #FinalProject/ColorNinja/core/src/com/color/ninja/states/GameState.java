@@ -53,8 +53,8 @@ public class GameState extends com.color.ninja.states.State {
     private float minThrowInterval;
     private float maxThrowInterval;
 
-    // Game timer and score
-    private int score;
+    // GameInstance timer and score
+    private int score;  // in shapes popped
     private float timer;    // in seconds
 
 

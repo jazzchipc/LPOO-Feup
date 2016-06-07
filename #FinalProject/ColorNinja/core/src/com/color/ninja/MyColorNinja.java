@@ -36,6 +36,9 @@ public class MyColorNinja extends ApplicationAdapter {
     public static final float PIXELS_PER_METER = 100f;  // scaling physics world
 	public static final float GRAVITY = 9.8f;
 
+	// Game properties
+	public static final int GAME_DURATION = 60; // in seconds
+
 	private GameStateManager gsm;
 	private SpriteBatch batch;
 

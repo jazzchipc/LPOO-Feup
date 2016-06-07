@@ -179,7 +179,7 @@ public class Shape {
 
         //h = vy^2 / 2g
         float maxVelY = 2.5f * (float)Math.sqrt(Gdx.graphics.getHeight() / MyColorNinja.PIXELS_PER_METER / 2 * MyColorNinja.GRAVITY); // 3 times velocity needed to reach maximum height
-        float minVelY = maxVelY / 3;
+        float minVelY = maxVelY / 2;
 
         //int randomNum = rand.nextInt((max - min) + 1) + min;
         //float randomFloat = rand.nextFloat() * (max - min) + min;

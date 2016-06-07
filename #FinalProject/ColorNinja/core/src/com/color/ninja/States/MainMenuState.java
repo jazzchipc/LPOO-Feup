@@ -45,6 +45,7 @@ public class MainMenuState extends State {
     public MainMenuState(GameStateManager gsm) {
         super(gsm);
 
+
         background = new Texture("background.png");
 
         title = new Sprite(new Texture("title1.png"));
@@ -155,6 +156,7 @@ public class MainMenuState extends State {
         newGameBtn.draw(sb, 1);
         settingsBtn.draw(sb, 1);
         scoresBtn.draw(sb, 1);
+
 
         sb.end();   // Close batch.
 
