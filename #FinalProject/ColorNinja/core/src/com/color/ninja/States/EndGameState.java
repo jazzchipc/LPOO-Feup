@@ -115,7 +115,7 @@ public class EndGameState extends State {
         if(newHighscore)
         {
             TextLabel highscore = new TextLabel("NEW\nHIGHSCORE!");
-            highscore.setPosition(Gdx.graphics.getWidth() / 2 - highscore.getWidth() / 3, 6 * Gdx.graphics.getHeight()/10);
+            highscore.setPosition(Gdx.graphics.getWidth() / 3 - highscore.getWidth() / 2, 6 * Gdx.graphics.getHeight()/10);
             highscore.draw(sb);
         }
 
