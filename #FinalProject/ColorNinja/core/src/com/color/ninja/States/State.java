@@ -27,7 +27,7 @@ public abstract class State {
     /**
      * Handles the input given by the user, utilizing LibGDX functions.
      */
-    protected abstract void handleInput();
+    public abstract void handleInput();
 
     /**
      * Makes all the changes necessary to the state, according a time period.
