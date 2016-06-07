@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-
 /**
  * State of game end.
  */
@@ -45,17 +44,17 @@ public class EndGameState extends State {
 
         kungfu = Gdx.audio.newSound(Gdx.files.internal("sound/effects/kungfu.mp3"));
 
-        title.setSize(8 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 5);
+        title.setSize(8 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 3);
         title.setCenterX(Gdx.graphics.getWidth() / 2);
-        title.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 9 - title.getHeight());
+        title.setY(Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 25 - title.getHeight());
 
         restartBtn.setSize(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8);
         restartBtn.setX(Gdx.graphics.getWidth() / 2 - restartBtn.getWidth() / 2);
-        restartBtn.setY(3* Gdx.graphics.getHeight() / 10 );
+        restartBtn.setY(23*Gdx.graphics.getHeight() / 100 );
 
         exitBtn.setSize(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 8);
         exitBtn.setX(Gdx.graphics.getWidth() / 2 - exitBtn.getWidth() / 2 );
-        exitBtn.setY(2* Gdx.graphics.getHeight() / 10);
+        exitBtn.setY( Gdx.graphics.getHeight() / 15);
 
         Gdx.input.setInputProcessor(stage);
 
@@ -106,7 +105,7 @@ public class EndGameState extends State {
         restartBtn.draw(sb,1);
         exitBtn.draw(sb, 1);
 
-        sb.end();   // Close batch.
+        sb.end();
 
 
     }
