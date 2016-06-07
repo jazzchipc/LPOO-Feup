@@ -9,8 +9,7 @@ public class GameInstance{
     private static GameInstance ourInstance = new GameInstance();
 
     /**
-     *
-     * @return The Previously Created GameInstance
+     * @return The GameInstance singleton.
      */
     public static GameInstance getInstance() {
         return ourInstance;
