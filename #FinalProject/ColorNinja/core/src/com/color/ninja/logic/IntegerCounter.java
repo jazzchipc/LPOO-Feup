@@ -24,29 +24,51 @@ public class IntegerCounter {
         label = new TextLabel(Integer.toString(value),posX, posY);
     }
 
-
+    /**
+     * Gives value a new value.
+     * @param value New Integer
+     */
     public void setValue(int value) { this.value = value; }
 
+    /**
+     * Increases value by inc.
+     * @param inc
+     */
     public void increaseValue(int inc)
     {
         value = value + inc;
     }
 
+    /**
+     * Decreases value by dec.
+     * @param dec
+     */
     public void decreaseValue(int dec)
     {
         value = value - dec;
     }
 
+    /**
+     * Updates the label by converting value to a string.
+     */
     public void update()
     {
         label.setText(Integer.toString(value));
     }
 
+    /**
+     * Draws the label in the SpriteBatch.
+     * @param sb
+     */
     public void draw(SpriteBatch sb)
     {
         label.draw(sb);
     }
 
+    /**
+     * Returns the value, for comparison purposes.
+     * @return value
+     */
     public int getValue(){
         return value;
     }

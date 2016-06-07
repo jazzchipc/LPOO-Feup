@@ -19,11 +19,17 @@ public class Highscores {
     private Score topMedium;
     private Score topEasy;
 
+    /**
+     * Default Constructor
+     */
     public Highscores()
     {
         setScores();
     }
 
+    /**
+     * Sets the scores for each difficulty
+     */
     private void setScores()
     {
         topHard = new Score(prefs.getInteger("hard", 0), "hard");
@@ -31,6 +37,9 @@ public class Highscores {
         topEasy = new Score(prefs.getInteger("easy", 0), "easy");
     }
 
+    /**
+     * Writes the top scores in each difficulty to Preferences object created
+     */
     private void writeScoresToPrefs()
     {
         prefs.putInteger(topHard.getDifficulty(), topHard.getScore());
@@ -40,6 +49,11 @@ public class Highscores {
         prefs.flush();
     }
 
+    /**
+     * Checks if the obtained score is to be added to the Highscores.
+     * @param score New Highscore.
+     * @return If the given score is the highest in it's difficulty returns true, otherwise returns false.
+     */
     public boolean newScore(Score score)
     {
         boolean ret = false;
@@ -72,6 +86,9 @@ public class Highscores {
         return ret;
     }
 
+    /**
+     * Prints the Highest Score in each difficulty
+     */
     public void showScores()
     {
         System.out.print(topHard.getDifficulty());
@@ -90,14 +107,26 @@ public class Highscores {
         System.out.print("\n");
     }
 
+    /**
+     *
+     * @return The highest score in hard difficulty.
+     */
     public Score getTopHard() {
         return topHard;
     }
 
+    /**
+     *
+     * @return The highest score in medium difficulty.
+     */
     public Score getTopMedium() {
         return topMedium;
     }
 
+    /**
+     *
+     * @return The highest score in easy difficulty.
+     */
     public Score getTopEasy() {
         return topEasy;
     }

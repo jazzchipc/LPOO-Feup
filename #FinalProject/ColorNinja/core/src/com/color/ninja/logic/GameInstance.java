@@ -8,6 +8,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class GameInstance{
     private static GameInstance ourInstance = new GameInstance();
 
+    /**
+     *
+     * @return The Previously Created GameInstance
+     */
     public static GameInstance getInstance() {
         return ourInstance;
     }
@@ -16,7 +20,9 @@ public class GameInstance{
     private IntegerCounter scoreCounter;
     private IntegerCounter timerCounter;
 
-
+    /**
+     * Default constructor
+     */
     private GameInstance() {
 
     }
