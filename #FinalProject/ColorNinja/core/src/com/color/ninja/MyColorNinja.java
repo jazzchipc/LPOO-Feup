@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.color.ninja.logic.Highscores;
+import com.color.ninja.logic.Score;
 import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
 import com.badlogic.gdx.audio.Music;
@@ -53,6 +54,8 @@ public class MyColorNinja extends ApplicationAdapter {
 	private Array<Music> music;
 
 	private Highscores highscores;
+
+	private Score score;
 
 	@Override
 	public void create () {

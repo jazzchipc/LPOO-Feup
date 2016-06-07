@@ -114,7 +114,7 @@ public class MainMenuState extends State {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 kungfu.play(SettingsMenuState.soundsVol);
-                gsm.set(new SettingsMenuState(gsm));
+                gsm.push(new SettingsMenuState(gsm));
              }
         });
 
@@ -128,9 +128,8 @@ public class MainMenuState extends State {
     }
 
     @Override
-    protected void handleInput() {
-
-
+    public void handleInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

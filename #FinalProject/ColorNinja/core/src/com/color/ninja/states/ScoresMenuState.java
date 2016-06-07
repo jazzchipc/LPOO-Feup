@@ -79,9 +79,8 @@ public class ScoresMenuState extends State {
     }
 
     @Override
-    protected void handleInput() {
-
-
+    public void handleInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     /**

@@ -157,7 +157,7 @@ public class SettingsMenuState extends com.color.ninja.states.State {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
                         kungfu.play(soundsVol);
-                        gsm.set(new MainMenuState(gsm));
+                        gsm.pop();
                     }
         });
 
@@ -223,9 +223,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
 
     @Override
-    protected void handleInput() {
-
-
+    public void handleInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     /**

@@ -121,7 +121,7 @@ public class GameState extends com.color.ninja.states.State {
         pauseBtn.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                gsm.set(new PauseMenuState(gsm));
+                gsm.push(new PauseMenuState(gsm));
             }
         });
 
@@ -188,8 +188,8 @@ public class GameState extends com.color.ninja.states.State {
     }
 
     @Override
-    protected void handleInput() {
-
+    public void handleInput() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -233,7 +233,7 @@ public class GameState extends com.color.ninja.states.State {
         drawShapes(sb);
 
         scoreCounter.draw(sb);
-        timeCounter.draw(sb);
+        //timeCounter.draw(sb);
         livesCounter.draw(sb);
 
         sb.end();
