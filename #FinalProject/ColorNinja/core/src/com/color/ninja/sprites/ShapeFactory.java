@@ -13,6 +13,9 @@ public class ShapeFactory implements AbstractFactory {
     private ArrayList<String> shapes;
     private ArrayList<String> colors;
 
+    /**
+     * Default Constructor for the ShapeFactory
+     */
     public ShapeFactory() {
         shapes = new ArrayList<String>();
         shapes.add("square");
@@ -35,6 +38,13 @@ public class ShapeFactory implements AbstractFactory {
         return false;
     }
 
+    /**
+     *
+     * @param world
+     * @param shapeType Type of the shape
+     * @param color Color of the shape
+     * @return
+     */
     public Shape getShape(World world, String shapeType, String color) {
         if(shapeType == null)
             return null;
@@ -48,6 +58,11 @@ public class ShapeFactory implements AbstractFactory {
         return new Shape(world, color, shapeType);
     }
 
+    /**
+     * Generates a random type and color of a shape.
+     * @param world The world in which the shape will be.
+     * @return The random shape that was generated.
+     */
     @Override
     public Shape getRandomShape(World world) {
 

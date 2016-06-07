@@ -60,8 +60,17 @@ public class Shape {
 
     float difMult;
 
+    /**
+     * Default constructor with no arguments
+     */
     public Shape(){}
 
+    /**
+     * Default Constructor
+     * @param world World in which the shape is in.
+     * @param color Color of the Shape
+     * @param shapeType Type of the Shape
+     */
     public Shape(World world, String color, String shapeType) {
         // Setting parameters
         this.world = world;
@@ -93,6 +102,9 @@ public class Shape {
         }
     }
 
+    /**
+     *
+     */
     private void createSprite()
     {
         StringBuilder strBld = new StringBuilder();
@@ -111,12 +123,18 @@ public class Shape {
         randomPlacing();
     }
 
+    /**
+     * Creates the button to make the shape clickable
+     */
     private void createButton()
     {
         btn = new Button(new SpriteDrawable(sprite));
         sprite.setOrigin(sprite.getOriginX(), sprite.getOriginY());
     }
 
+    /**
+     * Sets the listener for the shape's button
+     */
     private void setListener()
     {
         if(Gdx.input.isTouched())
@@ -159,6 +177,9 @@ public class Shape {
         });*/
     }
 
+    /**
+     * Creates the animation for when the shape is destroyed
+     */
     private void createAnimation()
     {
         StringBuilder strBld = new StringBuilder();
@@ -180,6 +201,9 @@ public class Shape {
         tExplosion = 0;
     }
 
+    /**
+     * The shape explodes. The animation is played and the shape disappears.
+     */
     private void explode()
     {
         this.exploded = true;
@@ -240,6 +264,9 @@ public class Shape {
         body.setAngularVelocity((float) angularVelocity);
     }
 
+    /**
+     * Puts the shape below the screen on a random x coordinate
+     */
     private void randomPlacing()
     {
         // Put Shape below the screen on a random x coordinate
@@ -270,6 +297,10 @@ public class Shape {
         whoosh.play(SettingsMenuState.soundsVol);
     }
 
+    /**
+     * Checks if a shape is destroyed.
+     * @return true if yes, false otherwise.
+     */
     private boolean checkIfDestroyed()
     {
         if(sprite.getY() + (sprite.getHeight() / MyColorNinja.PIXELS_PER_METER) < -sprite.getHeight() * 2)   // if it way down the screen
