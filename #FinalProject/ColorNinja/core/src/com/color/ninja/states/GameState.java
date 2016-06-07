@@ -54,11 +54,14 @@ public class GameState extends com.color.ninja.states.State {
     // GameInstance timer and score
     private int score;  // in shapes popped
     private float timer;    // in seconds
+    private int lives;
 
     private IntegerCounter scoreCounter;
     private IntegerCounter timeCounter;
+    private IntegerCounter livesCounter;
 
     private static int GAME_TIME = 60;
+    private static int NUM_LIVES = 3;
 
 
 
@@ -96,9 +99,12 @@ public class GameState extends com.color.ninja.states.State {
         // Score and timer
         this.score = 0;
         this.timer = 0;
+        this.lives = NUM_LIVES;
 
         this.scoreCounter = new IntegerCounter(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
-        this.timeCounter  = new IntegerCounter(5 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
+        this.timeCounter  = new IntegerCounter(5 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10);
+        this.livesCounter = new IntegerCounter(5 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
+        this.livesCounter.setValue(lives);
 
         //Adding actors to scene
         setStageListeners();
@@ -142,6 +148,8 @@ public class GameState extends com.color.ninja.states.State {
             if(shapesFlying.get(i).isDestroyed()) {
                 if(shapesFlying.get(i).isExploded())
                     scoreCounter.increaseValue(1);
+                else
+                    livesCounter.decreaseValue(1);
 
                 slinging = false;
                 shapesFlying.get(i).dispose();
@@ -197,6 +205,7 @@ public class GameState extends com.color.ninja.states.State {
 
         scoreCounter.update();
         timeCounter.update();
+        livesCounter.update();
 
         disposeShapes();
     }
@@ -218,6 +227,7 @@ public class GameState extends com.color.ninja.states.State {
 
         scoreCounter.draw(sb);
         timeCounter.draw(sb);
+        livesCounter.draw(sb);
 
         sb.end();
 
