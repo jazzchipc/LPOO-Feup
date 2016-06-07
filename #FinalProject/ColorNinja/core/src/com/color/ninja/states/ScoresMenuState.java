@@ -70,20 +70,20 @@ public class ScoresMenuState extends State {
         hardScoreText = new TextLabel("Hard");
         hardScore = new TextLabel(Integer.toString(MyColorNinja.getOurInstance().highscores.getTopHard().getScore()));
 
-        hardScoreText.setPosition(Gdx.graphics.getWidth() / 2 - hardScoreText.getWidth() , 4 * Gdx.graphics.getHeight() / 6);
-        hardScore.setPosition(Gdx.graphics.getWidth() / 2 - hardScore.getWidth(), hardScoreText.getPosY() - Gdx.graphics.getHeight()/10);
+        hardScoreText.setPosition(Gdx.graphics.getWidth() / 2 - hardScoreText.getWidth() / 2, 4 * Gdx.graphics.getHeight() / 6);
+        hardScore.setPosition(Gdx.graphics.getWidth() / 2 - hardScore.getWidth() / 2, hardScoreText.getPosY() - Gdx.graphics.getHeight()/10);
 
         mediumScoreText = new TextLabel("Medium");
         mediumScore = new TextLabel(Integer.toString(MyColorNinja.getOurInstance().highscores.getTopMedium().getScore()));
 
-        mediumScoreText.setPosition(Gdx.graphics.getWidth() / 2 -  mediumScoreText.getWidth(), hardScore.getPosY() - Gdx.graphics.getHeight()/8);
-        mediumScore.setPosition(Gdx.graphics.getWidth() / 2 -  mediumScore.getWidth(), mediumScoreText.getPosY() - Gdx.graphics.getHeight()/10);
+        mediumScoreText.setPosition(Gdx.graphics.getWidth() / 2 -  mediumScoreText.getWidth() / 2, hardScore.getPosY() - Gdx.graphics.getHeight()/8);
+        mediumScore.setPosition(Gdx.graphics.getWidth() / 2 -  mediumScore.getWidth() / 2, mediumScoreText.getPosY() - Gdx.graphics.getHeight()/10);
 
         easyScoreText = new TextLabel("Easy");
         easyScore = new TextLabel(Integer.toString(MyColorNinja.getOurInstance().highscores.getTopEasy().getScore()));
 
-        easyScoreText.setPosition(Gdx.graphics.getWidth() / 2 -  easyScoreText.getWidth() ,mediumScore.getPosY() - Gdx.graphics.getHeight()/8);
-        easyScore.setPosition(Gdx.graphics.getWidth() / 2 -  easyScore.getWidth(), easyScoreText.getPosY() - Gdx.graphics.getHeight()/10);
+        easyScoreText.setPosition(Gdx.graphics.getWidth() / 2 -  easyScoreText.getWidth() / 2,mediumScore.getPosY() - Gdx.graphics.getHeight()/8);
+        easyScore.setPosition(Gdx.graphics.getWidth() / 2 -  easyScore.getWidth() / 2, easyScoreText.getPosY() - Gdx.graphics.getHeight()/10);
 
 
         // Setting up stage and actors

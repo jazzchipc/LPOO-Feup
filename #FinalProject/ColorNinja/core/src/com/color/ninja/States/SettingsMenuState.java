@@ -76,9 +76,9 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         musicVolSld.setValue(0.5f);
 
         easyCheckBox = new CheckBox("easy",skin);
-        easyCheckBox.setScale(20);
         mediumCheckBox = new CheckBox("medium",skin);
         hardCheckBox = new CheckBox("hard",skin);
+
 
         kungfu = Gdx.audio.newSound(Gdx.files.internal("sound/effects/kungfu.mp3"));
 
@@ -101,6 +101,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         soundsVolSld.setSize(5*Gdx.graphics.getWidth() /6 - soundsVolSld.getWidth()/2, Gdx.graphics.getHeight() /5);
         soundsVolSld.setX(Gdx.graphics.getWidth() / 2 - soundsVolSld.getWidth() / 2);
         soundsVolSld.setY(2 * Gdx.graphics.getHeight() /5);
+        soundsVolSld.getStyle().knob.setMinHeight(Gdx.graphics.getHeight() / 20);
+        soundsVolSld.getStyle().knob.setMinWidth(Gdx.graphics.getWidth() / 20);
 
         musicVolSprite.setSize(Gdx.graphics.getWidth() /2, Gdx.graphics.getHeight() / 15);
         musicVolSprite.setX(Gdx.graphics.getWidth() / 2 - soundsVolSprite.getWidth()/2);
@@ -116,13 +118,19 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
         easyCheckBox.setX(Gdx.graphics.getWidth() / 4 );
         easyCheckBox.setY(3*Gdx.graphics.getHeight() /18);
+        easyCheckBox.getCells().get(0).size(Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() / 35);
+        easyCheckBox.getLabel().setFontScale(Gdx.graphics.getHeight() / 500, Gdx.graphics.getHeight() / 500);
 
 
         mediumCheckBox.setX(Gdx.graphics.getWidth() / 4 );
         mediumCheckBox.setY(2*Gdx.graphics.getHeight() /18);
+        mediumCheckBox.getCells().get(0).size(Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() / 35);
+        mediumCheckBox.getLabel().setFontScale(Gdx.graphics.getHeight() / 500, Gdx.graphics.getHeight() / 500);
 
         hardCheckBox.setX(Gdx.graphics.getWidth() / 4 );
         hardCheckBox.setY(Gdx.graphics.getHeight() /18);
+        hardCheckBox.getCells().get(0).size(Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() / 35);
+        hardCheckBox.getLabel().setFontScale(Gdx.graphics.getHeight() / 500, Gdx.graphics.getHeight() / 500);
 
         Gdx.input.setInputProcessor(stage);
 
