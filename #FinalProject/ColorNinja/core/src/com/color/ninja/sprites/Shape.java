@@ -1,23 +1,20 @@
 package com.color.ninja.sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
 import com.color.ninja.states.SettingsMenuState;
@@ -29,6 +26,7 @@ import java.util.Random;
  * General shape class
  */
 public class Shape {
+    Camera cam;
 
     private static float ANIMATION_TIME = 0.5f;
     private static int NUM_OF_SPRITES = 7;
@@ -102,12 +100,41 @@ public class Shape {
     private void createButton()
     {
         btn = new Button(new SpriteDrawable(sprite));
-        btn.setOrigin(sprite.getOriginX(), sprite.getOriginY());
+        sprite.setOrigin(sprite.getOriginX(), sprite.getOriginY());
     }
 
     private void setListener()
     {
-        btn.addListener(new ClickListener(){
+        if(Gdx.input.isTouched())
+        {
+
+            int x = Gdx.input.getX();
+            int y = Gdx.input.getY();
+
+            Vector3 input = new Vector3(x, y, 0);
+            cam.unproject(input);
+
+            if(MyColorNinja.DEBUG) {
+                System.out.println("Clicked on screen.");
+
+                System.out.println(x);
+                System.out.println(y);
+
+                System.out.println(input.x);
+                System.out.println(input.y);
+            }
+
+            if(sprite.getBoundingRectangle().contains(x, Gdx.graphics.getHeight() - y))
+            {
+                if(MyColorNinja.DEBUG)
+                    System.out.println("Clicked.");
+
+                explode();
+                blop.play(SettingsMenuState.soundsVol);
+            }
+
+        }
+        /*sprite.addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if(MyColorNinja.DEBUG)
@@ -115,7 +142,7 @@ public class Shape {
                 explode();
                 blop.play(SettingsMenuState.soundsVol);
             }
-        });
+        });*/
     }
 
     private void createAnimation()
@@ -230,7 +257,7 @@ public class Shape {
 
     private boolean checkIfDestroyed()
     {
-        if(btn.getY() + (btn.getHeight() / MyColorNinja.PIXELS_PER_METER) < -btn.getHeight() * 2)   // if it way down the screen
+        if(sprite.getY() + (sprite.getHeight() / MyColorNinja.PIXELS_PER_METER) < -sprite.getHeight() * 2)   // if it way down the screen
             return true;
 
         if(tExplosion >= ANIMATION_TIME)    // if it has already exploded
@@ -249,10 +276,11 @@ public class Shape {
         array.add(this);
     }
 
-    public void addToGame(ArrayList<Shape> array, Stage stage)
+    public void addToGame(ArrayList<Shape> array, Stage stage, Camera cam)
     {
         addToArray(array);
         addToStage(stage);
+        this.cam = cam;
     }
 
     private void removeFromStage(Stage stage) { btn.remove(); }
@@ -269,9 +297,11 @@ public class Shape {
     {
         // Instead of the sprite, the button is the one that is moved
 
+        setListener();
+
         // Compensating for position differences
         if(!exploded)
-        btn.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
+        sprite.setPosition((body.getPosition().x * MyColorNinja.PIXELS_PER_METER) - sprite.getWidth() / 2,
                 (body.getPosition().y * MyColorNinja.PIXELS_PER_METER) - sprite.getHeight() / 2);
 
         else {
@@ -286,17 +316,17 @@ public class Shape {
 
         if (MyColorNinja.DEBUG) {
             System.out.println(destroyed);
-            System.out.println(btn.getY());
+            System.out.println(sprite.getY());
         }
     }
     public void draw(SpriteBatch batch)
     {
         // This draws the sprite in current buttons position. Since Actors can't rotate, this was the easiest way to implement Shape as a Button.
         if(!exploded)
-            batch.draw(sprite, btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
+            batch.draw(sprite, sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(),(float)Math.toDegrees(body.getAngle()));
 
         else if(!destroyed)
-            batch.draw(shapeExplosion.getFrame(),btn.getX(), btn.getY(), btn.getOriginX(), btn.getOriginY(), btn.getWidth(), btn.getHeight(), btn.getScaleX(), btn.getScaleY(),(float)Math.toDegrees(body.getAngle()));
+            batch.draw(shapeExplosion.getFrame(), sprite.getX(), sprite.getY(), sprite.getOriginX(), sprite.getOriginY(), sprite.getWidth(), sprite.getHeight(), sprite.getScaleX(), sprite.getScaleY(),(float)Math.toDegrees(body.getAngle()));
     }
 
     public void dispose()

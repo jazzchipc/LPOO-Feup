@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -104,9 +105,9 @@ public class GameState extends com.color.ninja.states.State {
         this.timer = 0;
         this.lives = NUM_LIVES;
 
-        this.scoreCounter = new IntegerCounter(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
-        this.timeCounter  = new IntegerCounter(9 * Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
-        this.livesCounter = new IntegerCounter(17 * Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/10);
+        this.scoreCounter = new IntegerCounter(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/40);
+        this.timeCounter  = new IntegerCounter(9 * Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/40);
+        this.livesCounter = new IntegerCounter(10 * Gdx.graphics.getWidth() / 20, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/40);
         this.livesCounter.setValue(lives);
 
         //Adding actors to scene
@@ -187,7 +188,7 @@ public class GameState extends com.color.ninja.states.State {
     private void throwShape()
     {
         Shape s = factory.getRandomShape(world);
-        s.addToGame(shapesFlying, stage);
+        s.addToGame(shapesFlying, stage, cam);
 
         s.sling();
 
