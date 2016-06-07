@@ -52,10 +52,12 @@ public class MyColorNinja extends ApplicationAdapter {
 
 	private Array<Music> music;
 
-	private Highscores highscores = new Highscores();
+	private Highscores highscores;
 
 	@Override
 	public void create () {
+		highscores = new Highscores();
+
 		batch = new SpriteBatch();
 
 		Gdx.gl.glClearColor(1, 1, 1, 1);	// the starting background color (R,G,B, alpha)

@@ -245,7 +245,7 @@ public class GameState extends com.color.ninja.states.State {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
         disposeShapes();
         world.dispose();
     }

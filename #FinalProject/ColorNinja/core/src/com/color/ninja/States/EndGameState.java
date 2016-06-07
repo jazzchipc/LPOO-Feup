@@ -30,6 +30,9 @@ public class EndGameState extends State {
 
     protected EndGameState(GameStateManager gsm) {
         super(gsm);
+
+        stage = new Stage();
+
         background = new Texture("background.png");
 
         title = new Sprite(new Texture("game over1.png"));
