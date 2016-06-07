@@ -67,7 +67,7 @@ public class Shape {
     public Shape(){}
 
     /**
-     * Default Constructor
+     * Shape constructor.
      * @param world World in which the shape is in.
      * @param color Color of the Shape
      * @param shapeType Type of the Shape
@@ -94,6 +94,9 @@ public class Shape {
         createAnimation();
     }
 
+    /**
+     * Defines a float which will influence sprite's velocity and size, according to the game's difficulty.
+     */
     private void defineDifMult()
     {
         switch(MyColorNinja.getOurInstance().difficulty)
@@ -106,7 +109,7 @@ public class Shape {
     }
 
     /**
-     *
+     * Creates and sets the Shape's sprite, according to its parameters.
      */
     private void createSprite()
     {

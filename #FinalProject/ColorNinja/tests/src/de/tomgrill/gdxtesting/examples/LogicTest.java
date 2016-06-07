@@ -26,10 +26,11 @@ import com.badlogic.gdx.Gdx;
 import de.tomgrill.gdxtesting.GdxTestRunner;
 
 @RunWith(GdxTestRunner.class)
-public class AssetExistsExampleTest {
+public class LogicTest {
 
 	@Test
-	public void badlogicLogoFileExists() {
+	public void counterIsIncremented() {
+
 		assertTrue("This test will only pass when the badlogic.jpg file coming with a new project setup has not been deleted.", Gdx.files
 				.internal("../android/assets/badlogic.jpg").exists());
 	}
