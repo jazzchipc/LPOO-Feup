@@ -234,7 +234,7 @@ public class GameState extends com.color.ninja.states.State {
         drawShapes(sb);
 
         scoreCounter.draw(sb);
-        timeCounter.draw(sb);
+        //timeCounter.draw(sb);
         livesCounter.draw(sb);
 
         sb.end();
