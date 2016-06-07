@@ -1,11 +1,9 @@
 package com.color.ninja.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.math.Vector2;
@@ -15,13 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
+import com.color.ninja.logic.IntegerCounter;
 import com.color.ninja.physics.MyBox;
 import com.color.ninja.sprites.*;
 import com.color.ninja.sprites.Shape;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
-import java.util.Random;
 
 /**
  * Class representing the game.
@@ -56,6 +54,11 @@ public class GameState extends com.color.ninja.states.State {
     // GameInstance timer and score
     private int score;  // in shapes popped
     private float timer;    // in seconds
+
+    private IntegerCounter scoreCounter;
+    private IntegerCounter timeCounter;
+
+    private static int GAME_TIME = 60;
 
 
 
@@ -93,6 +96,9 @@ public class GameState extends com.color.ninja.states.State {
         // Score and timer
         this.score = 0;
         this.timer = 0;
+
+        this.scoreCounter = new IntegerCounter(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
+        this.timeCounter  = new IntegerCounter(5 * Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() - Gdx.graphics.getHeight()/30);
 
         //Adding actors to scene
         setStageListeners();
@@ -134,6 +140,9 @@ public class GameState extends com.color.ninja.states.State {
         for (int i = 0; i < shapesFlying.size(); i++)
         {
             if(shapesFlying.get(i).isDestroyed()) {
+                if(shapesFlying.get(i).isExploded())
+                    scoreCounter.increaseValue(1);
+
                 slinging = false;
                 shapesFlying.get(i).dispose();
                 shapesFlying.get(i).removeFromGame(shapesFlying, stage);
@@ -179,10 +188,15 @@ public class GameState extends com.color.ninja.states.State {
 
         timer = timer + dt;
 
+        timeCounter.setValue(GAME_TIME - Math.round(timer));
+
         if(mayThrow() && !slinging)
             throwShape();
 
         updateShapes(dt);
+
+        scoreCounter.update();
+        timeCounter.update();
 
         disposeShapes();
     }
@@ -201,6 +215,9 @@ public class GameState extends com.color.ninja.states.State {
         pauseBtn.draw(sb,1);
 
         drawShapes(sb);
+
+        scoreCounter.draw(sb);
+        timeCounter.draw(sb);
 
         sb.end();
 

@@ -23,12 +23,15 @@ public class IntegerCounter {
         label = new TextLabel(Integer.toString(value),posX, posY);
     }
 
-    public void increaseScore(int inc)
+
+    public void setValue(int value) { this.value = value; }
+
+    public void increaseValue(int inc)
     {
         value = value + inc;
     }
 
-    public void decreaseScore(int dec)
+    public void decreaseValue(int dec)
     {
         value = value - dec;
     }

@@ -312,5 +312,11 @@ public class Shape {
         return destroyed;
     }
 
+    public boolean isExploded() {
+        return exploded;
+    }
+
+
+
 
 }
