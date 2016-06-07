@@ -46,4 +46,8 @@ public class IntegerCounter {
         label.draw(sb);
     }
 
+    public int getValue(){
+        return value;
+    }
+
 }

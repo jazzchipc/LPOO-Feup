@@ -211,8 +211,10 @@ public class GameState extends com.color.ninja.states.State {
 
         disposeShapes();
 
-        if(livesCounter.equals(0))
+        if(livesCounter.getValue() == 0)
             gsm.set(new EndGameState(gsm));
+
+
     }
 
     @Override
