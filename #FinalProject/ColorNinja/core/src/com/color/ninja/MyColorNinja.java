@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.color.ninja.logic.Highscores;
 import com.color.ninja.states.GameStateManager;
 import com.color.ninja.states.MainMenuState;
 import com.badlogic.gdx.audio.Music;
@@ -36,6 +37,9 @@ public class MyColorNinja extends ApplicationAdapter {
     public static final float PIXELS_PER_METER = 100f;  // scaling physics world
 	public static final float GRAVITY = 9.8f;
 
+	// Game properties
+	public static final int GAME_DURATION = 60; // in seconds
+
 	private GameStateManager gsm;
 	private SpriteBatch batch;
 
@@ -47,6 +51,8 @@ public class MyColorNinja extends ApplicationAdapter {
 	private Music music6;
 
 	private Array<Music> music;
+
+	private Highscores highscores = new Highscores();
 
 	@Override
 	public void create () {
