@@ -16,6 +16,19 @@ public class TextLabel {
     private int posX;
     private int posY;
 
+    private float fontWidth = Gdx.graphics.getWidth() / 400;
+    private float fontHeight = Gdx.graphics.getHeight() / 600;
+
+    public TextLabel(String s)
+    {
+        font = new BitmapFont(Gdx.files.internal("fonts/DomoAregato.fnt"));
+        text = s;
+
+        this.posX = 0;
+        this.posY = 0;
+
+        font.getData().setScale(fontWidth, fontHeight);
+    }
 
     public TextLabel(String s, int posX, int posY)
     {
@@ -24,9 +37,38 @@ public class TextLabel {
         this.posX = posX;
         this.posY = posY;
 
-        font.getData().setScale(Gdx.graphics.getWidth() / 400, Gdx.graphics.getHeight() / 600);
+        font.getData().setScale(fontWidth, fontHeight);
+    }
+
+    public int getWidth()
+    {
+        System.out.println(font.getSpaceWidth());
+        System.out.println(this.text.length() * fontWidth * font.getSpaceWidth());
+        System.out.println(fontHeight);
+
+        return (int)(this.text.length() * fontWidth * 8 * font.getSpaceWidth());
 
     }
+
+    public int getHeight()
+    {
+        return (int)(fontHeight * (int)font.getCapHeight());
+    }
+
+    public void setPosition(int x, int y)
+    {
+        this.posX = x;
+        this.posY = y;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
 
     public void draw(SpriteBatch sb)
     {

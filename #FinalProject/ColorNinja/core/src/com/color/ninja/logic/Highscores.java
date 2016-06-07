@@ -40,27 +40,36 @@ public class Highscores {
         prefs.flush();
     }
 
-    public void newScore(Score score)
+    public boolean newScore(Score score)
     {
+        boolean ret = false;
         if(score.getDifficulty().equals("hard"))
         {
-            if(score.compareTo(topHard) > 0)
+            if(score.compareTo(topHard) > 0) {
+                ret = true;
                 topHard = score;
+            }
         }
         if(score.getDifficulty().equals("medium"))
         {
-            if(score.compareTo(topMedium) > 0)
+            if(score.compareTo(topMedium) > 0) {
+                ret = true;
                 topMedium = score;
+            }
         }
         if(score.getDifficulty().equals("easy"))
         {
-            if(score.compareTo(topEasy) > 0)
+            if(score.compareTo(topEasy) > 0) {
+                ret = true;
                 topEasy = score;
+            }
         }
 
         writeScoresToPrefs();
 
         setScores();
+
+        return ret;
     }
 
     public void showScores()

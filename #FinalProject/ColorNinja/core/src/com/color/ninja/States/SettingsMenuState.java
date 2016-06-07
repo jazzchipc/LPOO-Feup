@@ -76,8 +76,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
         musicVolSld.setValue(0.5f);
 
         easyCheckBox = new CheckBox("easy",skin);
+        easyCheckBox.setScale(20);
         mediumCheckBox = new CheckBox("medium",skin);
-        mediumCheckBox.setChecked(true);
         hardCheckBox = new CheckBox("hard",skin);
 
         kungfu = Gdx.audio.newSound(Gdx.files.internal("sound/effects/kungfu.mp3"));
@@ -137,6 +137,14 @@ public class SettingsMenuState extends com.color.ninja.states.State {
 
         if(MyColorNinja.DEBUG)
             System.out.println(soundsVol);
+
+        switch(MyColorNinja.getOurInstance().difficulty)
+        {
+            case 0: easyCheckBox.setChecked(true); break;
+            case 1: mediumCheckBox.setChecked(true); break;
+            case 2: hardCheckBox.setChecked(true); break;
+            default: mediumCheckBox.setChecked(true);
+        }
 
     }
 
@@ -234,6 +242,8 @@ public class SettingsMenuState extends com.color.ninja.states.State {
     @Override
     public void update(float dt) {
         handleInput();
+
+        MyColorNinja.getOurInstance().difficulty = difficulty;
     }
 
     /**

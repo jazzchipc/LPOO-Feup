@@ -10,6 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.color.ninja.MyColorNinja;
+import com.color.ninja.ui.TextLabel;
+
 /**
  * State of game end.
  */
@@ -26,6 +29,8 @@ public class EndGameState extends State {
     private Button exitBtn;
 
     private Sound kungfu;
+
+    private boolean newHighscore;
 
     protected EndGameState(GameStateManager gsm) {
         super(gsm);
@@ -60,6 +65,8 @@ public class EndGameState extends State {
 
         stage.addActor(restartBtn);
         stage.addActor(exitBtn);
+
+        newHighscore = MyColorNinja.getOurInstance().highscores.newScore(MyColorNinja.getOurInstance().score);
 
         setListeners();
     }
@@ -104,6 +111,13 @@ public class EndGameState extends State {
         // draws game options buttons
         restartBtn.draw(sb,1);
         exitBtn.draw(sb, 1);
+
+        if(newHighscore)
+        {
+            TextLabel highscore = new TextLabel("NEW\nHIGHSCORE!");
+            highscore.setPosition(Gdx.graphics.getWidth() / 2 - highscore.getWidth() / 3, 6 * Gdx.graphics.getHeight()/10);
+            highscore.draw(sb);
+        }
 
         sb.end();
 

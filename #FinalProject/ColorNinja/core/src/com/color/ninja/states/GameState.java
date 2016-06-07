@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.color.ninja.MyColorNinja;
 import com.color.ninja.logic.IntegerCounter;
+import com.color.ninja.logic.Score;
 import com.color.ninja.physics.MyBox;
 import com.color.ninja.sprites.*;
 import com.color.ninja.sprites.Shape;
@@ -63,6 +64,7 @@ public class GameState extends com.color.ninja.states.State {
     private static int GAME_TIME = 60;
     private static int NUM_LIVES = 3;
 
+    private String difficulty;
 
 
 
@@ -113,6 +115,14 @@ public class GameState extends com.color.ninja.states.State {
         if(MyColorNinja.DEBUG)
             System.out.println("Hey!");
 
+        switch(MyColorNinja.getOurInstance().difficulty)
+        {
+            case 0: this.difficulty = "easy"; break;
+            case 1: this.difficulty = "medium"; break;
+            case 2: this.difficulty = "hard"; break;
+            default: this.difficulty = "medium";
+        }
+
 
     }
 
@@ -148,8 +158,10 @@ public class GameState extends com.color.ninja.states.State {
         for (int i = 0; i < shapesFlying.size(); i++)
         {
             if(shapesFlying.get(i).isDestroyed()) {
-                if(shapesFlying.get(i).isExploded())
+                if(shapesFlying.get(i).isExploded()) {
                     scoreCounter.increaseValue(1);
+                    MyColorNinja.getOurInstance().score = new Score(scoreCounter.getValue(), difficulty);
+                }
                 else
                     livesCounter.decreaseValue(1);
 
@@ -213,7 +225,6 @@ public class GameState extends com.color.ninja.states.State {
 
         if(livesCounter.getValue() == 0 || timeCounter.getValue() == 0)
             gsm.set(new EndGameState(gsm));
-
 
     }
 

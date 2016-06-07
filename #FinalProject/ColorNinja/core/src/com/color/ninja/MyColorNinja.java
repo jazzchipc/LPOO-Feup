@@ -53,13 +53,16 @@ public class MyColorNinja extends ApplicationAdapter {
 
 	private Array<Music> music;
 
-	private Highscores highscores;
+	public Highscores highscores;
 
-	private Score score;
+	public Score score;
+
+	public int difficulty;
 
 	@Override
 	public void create () {
 		highscores = new Highscores();
+		score = new Score(0, "easy");
 
 		batch = new SpriteBatch();
 

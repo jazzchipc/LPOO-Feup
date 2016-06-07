@@ -7,6 +7,8 @@ public class Score implements Comparable<Score> {
     private int score;
     private String difficulty;
 
+    public Score(){}
+
     public Score(int score, String difficulty)
     {
         this.score = score;
